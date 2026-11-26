@@ -67,6 +67,67 @@
             border-radius: 28px;
         }
 
+        /* Candy Crush Saga Map Nodes */
+        .candy-map-bg {
+            background: linear-gradient(180deg, #F3E8FF 0%, #FFE4EE 45%, #E0F7FA 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        .candy-node {
+            width: 68px;
+            height: 62px;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 800;
+            position: relative;
+            transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+            cursor: pointer;
+            user-select: none;
+        }
+        .candy-node:hover {
+            transform: scale(1.1) translateY(-3px);
+        }
+        .candy-node:active {
+            transform: scale(0.95) translateY(2px);
+        }
+        .candy-node-mint {
+            background: radial-gradient(circle at 35% 30%, #7AE582, #2DC653);
+            color: #FFFFFF;
+            box-shadow: 0 6px 0 #1B8A38, 0 10px 18px rgba(45, 198, 83, 0.35);
+            border: 3px solid #E8F8F0;
+        }
+        .candy-node-pink {
+            background: radial-gradient(circle at 35% 30%, #FF9EBB, #FF4D8D);
+            color: #FFFFFF;
+            box-shadow: 0 6px 0 #C9184A, 0 10px 18px rgba(255, 77, 141, 0.4);
+            border: 3px solid #FFF0F5;
+        }
+        .candy-node-boss {
+            width: 82px;
+            height: 74px;
+            background: radial-gradient(circle at 35% 30%, #FFE066, #F59F00);
+            color: #5C3A00;
+            box-shadow: 0 7px 0 #B36B00, 0 12px 22px rgba(245, 159, 0, 0.45);
+            border: 3.5px solid #FFF9DB;
+        }
+        .candy-node-locked {
+            background: radial-gradient(circle at 35% 30%, #E2E8F0, #94A3B8);
+            color: #475569;
+            box-shadow: 0 6px 0 #64748B, 0 8px 14px rgba(100, 116, 139, 0.25);
+            border: 3px solid #F8FAFC;
+        }
+        @keyframes pulseHalo {
+            0%, 100% { box-shadow: 0 6px 0 #C9184A, 0 0 0 0 rgba(255, 77, 141, 0.65); }
+            50% { box-shadow: 0 6px 0 #C9184A, 0 0 0 14px rgba(255, 77, 141, 0); }
+        }
+        .candy-node-active {
+            animation: pulseHalo 1.8s infinite;
+        }
+
         /* 3D Flashcard Flip chuẩn xác & mượt mà */
         .perspective-1000 {
             perspective: 1200px;
@@ -293,415 +354,483 @@
         <div class="flex-1 min-w-0">
 
             <!-- ========================================== -->
-            <!-- TAB 1: DASHBOARD & LỘ TRÌNH CÁ NHÂN HÓA     -->
+            <!-- TAB 1: DASHBOARD & LỘ TRÌNH CANDY CRUSH    -->
             <!-- ========================================== -->
             <section id="tab-dashboard" class="tab-content space-y-6">
-                <!-- Banner Chào mừng & Cá nhân hóa -->
+                <!-- Banner Chào mừng & Tổng hợp 6 Bậc -->
                 <div class="bento-card p-6 md:p-7 bg-gradient-to-r from-white via-kitty-pinkLight to-kitty-mintLight relative overflow-hidden">
                     <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-5">
                         <div class="space-y-2 max-w-2xl">
-                            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white text-kitty-pinkDeep font-extrabold text-xs border border-kitty-pink shadow-sm">
-                                ✨ Cá nhân hóa lộ trình 2026
-                            </span>
+                            <div class="flex flex-wrap items-center gap-2">
+                                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white text-kitty-pinkDeep font-extrabold text-xs border border-kitty-pink shadow-sm">
+                                    ✨ Lộ Trình Candy Saga 2026
+                                </span>
+                                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-kitty-mint text-kitty-mintDeep font-extrabold text-xs">
+                                    🎀 Giọng Nữ Kawaii AI
+                                </span>
+                            </div>
                             <h2 class="font-display font-bold text-2xl md:text-3xl text-kitty-text">
-                                Chào bạn! Hôm nay mình chinh phục bộ phận nào nhỉ? 🎀
+                                Chinh phục 6 bậc A1 → C2 cùng Momo nha! 🍭
                             </h2>
                             <p class="text-sm md:text-base text-kitty-subtext font-semibold">
-                                Chọn trình độ <b>CEFR (A1–C2)</b> và <b>Chuyên ngành</b> bên dưới để hệ thống tự động lọc từ vựng, lộ trình theo ngày và câu hỏi phỏng vấn chuẩn quốc tế.
+                                Toàn bộ từ vựng chuyên ngành <b>IT • Fintech • B2B • CX • QA/QC • PO</b> được gộp trọn trong từng bậc CEFR. Học xong các chặng ngày của bậc hiện tại, vượt qua <b>Cổng Boss Test Thăng Hạng</b> để mở khóa bậc tiếp theo!
                             </p>
                         </div>
                         <div class="flex flex-wrap gap-2.5 shrink-0">
                             <button onclick="switchTab('flashcards')" class="btn-kawaii-pink px-5 py-3 rounded-2xl font-extrabold text-sm flex items-center gap-2">
-                                <span>🚀 Học từ mới ngay</span>
+                                <span>🚀 Học chặng hôm nay</span>
                             </button>
                             <button onclick="openAiVocabModal()" class="btn-kawaii-mint px-4 py-3 rounded-2xl font-extrabold text-sm flex items-center gap-2">
-                                <span>✨ AI Tạo Thêm Từ Vựng</span>
+                                <span>✨ AI Tạo Từ 2026</span>
                             </button>
                         </div>
                     </div>
                 </div>
 
-                <!-- Bộ lọc Trình độ CEFR & Chuyên ngành -->
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
-                    <!-- Chọn 6 bậc CEFR -->
-                    <div class="bento-card p-5 space-y-3">
-                        <div class="flex items-center justify-between">
-                            <h3 class="font-display font-bold text-base text-kitty-text flex items-center gap-2">
-                                <span>📊</span> Trình độ khung CEFR (6 Bậc)
-                            </h3>
-                            <span id="cefr-desc-label" class="text-xs font-extrabold text-kitty-pinkDeep bg-kitty-pinkLight px-2.5 py-1 rounded-xl">B1 - Trung cấp</span>
-                        </div>
-                        <div id="cefr-selector" class="grid grid-cols-3 sm:grid-cols-6 gap-2">
-                            <!-- Render by JS -->
-                        </div>
-                    </div>
-
-                    <!-- Chọn Chuyên ngành & Bộ phận -->
-                    <div class="bento-mint p-5 space-y-3">
-                        <div class="flex items-center justify-between">
-                            <h3 class="font-display font-bold text-base text-kitty-text flex items-center gap-2">
-                                <span>🏢</span> Chuyên ngành & Vị trí mục tiêu
-                            </h3>
-                            <span class="text-xs font-extrabold text-kitty-mintDeep bg-kitty-mintLight px-2.5 py-1 rounded-xl">Kho 1,500+ từ</span>
-                        </div>
-                        <div id="domain-selector" class="flex flex-wrap gap-2">
-                            <!-- Render by JS -->
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Lộ trình học tổng hợp theo Ngày (Daily Roadmap) -->
-                <div class="bento-card p-6 space-y-4">
+                <!-- Thanh Chọn 6 Bậc CEFR & Tiến Độ Gộp Toàn Bộ Chuyên Ngành -->
+                <div class="bento-card p-5 sm:p-6 space-y-4">
                     <div class="flex flex-wrap items-center justify-between gap-2">
                         <div>
                             <h3 class="font-display font-bold text-lg text-kitty-text flex items-center gap-2">
-                                <span>📅</span> Lộ Trình Học Tổng Hợp Theo Ngày (Liên Phòng Ban)
+                                <span>🏆</span> Hành Trình 6 Bậc CEFR (Gộp Trọn 6 Chuyên Ngành)
                             </h3>
-                            <p class="text-xs text-kitty-subtext font-semibold">Chia nhỏ 1000–2000 từ vựng cốt lõi theo từng ngày giúp bạn dễ nhớ và ứng dụng ngay vào công việc</p>
+                            <p class="text-xs text-kitty-subtext font-semibold">Chọn bậc để xem bản đồ chặng đường và số từ vựng mục tiêu cần chinh phục</p>
                         </div>
-                        <span class="px-3 py-1.5 rounded-2xl bg-kitty-mintLight text-kitty-mintDeep font-extrabold text-xs border border-kitty-mint">
-                            Đã thuộc: <span id="total-mastered-count">0</span> / <span id="total-vocab-count">0</span> từ
+                        <span class="px-3.5 py-1.5 rounded-2xl bg-kitty-pinkLight text-kitty-pinkDeep font-extrabold text-xs border border-kitty-pink">
+                            Tổng kho: <span id="total-mastered-count">0</span> / <span id="total-vocab-count">0</span> từ đã thuộc
                         </span>
                     </div>
 
-                    <div id="daily-roadmap-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <!-- 6 Nút Bậc CEFR A1 -> C2 -->
+                    <div id="cefr-selector" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2.5">
                         <!-- Render by JS -->
+                    </div>
+
+                    <!-- Thanh tiến độ của Bậc đang chọn + Nút Test Thăng Hạng -->
+                    <div class="p-4 rounded-3xl bg-gradient-to-r from-kitty-pinkLight/70 via-white to-kitty-mintLight/70 border-2 border-kitty-pink flex flex-col md:flex-row md:items-center justify-between gap-4">
+                        <div class="space-y-1.5 flex-1">
+                            <div class="flex items-center justify-between">
+                                <span id="tier-title-label" class="font-display font-extrabold text-base text-kitty-pinkDeep">Bậc A1 • Khởi Đầu Công Nghệ (150 từ mục tiêu)</span>
+                                <span id="tier-progress-pct" class="font-display font-extrabold text-sm text-kitty-mintDeep">0%</span>
+                            </div>
+                            <div class="w-full h-3.5 bg-white rounded-full overflow-hidden border border-kitty-pink p-0.5">
+                                <div id="tier-progress-bar" class="h-full bg-gradient-to-r from-kitty-pinkDark via-amber-400 to-kitty-mintDark rounded-full transition-all duration-500" style="width: 15%;"></div>
+                            </div>
+                            <p id="tier-sub-desc" class="text-xs font-bold text-kitty-subtext">
+                                Gộp từ vựng IT, Fintech, B2B, CX, QA/QC & PO • Hoàn thành các chặng ngày để mở khóa Test lên bậc kế tiếp!
+                            </p>
+                        </div>
+                        <button id="tier-boss-test-btn" onclick="startTierBossExam()" class="shrink-0 btn-kawaii-pink px-5 py-3 rounded-2xl font-extrabold text-sm flex items-center justify-center gap-2">
+                            <span>👑 Làm Test Thăng Hạng</span>
+                        </button>
                     </div>
                 </div>
 
-                <!-- Thống kê tiến độ từng phòng ban -->
-                <div class="bento-mint p-6 space-y-4">
-                    <h3 class="font-display font-bold text-lg text-kitty-text flex items-center gap-2">
-                        <span>📈</span> Keep-Track Tiến Độ Theo Bộ Phận
-                    </h3>
-                    <div id="department-progress-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                <!-- BẢN ĐỒ CANDY CRUSH SAGA THEO TỪNG NGÀY & STREAK -->
+                <div class="bento-card p-4 sm:p-6 candy-map-bg border-4 border-kitty-pink shadow-kawaii">
+                    <div class="flex flex-wrap items-center justify-between gap-2 mb-4 bg-white/85 backdrop-blur-sm px-4 py-3 rounded-2xl border-2 border-kitty-pink">
+                        <div class="flex items-center gap-2">
+                            <span class="text-2xl">🗺️</span>
+                            <div>
+                                <h3 id="map-world-name" class="font-display font-extrabold text-base sm:text-lg text-kitty-pinkDeep">Vương Quốc Kẹo Ngọt A1 • Khởi Hành</h3>
+                                <p class="text-[11px] sm:text-xs font-bold text-kitty-subtext">Mỗi nút tròn tương ứng 1 ngày giữ Streak 🔥 • Chạm vào nút để học ngay cụm từ của chặng đó!</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-2 text-xs font-extrabold">
+                            <span class="px-3 py-1 rounded-xl bg-kitty-mintLight text-kitty-mintDeep border border-kitty-mint">🟢 Đã qua</span>
+                            <span class="px-3 py-1 rounded-xl bg-kitty-pinkLight text-kitty-pinkDeep border border-kitty-pink">💗 Đang học</span>
+                            <span class="px-3 py-1 rounded-xl bg-amber-100 text-amber-800 border border-amber-300">👑 Boss Test</span>
+                        </div>
+                    </div>
+
+                    <!-- Khung SVG Đường uốn lượn + Các nút màn chơi Candy Crush -->
+                    <div id="candy-saga-map-container" class="relative w-full max-w-2xl mx-auto py-4">
                         <!-- Render by JS -->
                     </div>
                 </div>
             </section>
 
             <!-- ========================================== -->
-            <!-- TAB 2: FLASHCARD HỌC TỪ VỰNG 3D            -->
+            <!-- TAB 2: FLASHCARD TỪ VỰNG 3D & PHÁT ÂM      -->
             <!-- ========================================== -->
             <section id="tab-flashcards" class="tab-content hidden space-y-6">
                 <div class="flex flex-wrap items-center justify-between gap-3">
                     <div>
-                        <h2 class="font-display font-bold text-2xl text-kitty-text">🃏 Flashcard Từ Vựng Chuyên Ngành</h2>
-                        <p class="text-xs sm:text-sm text-kitty-subtext font-semibold">Chạm vào thẻ để lật xem nghĩa, phiên âm IPA và ví dụ thực tế trong công ty nước ngoài</p>
+                        <h2 class="font-display font-bold text-2xl text-kitty-text">🃏 Thẻ Ghi Nhớ 3D Chuyên Ngành 2026</h2>
+                        <p class="text-xs sm:text-sm text-kitty-subtext font-semibold">Chạm vào thẻ để lật xem nghĩa tiếng Việt & ví dụ thực tế — Bấm loa để nghe giọng nữ Momo đọc!</p>
                     </div>
-                    <div class="flex items-center gap-2">
-                        <span id="fc-counter" class="px-4 py-2 rounded-2xl bg-white border-2 border-kitty-pink font-extrabold text-sm text-kitty-pinkDeep">Thẻ 1 / 10</span>
-                        <button onclick="openAiVocabModal()" class="btn-kawaii-mint px-4 py-2 rounded-2xl text-sm font-extrabold">
-                            + Tạo bộ từ AI
+                    <div class="flex flex-wrap items-center gap-2">
+                        <button onclick="quickUnlockMoreWords()" class="btn-kawaii-mint px-4 py-2.5 rounded-2xl font-extrabold text-xs flex items-center gap-1.5">
+                            <span>⚡ Nạp thêm từ mới</span>
+                        </button>
+                        <button onclick="openAiVocabModal()" class="btn-kawaii-pink px-4 py-2.5 rounded-2xl font-extrabold text-xs flex items-center gap-1.5">
+                            <span>✨ Tạo bộ từ AI</span>
                         </button>
                     </div>
                 </div>
 
-                <!-- Khu vực Thẻ Flashcard 3D -->
-                <div class="max-w-xl mx-auto">
-                    <div id="flashcard-stage" class="perspective-1000 w-full h-96 cursor-pointer select-none" onclick="flipFlashcard()">
-                        <div id="flashcard-inner" class="flashcard-inner">
-                            <!-- MẶT TRƯỚC -->
-                            <div class="flashcard-front bg-white border-4 border-kitty-pink shadow-kawaii p-8 flex flex-col justify-between relative">
-                                <div class="flex items-center justify-between">
-                                    <div class="flex items-center gap-2">
-                                        <span id="fc-cefr-badge" class="px-3 py-1 rounded-xl bg-kitty-pink text-kitty-pinkDeep font-extrabold text-xs">B2</span>
-                                        <span id="fc-domain-badge" class="px-3 py-1 rounded-xl bg-kitty-mintLight text-kitty-mintDeep font-extrabold text-xs border border-kitty-mint">IT / Software</span>
-                                    </div>
-                                    <span id="fc-status-badge" class="text-xs font-bold text-kitty-subtext">🌱 Đang học</span>
-                                </div>
+                <!-- Thanh tiến độ thẻ -->
+                <div class="flex items-center justify-between px-4 py-2.5 rounded-2xl bg-white border-2 border-kitty-pink">
+                    <span id="fc-counter" class="font-display font-extrabold text-sm text-kitty-pinkDeep">Thẻ 1 / 8 (A1)</span>
+                    <span id="fc-status-badge" class="px-3 py-1 rounded-full bg-kitty-mintLight text-kitty-mintDeep font-extrabold text-xs">🌱 Đang học</span>
+                </div>
 
-                                <div class="text-center my-auto space-y-3">
-                                    <p id="fc-pos" class="text-xs font-extrabold uppercase tracking-widest text-kitty-mintDeep">(noun)</p>
-                                    <h3 id="fc-word" class="font-display font-extrabold text-3xl md:text-4xl text-kitty-text">Deployment</h3>
-                                    <p id="fc-ipa" class="text-base font-bold text-kitty-pinkDeep">/dɪˈplɔɪ.mənt/</p>
-                                    
-                                    <button onclick="event.stopPropagation(); speakCurrentWord()" class="mx-auto mt-2 inline-flex items-center gap-2 px-5 py-2.5 rounded-2xl bg-kitty-pinkLight hover:bg-kitty-pink text-kitty-pinkDeep font-extrabold text-sm border-2 border-kitty-pink transition-all">
-                                        <i class="fa-solid fa-volume-high"></i>
-                                        <span>Nghe phát âm</span>
+                <!-- Sân khấu Flashcard 3D -->
+                <div id="flashcard-stage" class="max-w-2xl mx-auto h-80 sm:h-96 perspective-1000 cursor-pointer" onclick="flipFlashcard()">
+                    <div id="flashcard-inner" class="flashcard-inner">
+                        <!-- MẶT TRƯỚC -->
+                        <div class="flashcard-front bento-card bg-gradient-to-br from-white via-kitty-pinkLight/60 to-kitty-mintLight/60 p-6 sm:p-8 flex flex-col justify-between shadow-kawaii">
+                            <div class="flex items-center justify-between">
+                                <span id="fc-cefr-badge" class="px-3.5 py-1 rounded-full bg-kitty-pinkDeep text-white font-display font-extrabold text-xs">A1</span>
+                                <span id="fc-domain-badge" class="px-3.5 py-1 rounded-full bg-kitty-mint text-kitty-mintDeep font-extrabold text-xs">IT • Ngày 1</span>
+                            </div>
+
+                            <div class="text-center space-y-2 my-auto">
+                                <span id="fc-pos" class="text-xs font-extrabold text-kitty-subtext uppercase tracking-wider">(noun)</span>
+                                <h3 id="fc-word" class="font-display font-extrabold text-3xl sm:text-5xl text-kitty-text tracking-tight">Workflow</h3>
+                                <p id="fc-ipa" class="font-mono text-base sm:text-lg font-bold text-kitty-pinkDeep">/ˈwɜːk.fləʊ/</p>
+                                <div class="pt-3">
+                                    <button type="button" onclick="event.stopPropagation(); speakCurrentWord();" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-2xl bg-white hover:bg-kitty-pinkLight text-kitty-pinkDeep font-extrabold text-xs border-2 border-kitty-pink shadow-sm transition-all">
+                                        <i class="fa-solid fa-volume-high text-base"></i>
+                                        <span>Nghe giọng nữ đọc</span>
                                     </button>
-                                </div>
-
-                                <div class="text-center text-xs font-bold text-kitty-subtext flex items-center justify-center gap-1.5">
-                                    <span>🎀 Chạm vào thẻ để lật mặt sau</span>
                                 </div>
                             </div>
 
-                            <!-- MẶT SAU -->
-                            <div class="flashcard-back bg-gradient-to-br from-white via-kitty-mintLight to-kitty-pinkLight border-4 border-kitty-mint shadow-kawaii p-8 flex flex-col justify-between">
-                                <div class="flex items-center justify-between">
-                                    <span class="font-extrabold text-xs text-kitty-mintDeep uppercase tracking-wider">Nghĩa & Ngữ cảnh thực tế</span>
-                                    <button onclick="event.stopPropagation(); speakCurrentExample()" class="px-3 py-1.5 rounded-xl bg-white border border-kitty-mint text-xs font-extrabold text-kitty-mintDeep hover:bg-kitty-mintLight">
-                                        <i class="fa-solid fa-volume-high mr-1"></i> Đọc ví dụ
-                                    </button>
-                                </div>
+                            <p class="text-center text-xs font-bold text-kitty-subtext">👆 Chạm vào thẻ để lật xem nghĩa & ví dụ công sở</p>
+                        </div>
 
-                                <div class="my-auto space-y-4">
-                                    <div class="bg-white/90 p-4 rounded-2xl border-2 border-kitty-pink">
-                                        <p class="text-xs font-bold text-kitty-subtext mb-1">Tiếng Việt:</p>
-                                        <p id="fc-meaning" class="font-display font-extrabold text-xl text-kitty-pinkDeep">Sự triển khai phần mềm lên hệ thống</p>
-                                    </div>
+                        <!-- MẶT SAU -->
+                        <div class="flashcard-back bento-mint bg-gradient-to-br from-white via-kitty-mintLight/70 to-kitty-pinkLight/50 p-6 sm:p-8 flex flex-col justify-between shadow-kawaii">
+                            <div class="flex items-center justify-between">
+                                <span class="px-3 py-1 rounded-full bg-kitty-mintDeep text-white font-extrabold text-xs">💡 Nghĩa & Ứng Dụng</span>
+                                <button type="button" onclick="event.stopPropagation(); speakCurrentExample();" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-white text-kitty-mintDeep font-extrabold text-xs border border-kitty-mint shadow-sm">
+                                    <i class="fa-solid fa-volume-high"></i> Đọc câu ví dụ
+                                </button>
+                            </div>
 
-                                    <div class="bg-white/90 p-4 rounded-2xl border-2 border-kitty-mint">
-                                        <p class="text-xs font-bold text-kitty-subtext mb-1">Ví dụ công sở:</p>
-                                        <p id="fc-example-en" class="font-bold text-sm text-kitty-text mb-1">"The production deployment is scheduled for Friday night."</p>
-                                        <p id="fc-example-vi" class="text-xs font-semibold text-kitty-subtext italic">"Việc triển khai lên môi trường thật được lên lịch vào tối thứ Sáu."</p>
-                                    </div>
-                                </div>
-
-                                <div class="text-center text-xs font-bold text-kitty-mintDeep">
-                                    <span>🍀 Chạm để quay lại mặt trước</span>
+                            <div class="space-y-4 my-auto text-center">
+                                <h4 id="fc-meaning" class="font-display font-extrabold text-2xl sm:text-3xl text-kitty-mintDeep">Luồng quy trình làm việc</h4>
+                                <div class="p-4 rounded-2xl bg-white/95 border-2 border-kitty-mint text-left space-y-1.5">
+                                    <p id="fc-example-en" class="font-bold text-sm sm:text-base text-kitty-text">"Our new AI workflow saves two hours every morning."</p>
+                                    <p id="fc-example-vi" class="text-xs sm:text-sm font-semibold text-kitty-subtext italic">"Luồng quy trình AI mới giúp tiết kiệm 2 tiếng mỗi sáng."</p>
                                 </div>
                             </div>
+
+                            <p class="text-center text-xs font-bold text-kitty-subtext">👆 Chạm lần nữa để quay lại mặt trước</p>
                         </div>
                     </div>
+                </div>
 
-                    <!-- Các nút điều khiển Flashcard -->
-                    <div class="flex items-center justify-between gap-2 sm:gap-3 mt-6">
-                        <button onclick="prevFlashcard()" class="px-4 py-3.5 rounded-2xl bg-white border-2 border-kitty-pink font-extrabold text-sm text-kitty-text hover:bg-kitty-pinkLight transition-all">
-                            <i class="fa-solid fa-arrow-left"></i> Trước
-                        </button>
+                <!-- Bộ nút điều khiển Flashcard -->
+                <div class="max-w-2xl mx-auto flex flex-wrap items-center justify-between gap-3">
+                    <button onclick="prevFlashcard()" class="px-4 py-3 rounded-2xl bg-white border-2 border-kitty-pink font-extrabold text-xs sm:text-sm text-kitty-text hover:bg-kitty-pinkLight">
+                        ← Thẻ trước
+                    </button>
 
-                        <button onclick="markWordStatus(false)" class="flex-1 py-3.5 rounded-2xl bg-amber-100 border-2 border-amber-300 font-extrabold text-sm text-amber-800 hover:bg-amber-200 transition-all">
+                    <div class="flex items-center gap-2.5">
+                        <button onclick="markWordStatus(false)" class="px-4 py-3 rounded-2xl bg-amber-100 border-2 border-amber-300 font-extrabold text-xs sm:text-sm text-amber-800 hover:bg-amber-200">
                             🔄 Cần ôn lại
                         </button>
-
-                        <button onclick="markWordStatus(true)" class="flex-1 btn-kawaii-mint py-3.5 rounded-2xl font-extrabold text-sm">
+                        <button onclick="markWordStatus(true)" class="btn-kawaii-mint px-5 py-3 rounded-2xl font-extrabold text-xs sm:text-sm">
                             ✅ Đã thuộc (+15 XP)
                         </button>
-
-                        <button onclick="nextFlashcard()" class="px-4 py-3.5 rounded-2xl bg-white border-2 border-kitty-pink font-extrabold text-sm text-kitty-text hover:bg-kitty-pinkLight transition-all">
-                            Sau <i class="fa-solid fa-arrow-right"></i>
-                        </button>
                     </div>
+
+                    <button onclick="nextFlashcard()" class="px-4 py-3 rounded-2xl bg-white border-2 border-kitty-pink font-extrabold text-xs sm:text-sm text-kitty-text hover:bg-kitty-pinkLight">
+                        Thẻ sau →
+                    </button>
                 </div>
             </section>
 
             <!-- ========================================== -->
-            <!-- TAB 3: MINI GAME HÓA (SPEED QUIZ)          -->
+            <!-- TAB 3: KHU VUI CHƠI MINI GAME (3 TRÒ CHƠI) -->
             <!-- ========================================== -->
             <section id="tab-game" class="tab-content hidden space-y-6">
-                <div class="bento-card p-6 md:p-8 max-w-3xl mx-auto">
-                    <div class="flex flex-wrap items-center justify-between gap-4 mb-6 pb-4 border-b-2 border-kitty-pinkLight">
-                        <div>
-                            <span class="px-3 py-1 rounded-full bg-kitty-pinkLight text-kitty-pinkDeep font-extrabold text-xs">🎮 Gamification Mode</span>
-                            <h2 class="font-display font-bold text-2xl text-kitty-text mt-1">Thử Thách Phản Xạ Từ Vựng</h2>
-                            <p class="text-xs font-semibold text-kitty-subtext">Trả lời đúng 5 câu trong vòng chơi để mở khóa Màn Tung Hô Vinh Danh! 🏆</p>
-                        </div>
-                        <div class="flex items-center gap-3">
-                            <div class="px-4 py-2 rounded-2xl bg-kitty-mintLight border-2 border-kitty-mint font-extrabold text-sm text-kitty-mintDeep">
-                                Vòng này: <span id="game-round-progress">0/5</span>
-                            </div>
-                            <div class="px-4 py-2 rounded-2xl bg-kitty-pinkLight border-2 border-kitty-pink font-extrabold text-sm text-kitty-pinkDeep">
-                                Chuỗi đúng: <span id="game-combo">0</span> 🔥
-                            </div>
-                        </div>
+                <div class="flex flex-wrap items-center justify-between gap-3">
+                    <div>
+                        <h2 class="font-display font-bold text-2xl text-kitty-text">🎮 Khu Vui Chơi Giải Trí & Luyện Phản Xạ</h2>
+                        <p class="text-xs sm:text-sm text-kitty-subtext font-semibold">Vừa chơi vừa nhớ sâu từ vựng chuyên ngành 2026 — Thắng mỗi vòng nhận ngay màn tung hô & XP!</p>
                     </div>
-
-                    <!-- Câu hỏi Game -->
-                    <div id="game-area" class="space-y-6">
-                        <div class="p-6 rounded-3xl bg-gradient-to-r from-kitty-pinkLight to-kitty-mintLight border-2 border-kitty-pink text-center space-y-2">
-                            <span id="game-q-badge" class="inline-block px-3 py-1 rounded-xl bg-white text-xs font-extrabold text-kitty-mintDeep">IT • B2</span>
-                            <p class="text-xs font-bold text-kitty-subtext">Chọn nghĩa tiếng Việt chính xác của thuật ngữ sau:</p>
-                            <h3 id="game-question-word" class="font-display font-extrabold text-3xl text-kitty-text">Scalability</h3>
-                            <button onclick="speakGameWord()" class="inline-flex items-center gap-1.5 text-xs font-extrabold text-kitty-pinkDeep bg-white px-3 py-1.5 rounded-xl border border-kitty-pink mt-1">
-                                <i class="fa-solid fa-volume-high"></i> Nghe gợi ý
-                            </button>
-                        </div>
-
-                        <!-- 4 Đáp án -->
-                        <div id="game-options" class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-                            <!-- Render by JS -->
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- ========================================== -->
-            <!-- TAB 4: LUYỆN VOICE & GIAO TIẾP VỚI AI      -->
-            <!-- ========================================== -->
-            <section id="tab-voice-ai" class="tab-content hidden space-y-6">
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                    <!-- Cột cấu hình tình huống Roleplay -->
-                    <div class="bento-card p-6 space-y-4 h-fit">
-                        <div class="flex items-center gap-2">
-                            <span class="text-2xl">🤖🎀</span>
-                            <h2 class="font-display font-bold text-xl text-kitty-text">Trợ lý Hội thoại AI</h2>
-                        </div>
-                        <p class="text-xs font-semibold text-kitty-subtext">
-                            Luyện nói tiếng Anh tự nhiên theo trình độ CEFR đang chọn. AI sẽ đóng vai đồng nghiệp/sếp/khách hàng, sửa lỗi nhẹ nhàng và gợi ý từ vựng chuyên ngành.
-                        </p>
-
-                        <div class="space-y-3">
-                            <div>
-                                <label class="block text-xs font-extrabold text-kitty-text mb-1">Chọn bối cảnh giao tiếp:</label>
-                                <select id="ai-scenario-select" onchange="resetAiChat()" class="w-full p-3 rounded-2xl bg-kitty-pinkLight border-2 border-kitty-pink font-bold text-sm text-kitty-text focus:outline-none">
-                                    <option value="daily_standup">💻 Daily Standup Meeting (IT / Agile)</option>
-                                    <option value="po_sprint">📋 Sprint Planning & Backlog (PO / QA)</option>
-                                    <option value="fintech_pitch">💳 Giới thiệu sản phẩm thanh toán (Fintech)</option>
-                                    <option value="b2b_negotiation">🤝 Đàm phán hợp đồng khách hàng (B2B)</option>
-                                    <option value="cx_escalation">🎧 Xử lý khiếu nại khách hàng VIP (CX)</option>
-                                    <option value="qa_bug_report">🐞 Thảo luận Bug nghiêm trọng với Dev (QA/QC)</option>
-                                </select>
-                            </div>
-
-                            <div class="p-3.5 rounded-2xl bg-kitty-mintLight border border-kitty-mint text-xs space-y-1">
-                                <p class="font-extrabold text-kitty-mintDeep">💡 Mẹo dùng Voice cực dễ:</p>
-                                <p class="text-kitty-text font-semibold">1. Nhấn nút <b>Micro màu hồng</b> và nói tiếng Anh.</p>
-                                <p class="text-kitty-text font-semibold">2. AI sẽ tự động nghe, trả lời bằng giọng nói và sửa lỗi cho bạn.</p>
-                            </div>
-
-                            <button onclick="resetAiChat()" class="w-full py-2.5 rounded-2xl bg-white border-2 border-kitty-pink font-extrabold text-xs text-kitty-pinkDeep hover:bg-kitty-pinkLight">
-                                🔄 Bắt đầu cuộc hội thoại mới
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Khung Chat & Voice Interaction -->
-                    <div class="lg:col-span-2 bento-mint p-5 md:p-6 flex flex-col h-[560px]">
-                        <!-- Header khung chat -->
-                        <div class="flex items-center justify-between pb-3 mb-3 border-b-2 border-kitty-mintLight">
-                            <div class="flex items-center gap-2.5">
-                                <div class="w-10 h-10 rounded-full bg-kitty-pink flex items-center justify-center text-lg border-2 border-white shadow-sm">🐱</div>
-                                <div>
-                                    <h3 class="font-display font-bold text-base text-kitty-text">Momo Coach AI</h3>
-                                    <p id="ai-chat-subtitle" class="text-xs font-bold text-kitty-mintDeep">Đang điều chỉnh theo trình độ B2</p>
-                                </div>
-                            </div>
-                            <label class="flex items-center gap-2 text-xs font-extrabold text-kitty-text cursor-pointer bg-white px-3 py-1.5 rounded-xl border border-kitty-mint">
-                                <input type="checkbox" id="auto-tts-toggle" checked class="accent-kitty-pinkDeep">
-                                <span>🔊 Tự động đọc giọng AI</span>
-                            </label>
-                        </div>
-
-                        <!-- Danh sách tin nhắn -->
-                        <div id="ai-chat-messages" class="flex-1 overflow-y-auto space-y-3.5 pr-2 mb-4">
-                            <!-- Messages rendered here -->
-                        </div>
-
-                        <!-- Thanh nhập liệu & Nút thu âm Voice -->
-                        <div class="flex items-center gap-2 pt-2 border-t-2 border-kitty-mintLight">
-                            <button id="voice-mic-btn" onclick="toggleVoiceRecognition('chat')" class="w-12 h-12 rounded-2xl btn-kawaii-pink flex items-center justify-center text-lg shrink-0" title="Nhấn để nói tiếng Anh">
-                                <i class="fa-solid fa-microphone"></i>
-                            </button>
-                            <input id="ai-chat-input" type="text" onkeypress="if(event.key==='Enter') sendAiChatMessage()" placeholder="Nói qua Micro hoặc gõ tiếng Anh tại đây..." class="flex-1 px-4 py-3 rounded-2xl bg-white border-2 border-kitty-mint font-semibold text-sm focus:outline-none focus:border-kitty-pinkDeep">
-                            <button onclick="sendAiChatMessage()" class="btn-kawaii-mint px-5 py-3 rounded-2xl font-extrabold text-sm shrink-0">
-                                Gửi <i class="fa-solid fa-paper-plane ml-1"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- ========================================== -->
-            <!-- TAB 5: MENU PHỎNG VẤN CÔNG TY NƯỚC NGOÀI   -->
-            <!-- ========================================== -->
-            <section id="tab-interview" class="tab-content hidden space-y-6">
-                <div class="bento-card p-6 bg-gradient-to-r from-white to-kitty-pinkLight">
-                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
-                        <div>
-                            <span class="px-3 py-1 rounded-full bg-kitty-mintLight text-kitty-mintDeep font-extrabold text-xs border border-kitty-mint">💼 Global Career Prep</span>
-                            <h2 class="font-display font-bold text-2xl text-kitty-text mt-1">Luyện Phỏng Vấn Công Ty Nước Ngoài</h2>
-                            <p class="text-sm font-semibold text-kitty-subtext">Chọn vị trí ứng tuyển để xem câu hỏi thực chiến, từ vựng "ăn điểm" & thi phỏng vấn thử với AI</p>
-                        </div>
-                        <div class="flex items-center gap-2">
-                            <select id="interview-role-select" onchange="renderInterviewHub()" class="px-4 py-3 rounded-2xl bg-white border-2 border-kitty-pink font-extrabold text-sm text-kitty-text shadow-sm focus:outline-none">
-                                <option value="IT">💻 Software Engineer / IT</option>
-                                <option value="Fintech">💳 Fintech Specialist</option>
-                                <option value="B2B">🤝 B2B Sales / Business Dev</option>
-                                <option value="CX">🎧 CX (Customer Experience)</option>
-                                <option value="QA">🐞 QA / QC / Automation Tester</option>
-                                <option value="PO">📋 Product Owner (PO)</option>
-                            </select>
+                    <div class="flex items-center gap-2">
+                        <div class="px-4 py-2 rounded-2xl bg-kitty-pinkLight border-2 border-kitty-pink font-extrabold text-xs sm:text-sm text-kitty-pinkDeep">
+                            🔥 Combo: <span id="game-combo">0</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- Danh sách câu hỏi phỏng vấn + Khu vực trả lời thử -->
-                <div id="interview-questions-container" class="grid grid-cols-1 lg:grid-cols-2 gap-5">
-                    <!-- Rendered dynamically -->
-                </div>
-            </section>
+                <!-- Menu chọn 3 Mini Game -->
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    <button onclick="switchMiniGame('quiz')" id="gm-tab-quiz" class="gm-mode-btn p-4 rounded-3xl border-2 border-kitty-pinkDeep bg-kitty-pinkLight text-left transition-all shadow-sm">
+                        <div class="flex items-center justify-between mb-1">
+                            <span class="text-2xl">⚡</span>
+                            <span class="px-2 py-0.5 rounded-lg bg-white text-[11px] font-extrabold text-kitty-pinkDeep">Game 1</span>
+                        </div>
+                        <h3 class="font-display font-extrabold text-base text-kitty-text">Phản Xạ Siêu Tốc</h3>
+                        <p class="text-xs font-semibold text-kitty-subtext">Chọn nhanh nghĩa đúng trong 5 câu liên tiếp</p>
+                    </button>
 
-            <!-- ========================================== -->
-            <!-- TAB 6: BÀI THI ONLINE CHUẨN KHUNG CEFR     -->
-            <!-- ========================================== -->
-            <section id="tab-exam" class="tab-content hidden space-y-6">
-                <div id="exam-intro-card" class="bento-card p-8 max-w-3xl mx-auto text-center space-y-5">
-                    <div class="w-20 h-20 mx-auto rounded-3xl bg-kitty-pinkLight border-2 border-kitty-pink flex items-center justify-center text-4xl shadow-sm">
-                        🎓
-                    </div>
-                    <h2 class="font-display font-extrabold text-2xl md:text-3xl text-kitty-text">
-                        Bài Kiểm Tra Năng Lực Tiếng Anh Chuyên Ngành CEFR
-                    </h2>
-                    <p class="text-sm md:text-base font-semibold text-kitty-subtext max-w-xl mx-auto">
-                        Bài thi gồm <b>10 câu hỏi tổng hợp</b> (Từ vựng chuyên ngành IT, Fintech, B2B, CX, QA, PO + Ngữ pháp công sở + Đọc hiểu tình huống). Hoàn thành để nhận chứng nhận cấp độ CEFR (A1-C2) & cộng <b>+100 XP</b>!
-                    </p>
-                    <div class="flex flex-wrap justify-center gap-3 text-xs font-extrabold">
-                        <span class="px-3.5 py-2 rounded-2xl bg-kitty-mintLight text-kitty-mintDeep border border-kitty-mint">⏱️ Thời gian: 5 phút</span>
-                        <span class="px-3.5 py-2 rounded-2xl bg-kitty-pinkLight text-kitty-pinkDeep border border-kitty-pink">📊 Chấm điểm tự động</span>
-                        <span class="px-3.5 py-2 rounded-2xl bg-yellow-50 text-yellow-700 border border-yellow-200">🏅 Cấp huy hiệu CEFR</span>
-                    </div>
-                    <button onclick="startCefrExam()" class="btn-kawaii-pink px-8 py-4 rounded-2xl font-extrabold text-base">
-                        🚀 Bắt Đầu Làm Bài Thi Ngay
+                    <button onclick="switchMiniGame('match')" id="gm-tab-match" class="gm-mode-btn p-4 rounded-3xl border-2 border-kitty-mint bg-white text-left transition-all hover:bg-kitty-mintLight/50">
+                        <div class="flex items-center justify-between mb-1">
+                            <span class="text-2xl">🧩</span>
+                            <span class="px-2 py-0.5 rounded-lg bg-kitty-mintLight text-[11px] font-extrabold text-kitty-mintDeep">Game 2</span>
+                        </div>
+                        <h3 class="font-display font-extrabold text-base text-kitty-text">Ghép Đôi Thuật Ngữ</h3>
+                        <p class="text-xs font-semibold text-kitty-subtext">Nối từ tiếng Anh với nghĩa tiếng Việt tương ứng</p>
+                    </button>
+
+                    <button onclick="switchMiniGame('listen')" id="gm-tab-listen" class="gm-mode-btn p-4 rounded-3xl border-2 border-kitty-pink bg-white text-left transition-all hover:bg-kitty-pinkLight/50">
+                        <div class="flex items-center justify-between mb-1">
+                            <span class="text-2xl">🎧</span>
+                            <span class="px-2 py-0.5 rounded-lg bg-kitty-pinkLight text-[11px] font-extrabold text-kitty-pinkDeep">Game 3</span>
+                        </div>
+                        <h3 class="font-display font-extrabold text-base text-kitty-text">Tai Thính Gõ Chuẩn</h3>
+                        <p class="text-xs font-semibold text-kitty-subtext">Nghe giọng nữ dễ thương đọc & gõ lại từ vựng</p>
                     </button>
                 </div>
 
-                <!-- Khu vực làm bài thi -->
-                <div id="exam-active-card" class="hidden bento-mint p-6 md:p-8 max-w-3xl mx-auto space-y-6">
-                    <div class="flex items-center justify-between pb-4 border-b-2 border-kitty-mintLight">
-                        <span id="exam-progress-text" class="font-extrabold text-sm text-kitty-mintDeep">Câu 1 / 10</span>
-                        <div class="px-4 py-1.5 rounded-2xl bg-kitty-pinkLight border border-kitty-pink font-extrabold text-sm text-kitty-pinkDeep">
-                            ⏱️ <span id="exam-timer">05:00</span>
+                <!-- GAME 1: PHẢN XẠ SIÊU TỐC -->
+                <div id="game-panel-quiz" class="game-panel max-w-2xl mx-auto bento-card p-6 sm:p-8 space-y-6">
+                    <div class="flex items-center justify-between">
+                        <span id="game-q-badge" class="inline-block px-3.5 py-1 rounded-full bg-kitty-mintLight text-kitty-mintDeep font-extrabold text-xs border border-kitty-mint">
+                            IT • CEFR B2
+                        </span>
+                        <span class="px-3 py-1 rounded-xl bg-kitty-pinkLight text-kitty-pinkDeep font-extrabold text-xs">
+                            Tiến độ vòng: <span id="game-round-progress">0/5</span>
+                        </span>
+                    </div>
+                    <div class="text-center space-y-3">
+                        <h3 id="game-question-word" class="font-display font-extrabold text-3xl sm:text-4xl text-kitty-text">
+                            Agentic Workflow
+                        </h3>
+                        <button onclick="speakGameWord()" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-2xl bg-kitty-pinkLight hover:bg-kitty-pink text-kitty-pinkDeep font-extrabold text-xs border border-kitty-pink transition-all">
+                            <i class="fa-solid fa-volume-high"></i> Nghe giọng nữ đọc
+                        </button>
+                    </div>
+
+                    <div id="game-options" class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <!-- Render by JS -->
+                    </div>
+                </div>
+
+                <!-- GAME 2: GHÉP ĐÔI THUẬT NGỮ (MATCHING PAIRS) -->
+                <div id="game-panel-match" class="game-panel hidden max-w-3xl mx-auto bento-mint p-6 sm:p-8 space-y-5">
+                    <div class="flex flex-wrap items-center justify-between gap-2">
+                        <div>
+                            <h3 class="font-display font-extrabold text-lg text-kitty-mintDeep">🧩 Nối 5 Cặp Thuật Ngữ Chuyên Ngành</h3>
+                            <p class="text-xs font-bold text-kitty-subtext">Chạm 1 thẻ tiếng Anh bên trái, sau đó chạm nghĩa tiếng Việt đúng bên phải!</p>
                         </div>
+                        <button onclick="initMatchingGame()" class="px-3.5 py-2 rounded-2xl bg-white border-2 border-kitty-mint text-xs font-extrabold text-kitty-mintDeep hover:bg-kitty-mintLight">
+                            🔄 Đổi bộ thẻ mới
+                        </button>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div id="match-en-col" class="space-y-2.5"></div>
+                        <div id="match-vi-col" class="space-y-2.5"></div>
+                    </div>
+                </div>
+
+                <!-- GAME 3: TAI THÍNH GÕ CHUẨN (LISTENING SPELLING) -->
+                <div id="game-panel-listen" class="game-panel hidden max-w-2xl mx-auto bento-card p-6 sm:p-8 space-y-5 text-center">
+                    <span id="listen-badge" class="inline-block px-3.5 py-1 rounded-full bg-kitty-pinkLight text-kitty-pinkDeep font-extrabold text-xs border border-kitty-pink">
+                        Fintech • CEFR B2
+                    </span>
+                    <div class="space-y-2">
+                        <button onclick="speakListenGameWord()" class="w-20 h-20 mx-auto rounded-full btn-kawaii-pink flex items-center justify-center text-3xl shadow-md">
+                            🔊
+                        </button>
+                        <p class="text-xs font-bold text-kitty-subtext">Bấm vào loa để nghe giọng nữ đọc từ vựng, sau đó gõ chính xác từ tiếng Anh bên dưới!</p>
+                    </div>
+
+                    <div class="p-4 rounded-2xl bg-kitty-mintLight/60 border border-kitty-mint">
+                        <p class="text-xs font-bold text-kitty-mintDeep mb-1">Gợi ý nghĩa tiếng Việt:</p>
+                        <p id="listen-meaning-hint" class="font-display font-extrabold text-base text-kitty-text">...</p>
+                        <p id="listen-letter-hint" class="text-xs font-mono font-bold text-kitty-pinkDeep mt-1 tracking-widest">_ _ _ _ _</p>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row gap-2.5 max-w-md mx-auto">
+                        <input id="listen-input" type="text" onkeydown="if(event.key==='Enter') checkListenAnswer()" placeholder="Gõ từ tiếng Anh bạn nghe được..." class="flex-1 px-4 py-3 rounded-2xl bg-white border-2 border-kitty-pink font-bold text-sm text-center focus:outline-none">
+                        <button onclick="checkListenAnswer()" class="btn-kawaii-mint px-6 py-3 rounded-2xl font-extrabold text-sm">
+                            Kiểm tra ✨
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ========================================== -->
+            <!-- TAB 4: LUYỆN VOICE & HỘI THOẠI VỚI AI      -->
+            <!-- ========================================== -->
+            <section id="tab-voice-ai" class="tab-content hidden space-y-6">
+                <div class="flex flex-wrap items-center justify-between gap-3">
+                    <div>
+                        <h2 class="font-display font-bold text-2xl text-kitty-text">🎙️ Luyện Voice & Giao Tiếp Công Sở Với AI</h2>
+                        <p id="ai-chat-subtitle" class="text-xs sm:text-sm text-kitty-subtext font-semibold">Đang điều chỉnh theo trình độ B1 • Luyện phản xạ hội thoại thực tế</p>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <label class="inline-flex items-center gap-1.5 px-3 py-2 rounded-2xl bg-white border-2 border-kitty-mint text-xs font-extrabold text-kitty-mintDeep cursor-pointer">
+                            <input id="auto-tts-toggle" type="checkbox" checked class="accent-kitty-pinkDeep">
+                            <span>🔊 AI tự đọc</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="bento-mint p-4 sm:p-6 space-y-4">
+                    <!-- Chọn tình huống công sở -->
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b-2 border-kitty-mintLight">
+                        <div class="flex-1">
+                            <label class="block text-xs font-extrabold text-kitty-mintDeep mb-1">Chọn tình huống giao tiếp thực tế 2026:</label>
+                            <select id="ai-scenario-select" onchange="resetAiChat()" class="w-full px-4 py-2.5 rounded-2xl bg-kitty-mintLight/60 border-2 border-kitty-mint font-bold text-xs sm:text-sm text-kitty-text focus:outline-none">
+                                <option value="daily_standup">💻 IT / AI Eng 2026: Review AI Agent Workflow & Giảm Latency LLM</option>
+                                <option value="po_sprint">📋 Product Owner 2026: Chốt Product-Led Growth & AI Copilot Roadmap</option>
+                                <option value="fintech_pitch">💳 Fintech 2026: Thanh toán Stablecoin xuyên biên giới & Real-time AML</option>
+                                <option value="b2b_negotiation">🤝 B2B Enterprise 2026: Đàm phán gói AI Seat-based & Zero-Trust Security</option>
+                                <option value="cx_escalation">🎧 Bộ phận CX 2026: Xử lý sự cố AI Hallucination cho khách hàng VIP</option>
+                                <option value="qa_bug_report">🐞 QA / AI Tester 2026: Báo lỗi Edge Case & Đánh giá độ chính xác Model</option>
+                            </select>
+                        </div>
+                        <button onclick="resetAiChat()" class="shrink-0 px-4 py-2.5 rounded-2xl bg-white border-2 border-kitty-pink font-extrabold text-xs text-kitty-pinkDeep hover:bg-kitty-pinkLight">
+                            🔄 Bắt đầu lại
+                        </button>
+                    </div>
+
+                    <!-- Khung tin nhắn hội thoại -->
+                    <div id="ai-chat-messages" class="h-80 overflow-y-auto p-3 rounded-2xl bg-kitty-pinkLight/30 border border-kitty-pink space-y-3">
+                        <!-- Render by JS -->
+                    </div>
+
+                    <!-- Thanh nhập liệu & Micro -->
+                    <div class="flex items-center gap-2">
+                        <button id="voice-mic-btn" onclick="toggleVoiceRecognition('chat')" class="shrink-0 w-12 h-12 rounded-2xl btn-kawaii-pink flex items-center justify-center text-lg" title="Nhấn để nói tiếng Anh">
+                            <i class="fa-solid fa-microphone"></i>
+                        </button>
+                        <input id="ai-chat-input" type="text" onkeydown="if(event.key==='Enter') sendAiChatMessage()" placeholder="Nhấn Micro để nói tiếng Anh hoặc nhập câu trả lời của bạn..." class="flex-1 px-4 py-3 rounded-2xl bg-white border-2 border-kitty-mint font-bold text-sm focus:outline-none">
+                        <button onclick="sendAiChatMessage()" class="shrink-0 btn-kawaii-mint px-5 py-3 rounded-2xl font-extrabold text-sm">
+                            Gửi <i class="fa-solid fa-paper-plane ml-1"></i>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ========================================== -->
+            <!-- TAB 5: MENU PHỎNG VẤN QUỐC TẾ              -->
+            <!-- ========================================== -->
+            <section id="tab-interview" class="tab-content hidden space-y-6">
+                <div class="bento-card p-6 bg-gradient-to-r from-white via-kitty-pinkLight to-kitty-mintLight flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div class="space-y-1">
+                        <span class="px-3 py-1 rounded-full bg-white text-kitty-pinkDeep font-extrabold text-xs border border-kitty-pink">
+                            🌍 Global Tech & Fintech Interview Prep
+                        </span>
+                        <h2 class="font-display font-bold text-2xl text-kitty-text">💼 Luyện Phỏng Vấn Công Ty Nước Ngoài</h2>
+                        <p class="text-xs sm:text-sm text-kitty-subtext font-semibold">Bộ câu hỏi thực chiến kèm từ vựng ăn điểm, cấu trúc trả lời STAR và hội đồng AI chấm điểm trực tiếp.</p>
+                    </div>
+                    <div class="shrink-0">
+                        <label class="block text-xs font-extrabold text-kitty-text mb-1">Chọn vị trí ứng tuyển:</label>
+                        <select id="interview-role-select" onchange="renderInterviewHub()" class="px-4 py-2.5 rounded-2xl bg-white border-2 border-kitty-pinkDeep font-extrabold text-sm text-kitty-pinkDeep focus:outline-none">
+                            <option value="IT">💻 IT / Software Engineer</option>
+                            <option value="Fintech">💳 Fintech / Banking Specialist</option>
+                            <option value="B2B">🤝 Kinh doanh / B2B Sales</option>
+                            <option value="CX">🎧 Customer Experience (CX)</option>
+                            <option value="QA">🐞 Tester / QA / QC</option>
+                            <option value="PO">📋 Product Owner (PO)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div id="interview-questions-container" class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+                    <!-- Render by JS -->
+                </div>
+            </section>
+
+            <!-- ========================================== -->
+            <!-- TAB 6: BÀI THI THỬ CHUẨN KHUNG CEFR        -->
+            <!-- ========================================== -->
+            <section id="tab-exam" class="tab-content hidden space-y-6">
+                <!-- Màn hình giới thiệu bài thi -->
+                <div id="exam-intro-card" class="max-w-2xl mx-auto bento-card p-7 text-center space-y-5">
+                    <div class="w-16 h-16 mx-auto rounded-3xl bg-kitty-pinkLight border-2 border-kitty-pink flex items-center justify-center text-3xl">
+                        📝
+                    </div>
+                    <div class="space-y-2">
+                        <span class="px-3 py-1 rounded-full bg-kitty-mintLight text-kitty-mintDeep font-extrabold text-xs border border-kitty-mint">
+                            Đánh giá năng lực chuẩn CEFR A1 → C2
+                        </span>
+                        <h2 class="font-display font-bold text-2xl md:text-3xl text-kitty-text">Bài Thi Đánh Giá Tiếng Anh Chuyên Ngành</h2>
+                        <p class="text-xs sm:text-sm text-kitty-subtext font-semibold leading-relaxed">
+                            Gồm 10 câu hỏi tình huống thực tế tổng hợp từ IT, Fintech, B2B, CX, QA/QC và PO. Hoàn thành bài thi để nhận chứng nhận CEFR và xem giải thích chi tiết từng câu đúng/sai!
+                        </p>
+                    </div>
+                    <div class="grid grid-cols-3 gap-3 text-center">
+                        <div class="p-3 rounded-2xl bg-kitty-pinkLight/60 border border-kitty-pink">
+                            <p class="text-xs font-bold text-kitty-subtext">Số lượng</p>
+                            <p class="font-display font-extrabold text-base text-kitty-pinkDeep">10 Câu</p>
+                        </div>
+                        <div class="p-3 rounded-2xl bg-kitty-mintLight/60 border border-kitty-mint">
+                            <p class="text-xs font-bold text-kitty-subtext">Thời gian</p>
+                            <p class="font-display font-extrabold text-base text-kitty-mintDeep">05:00</p>
+                        </div>
+                        <div class="p-3 rounded-2xl bg-amber-50 border border-amber-200">
+                            <p class="text-xs font-bold text-kitty-subtext">Phần thưởng</p>
+                            <p class="font-display font-extrabold text-base text-amber-600">+100 XP</p>
+                        </div>
+                    </div>
+                    <button onclick="startCefrExam()" class="btn-kawaii-pink px-8 py-3.5 rounded-2xl font-extrabold text-base">
+                        🚀 Bắt đầu làm bài thi ngay
+                    </button>
+                </div>
+
+                <!-- Màn hình đang làm bài thi -->
+                <div id="exam-active-card" class="hidden max-w-2xl mx-auto bento-mint p-6 sm:p-8 space-y-6">
+                    <div class="flex items-center justify-between border-b-2 border-kitty-mintLight pb-3">
+                        <span id="exam-progress-text" class="font-extrabold text-sm text-kitty-mintDeep">Câu 1 / 10</span>
+                        <span class="px-3.5 py-1.5 rounded-2xl bg-kitty-pinkLight text-kitty-pinkDeep font-display font-extrabold text-sm border border-kitty-pink">
+                            ⏱️ <span id="exam-timer">05:00</span>
+                        </span>
                     </div>
 
                     <div id="exam-question-box" class="space-y-4">
-                        <!-- Rendered dynamically -->
+                        <!-- Render by JS -->
                     </div>
 
-                    <div class="flex justify-between pt-4">
-                        <button onclick="prevExamQuestion()" id="exam-prev-btn" class="px-5 py-2.5 rounded-2xl bg-white border-2 border-kitty-mint font-extrabold text-sm text-kitty-text">
+                    <div class="flex items-center justify-between pt-2">
+                        <button id="exam-prev-btn" onclick="prevExamQuestion()" class="px-5 py-2.5 rounded-2xl bg-white border-2 border-kitty-pink font-extrabold text-xs sm:text-sm text-kitty-text disabled:opacity-40">
                             ← Câu trước
                         </button>
-                        <button onclick="nextExamQuestion()" id="exam-next-btn" class="btn-kawaii-mint px-6 py-2.5 rounded-2xl font-extrabold text-sm">
+                        <button id="exam-next-btn" onclick="nextExamQuestion()" class="btn-kawaii-mint px-6 py-2.5 rounded-2xl font-extrabold text-xs sm:text-sm">
                             Câu tiếp theo →
                         </button>
                     </div>
                 </div>
 
-                <!-- Khu vực kết quả bài thi -->
-                <div id="exam-result-card" class="hidden bento-card p-6 md:p-8 max-w-3xl mx-auto space-y-6">
-                    <div class="text-center space-y-4">
-                        <div class="text-5xl">🏆🎀</div>
-                        <h3 class="font-display font-extrabold text-2xl text-kitty-text">Chúc Mừng Bạn Hoàn Thành Bài Thi!</h3>
-                        <div class="p-6 rounded-3xl bg-gradient-to-r from-kitty-pinkLight to-kitty-mintLight border-2 border-kitty-pink space-y-2">
-                            <p class="text-xs font-extrabold uppercase text-kitty-subtext">Kết quả đánh giá năng lực</p>
-                            <p id="exam-final-score" class="font-display font-extrabold text-4xl text-kitty-pinkDeep">8 / 10</p>
-                            <p id="exam-awarded-cefr" class="inline-block px-4 py-1.5 rounded-2xl bg-white font-extrabold text-sm text-kitty-mintDeep border border-kitty-mint">
-                                Đạt chuẩn CEFR B2 (Upper-Intermediate)
-                            </p>
-                        </div>
-                        <p id="exam-feedback-text" class="text-sm font-semibold text-kitty-subtext"></p>
-                    </div>
-
-                    <!-- Bảng chi tiết từng câu đúng/sai & giải thích -->
-                    <div class="space-y-4 pt-4 border-t-2 border-kitty-pinkLight text-left">
-                        <div class="flex items-center justify-between">
-                            <h4 class="font-display font-extrabold text-lg text-kitty-text flex items-center gap-2">
-                                <span>📋</span> Chi Tiết Đáp Án & Giải Thích Từng Câu
-                            </h4>
-                            <span class="text-xs font-bold text-kitty-subtext">Xem lại để nhớ sâu hơn nhé!</span>
-                        </div>
-                        <div id="exam-review-list" class="space-y-3.5">
-                            <!-- Render chi tiết từng câu bằng JS -->
+                <!-- Màn hình kết quả & giải thích chi tiết từng câu -->
+                <div id="exam-result-card" class="hidden max-w-3xl mx-auto space-y-6">
+                    <div class="bento-card p-6 sm:p-8 text-center space-y-4 bg-gradient-to-b from-white to-kitty-pinkLight/50">
+                        <span class="inline-block px-4 py-1 rounded-full bg-kitty-mint text-kitty-mintDeep font-extrabold text-xs">
+                            🎉 KẾT QUẢ ĐÁNH GIÁ NĂNG LỰC
+                        </span>
+                        <h2 id="exam-final-score" class="font-display font-extrabold text-4xl sm:text-5xl text-kitty-pinkDeep">
+                            8 / 10
+                        </h2>
+                        <p id="exam-awarded-cefr" class="font-display font-bold text-xl text-kitty-mintDeep">
+                            Đạt chuẩn CEFR B2 (Upper-Intermediate)
+                        </p>
+                        <p id="exam-feedback-text" class="text-xs sm:text-sm font-semibold text-kitty-text max-w-xl mx-auto">
+                            Tuyệt vời!
+                        </p>
+                        <div class="pt-2">
+                            <button onclick="startCefrExam()" class="btn-kawaii-pink px-6 py-3 rounded-2xl font-extrabold text-sm">
+                                🔄 Làm lại bài thi mới
+                            </button>
                         </div>
                     </div>
 
-                    <div class="text-center pt-2">
-                        <button onclick="startCefrExam()" class="btn-kawaii-pink px-7 py-3.5 rounded-2xl font-extrabold text-sm">
-                            🔄 Thi lại để nâng hạng
-                        </button>
+                    <div class="space-y-4">
+                        <h3 class="font-display font-bold text-lg text-kitty-text flex items-center gap-2">
+                            <span>📋</span> Chi Tiết Đáp Án & Giải Thích Từng Câu
+                        </h3>
+                        <div id="exam-review-list" class="space-y-4">
+                            <!-- Render by JS -->
+                        </div>
                     </div>
                 </div>
             </section>
@@ -870,236 +999,262 @@
 
     <script>
         // =========================================================================
-        // 1. CƠ SỞ DỮ LIỆU TỪ VỰNG, LỘ TRÌNH & PHỎNG VẤN CHUYÊN NGÀNH (CEFR A1-C2)
+        // 1. CƠ SỞ DỮ LIỆU TỪ VỰNG 2026, CANDY SAGA 6 BẬC & PHỎNG VẤN QUỐC TẾ
         // =========================================================================
         const apiKey = ""; // Runtime tự động cung cấp khóa Gemini API
 
         const CEFR_LEVELS = [
-            { code: 'A1', label: 'A1 - Sơ cấp' },
-            { code: 'A2', label: 'A2 - Nền tảng' },
-            { code: 'B1', label: 'B1 - Trung cấp' },
-            { code: 'B2', label: 'B2 - Trung cao' },
-            { code: 'C1', label: 'C1 - Cao cấp' },
-            { code: 'C2', label: 'C2 - Thành thạo' }
+            { code: 'A1', name: 'A1 • Khởi Hành', world: 'Vương Quốc Kẹo Ngọt A1', targetWords: 150, desc: 'Nền tảng giao tiếp Tech, Fintech & Văn phòng quốc tế' },
+            { code: 'A2', name: 'A2 • Tăng Tốc', world: 'Rừng Bạc Hà A2', targetWords: 300, desc: 'Trao đổi task hàng ngày, báo cáo tiến độ & hỗ trợ khách hàng' },
+            { code: 'B1', name: 'B1 • Vững Vàng', world: 'Thung Lũng Hoa Anh Đào B1', targetWords: 500, desc: 'Họp Sprint, viết User Story, xử lý ticket & trình bày giải pháp' },
+            { code: 'B2', name: 'B2 • Chuyên Gia', world: 'Lâu Đài Pha Lê B2', targetWords: 800, desc: 'Đàm phán B2B, phân tích RCA, tối ưu hệ thống & bảo vệ quan điểm' },
+            { code: 'C1', name: 'C1 • Lãnh Đạo', world: 'Đỉnh Mây Cầu Vồng C1', targetWords: 1200, desc: 'Chiến lược sản phẩm AI, kiến trúc quy mô lớn & xử lý khủng hoảng' },
+            { code: 'C2', name: 'C2 • Đỉnh Cao', world: 'Ngai Vàng Quốc Tế C2', targetWords: 1800, desc: 'Làm chủ mọi cuộc thương thảo C-Level & phỏng vấn tập đoàn toàn cầu' }
         ];
 
         const DOMAINS = [
-            { id: 'ALL', label: '🌟 Tất cả bộ phận' },
-            { id: 'IT', label: '💻 IT / Software' },
-            { id: 'Fintech', label: '💳 Fintech & Banking' },
+            { id: 'ALL', label: '🌟 Gộp tất cả (IT • Fintech • B2B • CX • QA • PO)' },
+            { id: 'IT', label: '💻 IT / AI Engineering' },
+            { id: 'Fintech', label: '💳 Fintech 2026' },
             { id: 'B2B', label: '🤝 Kinh doanh / B2B' },
             { id: 'CX', label: '🎧 Bộ phận CX' },
             { id: 'QA', label: '🐞 Tester / QA / QC' },
             { id: 'PO', label: '📋 Product Owner (PO)' }
         ];
 
+        // Kho từ vựng chuẩn xu hướng 2026 gộp đầy đủ 6 chuyên ngành theo từng bậc A1 -> C2
         const INITIAL_VOCAB = [
-            // IT / Software
-            { id: 1, word: 'Deployment', pos: 'noun', ipa: '/dɪˈplɔɪ.mənt/', cefr: 'B1', domain: 'IT', day: 1, meaning: 'Sự triển khai phần mềm lên hệ thống', exampleEn: 'The production deployment is scheduled for Friday night.', exampleVi: 'Việc triển khai lên môi trường thật được lên lịch vào tối thứ Sáu.' },
-            { id: 2, word: 'Scalability', pos: 'noun', ipa: '/ˌskeɪ.ləˈbɪl.ə.ti/', cefr: 'B2', domain: 'IT', day: 1, meaning: 'Khả năng mở rộng quy mô hệ thống', exampleEn: 'Cloud architecture ensures high scalability during peak traffic.', exampleVi: 'Kiến trúc đám mây đảm bảo khả năng mở rộng cao trong giờ cao điểm.' },
-            { id: 3, word: 'Latency', pos: 'noun', ipa: '/ˈleɪ.tən.si/', cefr: 'C1', domain: 'IT', day: 2, meaning: 'Độ trễ phản hồi của hệ thống/mạng', exampleEn: 'We optimized database queries to reduce API latency below 50ms.', exampleVi: 'Chúng tôi tối ưu truy vấn cơ sở dữ liệu để giảm độ trễ API xuống dưới 50ms.' },
-            { id: 4, word: 'Refactor', pos: 'verb', ipa: '/ˌriːˈfæk.tər/', cefr: 'B2', domain: 'IT', day: 2, meaning: 'Tái cấu trúc mã nguồn cho sạch và tối ưu hơn', exampleEn: 'Developers need two days to refactor the legacy payment module.', exampleVi: 'Lập trình viên cần 2 ngày để tái cấu trúc mô-đun thanh toán cũ.' },
-            { id: 5, word: 'Repository', pos: 'noun', ipa: '/rɪˈpɒz.ɪ.tər.i/', cefr: 'A2', domain: 'IT', day: 1, meaning: 'Kho lưu trữ mã nguồn (Git repo)', exampleEn: 'Please push your latest commit to the main repository.', exampleVi: 'Vui lòng đẩy bản cập nhật mới nhất của bạn lên kho mã nguồn chính.' },
+            // --- BẬC A1 ---
+            { id: 101, word: 'Workflow', pos: 'noun', ipa: '/ˈwɜːk.fləʊ/', cefr: 'A1', domain: 'IT', stage: 1, meaning: 'Luồng quy trình làm việc', exampleEn: 'Our new AI workflow saves two hours every morning.', exampleVi: 'Luồng quy trình AI mới giúp tiết kiệm 2 tiếng mỗi sáng.' },
+            { id: 102, word: 'Transaction', pos: 'noun', ipa: '/trænˈzæk.ʃən/', cefr: 'A1', domain: 'Fintech', stage: 1, meaning: 'Giao dịch thanh toán', exampleEn: 'Every QR transaction is confirmed in one second.', exampleVi: 'Mỗi giao dịch QR được xác nhận chỉ trong 1 giây.' },
+            { id: 103, word: 'Client', pos: 'noun', ipa: '/ˈklaɪ.ənt/', cefr: 'A1', domain: 'B2B', stage: 1, meaning: 'Khách hàng doanh nghiệp / đối tác', exampleEn: 'We have a demo call with an enterprise client at 2 PM.', exampleVi: 'Chúng ta có buổi gọi demo với khách hàng doanh nghiệp lúc 2 giờ chiều.' },
+            { id: 104, word: 'Ticket', pos: 'noun', ipa: '/ˈtɪk.ɪt/', cefr: 'A1', domain: 'CX', stage: 2, meaning: 'Phiếu yêu cầu hỗ trợ / báo lỗi', exampleEn: 'Please update the customer ticket after fixing the issue.', exampleVi: 'Vui lòng cập nhật phiếu hỗ trợ khách hàng sau khi sửa lỗi.' },
+            { id: 105, word: 'Bug Report', pos: 'noun phrase', ipa: '/bʌɡ rɪˈpɔːt/', cefr: 'A1', domain: 'QA', stage: 2, meaning: 'Báo cáo lỗi phần mềm', exampleEn: 'The tester attached a clear video to the bug report.', exampleVi: 'Tester đã đính kèm video rõ nét vào báo cáo lỗi.' },
+            { id: 106, word: 'Roadmap', pos: 'noun', ipa: '/ˈrəʊd.mæp/', cefr: 'A1', domain: 'PO', stage: 2, meaning: 'Lộ trình phát triển sản phẩm', exampleEn: 'Our 2026 product roadmap focuses on AI automation.', exampleVi: 'Lộ trình sản phẩm 2026 của chúng ta tập trung vào tự động hóa AI.' },
+            { id: 107, word: 'Dashboard', pos: 'noun', ipa: '/ˈdæʃ.bɔːd/', cefr: 'A1', domain: 'PO', stage: 3, meaning: 'Bảng điều khiển trực quan số liệu', exampleEn: 'Check the real-time revenue dashboard before the meeting.', exampleVi: 'Hãy kiểm tra bảng số liệu doanh thu thời gian thực trước cuộc họp.' },
+            { id: 108, word: 'Digital Wallet', pos: 'noun phrase', ipa: '/ˈdɪdʒ.ɪ.təl ˈwɒl.ɪt/', cefr: 'A1', domain: 'Fintech', stage: 3, meaning: 'Ví điện tử số', exampleEn: 'Gen Z users prefer paying via biometric digital wallets.', exampleVi: 'Người dùng Gen Z thích thanh toán qua ví điện tử sinh trắc học.' },
 
-            // Fintech
-            { id: 6, word: 'Reconciliation', pos: 'noun', ipa: '/ˌrek.ənˌsɪl.iˈeɪ.ʃən/', cefr: 'C1', domain: 'Fintech', day: 3, meaning: 'Đối soát giao dịch tài chính / sổ sách', exampleEn: 'Automated daily reconciliation prevents settlement discrepancies.', exampleVi: 'Đối soát tự động hàng ngày giúp ngăn ngừa sai lệch thanh toán.' },
-            { id: 7, word: 'Liquidity', pos: 'noun', ipa: '/lɪˈkwɪd.ə.ti/', cefr: 'C1', domain: 'Fintech', day: 3, meaning: 'Tính thanh khoản', exampleEn: 'Instant cross-border transfers require strong liquidity management.', exampleVi: 'Chuyển tiền xuyên biên giới tức thì đòi hỏi quản trị thanh khoản mạnh.' },
-            { id: 8, word: 'Compliance', pos: 'noun', ipa: '/kəmˈplaɪ.əns/', cefr: 'B2', domain: 'Fintech', day: 3, meaning: 'Sự tuân thủ quy định pháp lý (KYC/AML)', exampleEn: 'All fintech wallets must pass strict KYC compliance checks.', exampleVi: 'Tất cả ví điện tử fintech phải vượt qua kiểm tra tuân thủ KYC nghiêm ngặt.' },
-            { id: 9, word: 'Transaction', pos: 'noun', ipa: '/trænˈzæk.ʃən/', cefr: 'A1', domain: 'Fintech', day: 1, meaning: 'Giao dịch thanh toán', exampleEn: 'Your QR payment transaction was completed successfully.', exampleVi: 'Giao dịch thanh toán QR của bạn đã hoàn tất thành công.' },
+            // --- BẬC A2 ---
+            { id: 201, word: 'Repository', pos: 'noun', ipa: '/rɪˈpɒz.ɪ.tər.i/', cefr: 'A2', domain: 'IT', stage: 1, meaning: 'Kho lưu trữ mã nguồn (Git repo)', exampleEn: 'Please push your latest commit to the main repository.', exampleVi: 'Vui lòng đẩy bản cập nhật mới nhất lên kho mã nguồn chính.' },
+            { id: 202, word: 'eKYC Verification', pos: 'noun phrase', ipa: '/iː keɪ waɪ siː ˌver.ɪ.fɪˈkeɪ.ʃən/', cefr: 'A2', domain: 'Fintech', stage: 1, meaning: 'Định danh khách hàng điện tử trực tuyến', exampleEn: 'AI-powered eKYC verification takes less than 15 seconds.', exampleVi: 'Xác minh eKYC bằng AI mất chưa tới 15 giây.' },
+            { id: 203, word: 'Follow-up', pos: 'noun', ipa: '/ˈfɒl.əʊ.ʌp/', cefr: 'A2', domain: 'B2B', stage: 2, meaning: 'Email/cuộc gọi trao đổi tiếp nối sau buổi họp', exampleEn: 'I sent a follow-up proposal to the B2B buyer.', exampleVi: 'Tôi đã gửi đề xuất tiếp nối cho bên mua hàng B2B.' },
+            { id: 204, word: 'Feedback Loop', pos: 'noun phrase', ipa: '/ˈfiːd.bæk luːp/', cefr: 'A2', domain: 'CX', stage: 2, meaning: 'Vòng phản hồi cải tiến từ người dùng', exampleEn: 'A fast feedback loop helps us improve app ratings quickly.', exampleVi: 'Vòng phản hồi nhanh giúp chúng ta cải thiện điểm đánh giá app.' },
+            { id: 205, word: 'Test Case', pos: 'noun phrase', ipa: '/test keɪs/', cefr: 'A2', domain: 'QA', stage: 3, meaning: 'Kịch bản kiểm thử phần mềm', exampleEn: 'We automated 200 critical test cases for the checkout flow.', exampleVi: 'Chúng tôi đã tự động hóa 200 kịch bản kiểm thử cho luồng thanh toán.' },
+            { id: 206, word: 'User Story', pos: 'noun phrase', ipa: '/ˈjuː.zər ˈstɔː.ri/', cefr: 'A2', domain: 'PO', stage: 3, meaning: 'Mô tả tính năng dưới góc nhìn người dùng', exampleEn: 'The PO wrote clear user stories for the AI search bar.', exampleVi: 'PO đã viết các user story rõ ràng cho thanh tìm kiếm AI.' },
 
-            // B2B & Kinh doanh
-            { id: 10, word: 'Stakeholder', pos: 'noun', ipa: '/ˈsteɪkˌhəʊl.dər/', cefr: 'B1', domain: 'B2B', day: 2, meaning: 'Các bên liên quan / đối tác dự án', exampleEn: 'We aligned all key stakeholders before signing the B2B contract.', exampleVi: 'Chúng tôi đã thống nhất với các bên liên quan trước khi ký hợp đồng B2B.' },
-            { id: 11, word: 'Value Proposition', pos: 'noun phrase', ipa: '/ˈvæl.juː ˌprɒp.əˈzɪʃ.ən/', cefr: 'B2', domain: 'B2B', day: 4, meaning: 'Tuyên ngôn giá trị cốt lõi của sản phẩm', exampleEn: 'Our SaaS value proposition is reducing operational costs by 40%.', exampleVi: 'Giá trị cốt lõi của SaaS bên mình là giảm 40% chi phí vận hành.' },
-            { id: 12, word: 'Procurement', pos: 'noun', ipa: '/prəˈkjʊə.mənt/', cefr: 'C1', domain: 'B2B', day: 4, meaning: 'Quy trình thu mua / đấu thầu doanh nghiệp', exampleEn: 'Enterprise deals often take longer due to strict procurement reviews.', exampleVi: 'Các thương vụ doanh nghiệp lớn thường mất nhiều thời gian do khâu thẩm định thu mua.' },
-            { id: 13, word: 'Onboarding', pos: 'noun', ipa: '/ˈɒnˌbɔː.dɪŋ/', cefr: 'B1', domain: 'B2B', day: 2, meaning: 'Quy trình hướng dẫn làm quen / tích hợp ban đầu', exampleEn: 'Smooth client onboarding increases long-term B2B retention.', exampleVi: 'Quy trình hướng dẫn khách hàng mượt mà giúp tăng tỷ lệ giữ chân B2B dài hạn.' },
+            // --- BẬC B1 ---
+            { id: 1, word: 'Deployment', pos: 'noun', ipa: '/dɪˈplɔɪ.mənt/', cefr: 'B1', domain: 'IT', stage: 1, meaning: 'Sự triển khai phần mềm lên hệ thống', exampleEn: 'The zero-downtime deployment is scheduled for tonight.', exampleVi: 'Việc triển khai không gián đoạn được lên lịch vào tối nay.' },
+            { id: 10, word: 'Stakeholder', pos: 'noun', ipa: '/ˈsteɪkˌhəʊl.dər/', cefr: 'B1', domain: 'B2B', stage: 1, meaning: 'Các bên liên quan / đối tác dự án', exampleEn: 'We aligned all key stakeholders before signing the B2B contract.', exampleVi: 'Chúng tôi đã thống nhất với các bên liên quan trước khi ký hợp đồng.' },
+            { id: 13, word: 'Onboarding', pos: 'noun', ipa: '/ˈɒnˌbɔː.dɪŋ/', cefr: 'B1', domain: 'B2B', stage: 2, meaning: 'Quy trình hướng dẫn tích hợp ban đầu', exampleEn: 'Interactive AI onboarding increased our SaaS activation by 35%.', exampleVi: 'Hướng dẫn tương tác bằng AI đã tăng tỷ lệ kích hoạt SaaS thêm 35%.' },
+            { id: 16, word: 'Empathy', pos: 'noun', ipa: '/ˈem.pə.θi/', cefr: 'B1', domain: 'CX', stage: 2, meaning: 'Sự thấu cảm với khách hàng', exampleEn: 'Showing genuine empathy calms frustrated users during outages.', exampleVi: 'Thể hiện sự thấu cảm chân thành giúp trấn an người dùng khi lỗi mạng.' },
+            { id: 19, word: 'Reproduce', pos: 'verb', ipa: '/ˌriː.prəˈdjuːs/', cefr: 'B1', domain: 'QA', stage: 3, meaning: 'Tái hiện lại lỗi (bug)', exampleEn: 'Please attach clear steps to reproduce this UI bug on iOS.', exampleVi: 'Vui lòng đính kèm các bước rõ ràng để tái hiện lỗi giao diện trên iOS.' },
+            { id: 42, word: 'Minimum Viable Product (MVP)', pos: 'noun phrase', ipa: '/ˈmɪn.ɪ.məm ˈvaɪ.ə.bəl ˈprɒd.ʌkt/', cefr: 'B1', domain: 'PO', stage: 3, meaning: 'Sản phẩm khả dụng tối thiểu kiểm chứng thị trường', exampleEn: 'We shipped the AI Copilot MVP in four weeks to validate demand.', exampleVi: 'Chúng tôi ra mắt bản MVP Trợ lý AI trong 4 tuần để kiểm chứng nhu cầu.' },
 
-            // CX (Customer Experience)
-            { id: 14, word: 'Churn Rate', pos: 'noun', ipa: '/tʃɜːn reɪt/', cefr: 'B2', domain: 'CX', day: 4, meaning: 'Tỷ lệ khách hàng rời bỏ dịch vụ', exampleEn: 'Proactive CX support helped reduce our monthly churn rate to 1.5%.', exampleVi: 'Hỗ trợ CX chủ động đã giúp giảm tỷ lệ khách rời bỏ hàng tháng xuống 1.5%.' },
-            { id: 15, word: 'Escalation', pos: 'noun', ipa: '/ˌes.kəˈleɪ.ʃən/', cefr: 'B2', domain: 'CX', day: 5, meaning: 'Chuyển cấp xử lý sự cố nghiêm trọng', exampleEn: 'Urgent VIP tickets require immediate escalation to Tier-2 engineers.', exampleVi: 'Các yêu cầu khẩn từ khách VIP cần chuyển cấp ngay cho kỹ sư cấp 2.' },
-            { id: 16, word: 'Empathy', pos: 'noun', ipa: '/ˈem.pə.θi/', cefr: 'B1', domain: 'CX', day: 5, meaning: 'Sự thấu cảm với khách hàng', exampleEn: 'Showing genuine empathy calms frustrated users during outages.', exampleVi: 'Thể hiện sự thấu cảm chân thành giúp trấn an người dùng bức xúc khi hệ thống lỗi.' },
+            // --- BẬC B2 ---
+            { id: 2, word: 'Scalability', pos: 'noun', ipa: '/ˌskeɪ.ləˈbɪl.ə.ti/', cefr: 'B2', domain: 'IT', stage: 1, meaning: 'Khả năng mở rộng quy mô hệ thống', exampleEn: 'Serverless architecture ensures instant scalability during peak traffic.', exampleVi: 'Kiến trúc serverless đảm bảo mở rộng tức thì trong giờ cao điểm.' },
+            { id: 301, word: 'Prompt Engineering', pos: 'noun phrase', ipa: '/prɒmpt ˌen.dʒɪˈnɪə.rɪŋ/', cefr: 'B2', domain: 'IT', stage: 1, meaning: 'Kỹ thuật tối ưu câu lệnh điều khiển mô hình AI', exampleEn: 'Structured prompt engineering reduced LLM hallucinations by 60%.', exampleVi: 'Kỹ thuật tối ưu câu lệnh có cấu trúc đã giảm 60% ảo giác của AI.' },
+            { id: 8, word: 'Compliance', pos: 'noun', ipa: '/kəmˈplaɪ.əns/', cefr: 'B2', domain: 'Fintech', stage: 1, meaning: 'Sự tuân thủ quy định pháp lý (KYC/AML/AI Act)', exampleEn: 'All fintech wallets must pass strict AML compliance checks.', exampleVi: 'Tất cả ví fintech phải vượt qua kiểm tra tuân thủ chống rửa tiền nghiêm ngặt.' },
+            { id: 28, word: 'Settlement', pos: 'noun', ipa: '/ˈset.əl.mənt/', cefr: 'B2', domain: 'Fintech', stage: 2, meaning: 'Quyết toán / tất toán dòng tiền giữa các bên', exampleEn: 'Stablecoin rails enable 24/7 cross-border B2B settlement.', exampleVi: 'Hạ tầng stablecoin cho phép quyết toán B2B xuyên biên giới 24/7.' },
+            { id: 11, word: 'Value Proposition', pos: 'noun phrase', ipa: '/ˈvæl.juː ˌprɒp.əˈzɪʃ.ən/', cefr: 'B2', domain: 'B2B', stage: 2, meaning: 'Tuyên ngôn giá trị cốt lõi của sản phẩm', exampleEn: 'Our SaaS value proposition is cutting operational costs by 45%.', exampleVi: 'Giá trị cốt lõi của SaaS bên mình là giảm 45% chi phí vận hành.' },
+            { id: 14, word: 'Churn Rate', pos: 'noun', ipa: '/tʃɜːn reɪt/', cefr: 'B2', domain: 'CX', stage: 2, meaning: 'Tỷ lệ khách hàng rời bỏ dịch vụ', exampleEn: 'Predictive CX alerts helped reduce our monthly churn rate to 1.2%.', exampleVi: 'Cảnh báo CX dự đoán giúp giảm tỷ lệ khách rời bỏ hàng tháng xuống 1.2%.' },
+            { id: 17, word: 'Regression Testing', pos: 'noun phrase', ipa: '/rɪˈɡreʃ.ən ˈtes.tɪŋ/', cefr: 'B2', domain: 'QA', stage: 3, meaning: 'Kiểm thử hồi quy sau khi cập nhật tính năng', exampleEn: 'Self-healing AI scripts run full regression testing in 10 minutes.', exampleVi: 'Kịch bản AI tự phục hồi chạy kiểm thử hồi quy toàn diện chỉ trong 10 phút.' },
+            { id: 21, word: 'Acceptance Criteria', pos: 'noun phrase', ipa: '/əkˈsep.təns kraɪˈtɪə.ri.ə/', cefr: 'B2', domain: 'PO', stage: 3, meaning: 'Tiêu chí nghiệm thu tính năng (AC)', exampleEn: 'Every user story needs measurable acceptance criteria before sprint kickoff.', exampleVi: 'Mỗi user story cần tiêu chí nghiệm thu đo lường được trước khi bắt đầu sprint.' },
 
-            // QA / QC / Tester
-            { id: 17, word: 'Regression Testing', pos: 'noun phrase', ipa: '/rɪˈɡreʃ.ən ˈtes.tɪŋ/', cefr: 'B2', domain: 'QA', day: 5, meaning: 'Kiểm thử hồi quy sau khi sửa lỗi/cập nhật', exampleEn: 'QA ran full regression testing before approving the hotfix release.', exampleVi: 'Đội QA đã chạy kiểm thử hồi quy toàn diện trước khi duyệt bản vá lỗi nóng.' },
-            { id: 18, word: 'Edge Case', pos: 'noun', ipa: '/edʒ keɪs/', cefr: 'B2', domain: 'QA', day: 5, meaning: 'Trường hợp biên / tình huống hiếm gặp', exampleEn: 'Good testers always think of edge cases like network drops mid-payment.', exampleVi: 'Tester giỏi luôn nghĩ tới các trường hợp biên như rớt mạng giữa lúc thanh toán.' },
-            { id: 19, word: 'Reproduce', pos: 'verb', ipa: '/ˌriː.prəˈdjuːs/', cefr: 'B1', domain: 'QA', day: 1, meaning: 'Tái hiện lại lỗi (bug)', exampleEn: 'Please attach clear steps to reproduce this UI bug on iOS.', exampleVi: 'Vui lòng đính kèm các bước rõ ràng để tái hiện lỗi giao diện này trên iOS.' },
+            // --- BẬC C1 ---
+            { id: 401, word: 'Agentic AI', pos: 'noun phrase', ipa: '/eɪˈdʒen.tɪk eɪ aɪ/', cefr: 'C1', domain: 'IT', stage: 1, meaning: 'Hệ thống AI tự chủ lập kế hoạch và thực thi chuỗi tác vụ', exampleEn: 'We deployed an Agentic AI pipeline to triage Tier-1 support tickets autonomously.', exampleVi: 'Chúng tôi triển khai hệ thống Agentic AI để tự động phân loại yêu cầu hỗ trợ.' },
+            { id: 3, word: 'Latency', pos: 'noun', ipa: '/ˈleɪ.tən.si/', cefr: 'C1', domain: 'IT', stage: 1, meaning: 'Độ trễ phản hồi của hệ thống/mạng', exampleEn: 'Edge caching reduced voice AI response latency below 250ms.', exampleVi: 'Bộ nhớ đệm biên đã giảm độ trễ phản hồi AI giọng nói xuống dưới 250ms.' },
+            { id: 6, word: 'Reconciliation', pos: 'noun', ipa: '/ˌrek.ənˌsɪl.iˈeɪ.ʃən/', cefr: 'C1', domain: 'Fintech', stage: 2, meaning: 'Đối soát giao dịch tài chính / sổ cái tự động', exampleEn: 'Automated real-time reconciliation prevents multi-currency discrepancies.', exampleVi: 'Đối soát thời gian thực tự động ngăn ngừa sai lệch đa tiền tệ.' },
+            { id: 12, word: 'Procurement', pos: 'noun', ipa: '/prəˈkjʊə.mənt/', cefr: 'C1', domain: 'B2B', stage: 2, meaning: 'Quy trình thẩm định & thu mua doanh nghiệp lớn', exampleEn: 'Passing SOC2 and AI governance reviews accelerated enterprise procurement.', exampleVi: 'Vượt qua thẩm định SOC2 và quản trị AI đã đẩy nhanh khâu thu mua doanh nghiệp.' },
+            { id: 402, word: 'AI Hallucination', pos: 'noun phrase', ipa: '/eɪ aɪ həˌluː.sɪˈneɪ.ʃən/', cefr: 'C1', domain: 'CX', stage: 3, meaning: 'Hiện tượng AI tạo ra thông tin sai lệch nhưng nghe rất thuyết phục', exampleEn: 'Strict RAG guardrails protect CX chatbots from AI hallucinations.', exampleVi: 'Hàng rào bảo vệ RAG nghiêm ngặt giúp chatbot CX tránh bịa thông tin sai.' },
+            { id: 41, word: 'Root Cause Analysis (RCA)', pos: 'noun phrase', ipa: '/ruːt kɔːz əˈnæl.ə.sɪs/', cefr: 'C1', domain: 'QA', stage: 3, meaning: 'Phân tích nguyên nhân gốc rễ sự cố', exampleEn: 'QA and SRE leads published a blameless RCA within 12 hours.', exampleVi: 'Trưởng nhóm QA và SRE đã công bố báo cáo nguyên nhân gốc rễ trong 12 giờ.' },
+            { id: 44, word: 'Product-Led Growth (PLG)', pos: 'noun phrase', ipa: '/ˈprɒd.ʌkt led ɡrəʊθ/', cefr: 'C1', domain: 'PO', stage: 3, meaning: 'Chiến lược tăng trưởng lấy trải nghiệm sản phẩm làm trọng tâm', exampleEn: 'Our freemium AI tier drives Product-Led Growth across global teams.', exampleVi: 'Gói AI miễn phí thúc đẩy tăng trưởng dựa vào sản phẩm trên toàn cầu.' },
 
-            // Product Owner (PO)
-            { id: 20, word: 'Prioritization', pos: 'noun', ipa: '/praɪˌɒr.ɪ.taɪˈzeɪ.ʃən/', cefr: 'B2', domain: 'PO', day: 6, meaning: 'Sắp xếp thứ tự ưu tiên tính năng', exampleEn: 'Backlog prioritization is based on business impact and dev effort.', exampleVi: 'Việc ưu tiên backlog dựa trên tác động kinh doanh và nguồn lực lập trình.' },
-            { id: 21, word: 'Acceptance Criteria', pos: 'noun phrase', ipa: '/əkˈsep.təns kraɪˈtɪə.ri.ə/', cefr: 'B2', domain: 'PO', day: 6, meaning: 'Tiêu chí nghiệm thu tính năng (AC)', exampleEn: 'Every user story must have clear acceptance criteria before Sprint Planning.', exampleVi: 'Mỗi user story phải có tiêu chí nghiệm thu rõ ràng trước buổi lập kế hoạch Sprint.' },
-            { id: 22, word: 'Scope Creep', pos: 'noun', ipa: '/skəʊp kriːp/', cefr: 'C1', domain: 'PO', day: 6, meaning: 'Sự phình to phạm vi dự án ngoài kế hoạch', exampleEn: 'The PO prevented scope creep by moving extra requests to Phase 2.', exampleVi: 'PO đã ngăn chặn việc phình phạm vi dự án bằng cách dời các yêu cầu phụ sang Giai đoạn 2.' }
+            // --- BẬC C2 ---
+            { id: 25, word: 'Idempotency', pos: 'noun', ipa: '/ˌaɪ.dɛmˈpəʊ.tən.si/', cefr: 'C2', domain: 'IT', stage: 1, meaning: 'Tính lũy đẳng (gọi API nhiều lần vẫn đảm bảo 1 kết quả duy nhất)', exampleEn: 'Idempotency keys prevent double-charging users during network retries.', exampleVi: 'Khóa lũy đẳng ngăn chặn trừ tiền hai lần khi mạng tự động gửi lại yêu cầu.' },
+            { id: 501, word: 'Zero-Trust Architecture', pos: 'noun phrase', ipa: '/ˈzɪə.rəʊ trʌst ˈɑː.kɪ.tek.tʃər/', cefr: 'C2', domain: 'IT', stage: 1, meaning: 'Kiến trúc bảo mật không tin cậy mặc định, xác thực mọi truy cập', exampleEn: 'Enterprise fintech clients mandate Zero-Trust Architecture across all microservices.', exampleVi: 'Khách hàng fintech doanh nghiệp bắt buộc kiến trúc Zero-Trust trên mọi microservice.' },
+            { id: 502, word: 'Tokenized Liquidity', pos: 'noun phrase', ipa: '/ˈtəʊ.kə.naɪzd lɪˈkwɪd.ə.ti/', cefr: 'C2', domain: 'Fintech', stage: 2, meaning: 'Thanh khoản tài sản số hóa trên hạ tầng blockchain/ngân hàng', exampleEn: 'Tokenized liquidity pools allow instant treasury optimization across time zones.', exampleVi: 'Các bể thanh khoản số hóa cho phép tối ưu nguồn vốn tức thì xuyên múi giờ.' },
+            { id: 503, word: 'Indemnification Clause', pos: 'noun phrase', ipa: '/ɪnˌdem.nɪ.fɪˈkeɪ.ʃən klɔːz/', cefr: 'C2', domain: 'B2B', stage: 2, meaning: 'Điều khoản bồi thường & miễn trừ trách nhiệm pháp lý trong hợp đồng', exampleEn: 'Legal redlined the AI IP indemnification clause before signing the MSA.', exampleVi: 'Bộ phận pháp chế đã rà soát điều khoản bồi thường bản quyền AI trước khi ký MSA.' },
+            { id: 504, word: 'Deterministic Guardrails', pos: 'noun phrase', ipa: '/dɪˌtɜː.mɪˈnɪs.tɪk ˈɡɑːd.reɪlz/', cefr: 'C2', domain: 'QA', stage: 3, meaning: 'Rào chắn kiểm thử tất định đảm bảo hệ thống AI không vượt rào', exampleEn: 'QA engineers designed deterministic guardrails to validate LLM outputs in production.', exampleVi: 'Kỹ sư QA thiết kế rào chắn kiểm thử tất định để xác thực đầu ra của LLM.' },
+            { id: 505, word: 'Asymmetric Value Capture', pos: 'noun phrase', ipa: '/ˌeɪ.sɪˈmet.rɪk ˈvæl.juː ˈkæp.tʃər/', cefr: 'C2', domain: 'PO', stage: 3, meaning: 'Nắm bắt giá trị vượt trội nhờ lợi thế dữ liệu độc quyền', exampleEn: 'Proprietary workflow telemetry creates asymmetric value capture for our platform.', exampleVi: 'Dữ liệu vận hành độc quyền tạo ra lợi thế nắm bắt giá trị vượt trội cho nền tảng.' }
         ];
 
-        const DAILY_ROADMAP = [
-            { day: 1, title: 'Ngày 1: Nền tảng Tech & Quy trình Agile', domains: 'IT • QA • Fintech', desc: 'Làm quen thuật ngữ triển khai, kho mã nguồn, giao dịch & báo lỗi cơ bản.' },
-            { day: 2, title: 'Ngày 2: Tối ưu Hệ thống & Làm việc Đối tác', domains: 'IT • B2B', desc: 'Giao tiếp về độ trễ API, tái cấu trúc code và quy trình onboarding khách hàng.' },
-            { day: 3, title: 'Ngày 3: Nghiệp vụ Tài chính & Tuân thủ', domains: 'Fintech • Legal', desc: 'Chuyên sâu đối soát giao dịch, thanh khoản và tiêu chuẩn bảo mật KYC/AML.' },
-            { day: 4, title: 'Ngày 4: Tăng trưởng B2B & Giữ chân Khách hàng', domains: 'B2B • CX', desc: 'Trình bày giá trị giải pháp SaaS, đàm phán thu mua và giảm tỷ lệ rời bỏ.' },
-            { day: 5, title: 'Ngày 5: Đảm bảo Chất lượng & Xử lý Khủng hoảng', domains: 'QA/QC • CX', desc: 'Kiểm thử hồi quy, bắt các tình huống biên và quy trình chuyển cấp sự cố.' },
-            { day: 6, title: 'Ngày 6: Quản trị Sản phẩm & Chiến lược PO', domains: 'PO • All Teams', desc: 'Viết tiêu chí nghiệm thu, ưu tiên backlog và kiểm soát phạm vi dự án.' }
+        // Kho từ vựng mở rộng 2026 dự phòng vô tận (hoạt động cả khi offline)
+        const EXTRA_VOCAB_BANK = [
+            { word: 'Retrieval-Augmented Generation (RAG)', pos: 'noun phrase', ipa: '/rɪˈtriː.vəl ɔːɡˈmen.tɪd ˌdʒen.əˈreɪ.ʃən/', cefr: 'C1', domain: 'IT', stage: 4, meaning: 'Kỹ thuật kết hợp truy xuất dữ liệu nội bộ để AI trả lời chính xác', exampleEn: 'We built a RAG pipeline connected to our internal Confluence docs.', exampleVi: 'Chúng tôi xây dựng luồng RAG kết nối với tài liệu Confluence nội bộ.' },
+            { word: 'Observability', pos: 'noun', ipa: '/əbˌzɜː.vəˈbɪl.ə.ti/', cefr: 'B2', domain: 'IT', stage: 4, meaning: 'Khả năng giám sát toàn diện trạng thái bên trong hệ thống qua log/metrics/traces', exampleEn: 'Full-stack observability helped us pinpoint the memory leak in minutes.', exampleVi: 'Khả năng giám sát toàn diện giúp chúng tôi tìm ra lỗi rò rỉ bộ nhớ trong vài phút.' },
+            { word: 'Embedded Finance', pos: 'noun phrase', ipa: '/ɪmˈbed.ɪd ˈfaɪ.næns/', cefr: 'B2', domain: 'Fintech', stage: 4, meaning: 'Tài chính nhúng (tích hợp thanh toán/vay ngay trong app phi tài chính)', exampleEn: 'Embedded finance lets B2B marketplaces offer instant net-30 credit.', exampleVi: 'Tài chính nhúng giúp sàn B2B cung cấp tín dụng trả chậm tức thì.' },
+            { word: 'Chargeback Mitigation', pos: 'noun phrase', ipa: '/ˈtʃɑːdʒ.bæk ˌmɪt.ɪˈɡeɪ.ʃən/', cefr: 'C1', domain: 'Fintech', stage: 4, meaning: 'Giảm thiểu khiếu nại hoàn tiền thẻ gian lận', exampleEn: 'Biometric passkeys significantly improved our chargeback mitigation rate.', exampleVi: 'Khóa xác thực sinh trắc học cải thiện đáng kể tỷ lệ giảm hoàn tiền gian lận.' },
+            { word: 'Net Revenue Retention (NRR)', pos: 'noun phrase', ipa: '/net ˈrev.ən.juː rɪˈten.ʃən/', cefr: 'C1', domain: 'B2B', stage: 4, meaning: 'Tỷ lệ duy trì doanh thu thuần (bao gồm cả nâng cấp gói từ khách cũ)', exampleEn: 'Top-quartile B2B SaaS companies achieve over 120% Net Revenue Retention.', exampleVi: 'Các công ty SaaS B2B hàng đầu đạt tỷ lệ duy trì doanh thu thuần trên 120%.' },
+            { word: 'Synthetic Data', pos: 'noun phrase', ipa: '/sɪnˈθet.ɪk ˈdeɪ.tə/', cefr: 'B2', domain: 'QA', stage: 4, meaning: 'Dữ liệu giả lập nhân tạo phục vụ kiểm thử bảo mật & AI', exampleEn: 'QA generated GDPR-compliant synthetic data to stress-test the banking API.', exampleVi: 'Đội QA tạo dữ liệu giả lập chuẩn GDPR để kiểm thử chịu tải API ngân hàng.' },
+            { word: 'Hyper-Personalization', pos: 'noun', ipa: '/ˌhaɪ.pə ˌpɜː.sən.əl.aɪˈzeɪ.ʃən/', cefr: 'B2', domain: 'CX', stage: 4, meaning: 'Siêu cá nhân hóa trải nghiệm từng khách hàng theo thời gian thực', exampleEn: 'Real-time hyper-personalization lifted our customer satisfaction score to 96%.', exampleVi: 'Siêu cá nhân hóa thời gian thực nâng điểm hài lòng khách hàng lên 96%.' },
+            { word: 'North Star Metric', pos: 'noun phrase', ipa: '/nɔːθ stɑː ˈmet.rɪk/', cefr: 'B2', domain: 'PO', stage: 4, meaning: 'Chỉ số Sao Bắc Đẩu đo lường giá trị cốt lõi nhất của sản phẩm', exampleEn: 'Weekly active AI workflows is our platform’s North Star Metric.', exampleVi: 'Số luồng AI hoạt động hàng tuần là chỉ số Sao Bắc Đẩu của nền tảng.' }
+        ];
+
+        // Cấu trúc các chặng ngày trên bản đồ Candy Crush cho mỗi bậc CEFR
+        const CANDY_STAGES_TEMPLATE = [
+            { stage: 1, label: 'Ngày 1', title: 'Chặng 1: Khởi Động Chuyên Ngành', sub: 'IT • Fintech • B2B Core' },
+            { stage: 2, label: 'Ngày 2', title: 'Chặng 2: Vận Hành & Khách Hàng', sub: 'CX • QA/QC • Agile' },
+            { stage: 3, label: 'Ngày 3', title: 'Chặng 3: Chiến Lược & Thực Chiến', sub: 'PO • Product & Growth' },
+            { stage: 4, label: 'Ngày 4', title: 'Chặng 4: Xu Hướng AI & Công Nghệ 2026', sub: 'All Departments Merged' }
         ];
 
         const INTERVIEW_BANK = {
             IT: [
                 {
-                    q: 'Can you walk me through a challenging technical bottleneck you solved and how you improved system scalability?',
-                    vi: 'Bạn hãy chia sẻ về một nút thắt kỹ thuật khó bạn từng giải quyết và cách bạn cải thiện khả năng mở rộng hệ thống?',
-                    powerWords: ['Latency', 'Caching layer', 'Database indexing', 'Throughput'],
-                    starTip: 'Situation (Hệ thống chậm giờ cao điểm) → Task (Giảm response time) → Action (Áp dụng Redis cache & tối ưu query) → Result (Giảm 65% latency).'
+                    q: 'In 2026, how do you design guardrails and reduce latency when integrating Agentic AI or LLMs into production systems?',
+                    vi: 'Năm 2026, bạn thiết kế hàng rào kiểm soát và giảm độ trễ như thế nào khi tích hợp Agentic AI hoặc LLM vào hệ thống thật?',
+                    powerWords: ['Latency', 'Semantic caching', 'RAG guardrails', 'Observability'],
+                    starTip: 'Situation (AI chatbot phản hồi chậm 4s) → Action (Áp dụng semantic caching, streaming response & output schema validation) → Result (Giảm latency xuống 400ms, 0% lỗi format).'
                 },
                 {
-                    q: 'How do you handle technical debt when business stakeholders push for rapid feature releases?',
-                    vi: 'Bạn xử lý nợ kỹ thuật (technical debt) như thế nào khi các bên kinh doanh thúc ép ra mắt tính năng nhanh?',
-                    powerWords: ['Trade-offs', 'Maintainability', 'Refactoring', 'Sprint allocation'],
-                    starTip: 'Nhấn mạnh việc giao tiếp minh bạch rủi ro dài hạn và đề xuất dành 15-20% capacity mỗi Sprint để refactor.'
+                    q: 'Can you walk me through a challenging system bottleneck you resolved using Zero-Trust and cloud-native scalability?',
+                    vi: 'Bạn hãy chia sẻ về một nút thắt hệ thống khó bạn từng giải quyết bằng kiến trúc Zero-Trust và khả năng mở rộng cloud-native?',
+                    powerWords: ['Scalability', 'Idempotency', 'Throughput', 'Zero-Trust'],
+                    starTip: 'Nêu rõ số liệu trước và sau tối ưu (ví dụ: tăng throughput gấp 3 lần trong đợt flash sale mà không rớt giao dịch).'
                 }
             ],
             Fintech: [
                 {
-                    q: 'How do you balance seamless user experience with strict security and KYC/AML compliance in financial products?',
-                    vi: 'Bạn cân bằng giữa trải nghiệm người dùng mượt mà với tính bảo mật nghiêm ngặt và tuân thủ KYC/AML trong sản phẩm tài chính như thế nào?',
-                    powerWords: ['Frictionless KYC', 'Fraud detection', 'Idempotency', 'Audit trail'],
-                    starTip: 'Nêu ví dụ về eKYC tự động hóa giúp duyệt tài khoản trong 30 giây nhưng vẫn đảm bảo đối soát chống gian lận.'
+                    q: 'How do you balance instant cross-border settlement (including stablecoin or real-time rails) with strict KYC/AML compliance?',
+                    vi: 'Bạn cân bằng giữa quyết toán xuyên biên giới tức thì với tuân thủ KYC/AML nghiêm ngặt như thế nào?',
+                    powerWords: ['Reconciliation', 'eKYC verification', 'Idempotency', 'Audit trail'],
+                    starTip: 'Nhấn mạnh cơ chế chấm điểm rủi ro theo thời gian thực (real-time risk scoring) và đối soát sổ cái tự động.'
                 },
                 {
-                    q: 'Tell me about a time you handled a payment reconciliation discrepancy or failed transaction incident.',
-                    vi: 'Hãy kể về một lần bạn xử lý sai lệch đối soát thanh toán hoặc sự cố giao dịch lỗi.',
-                    powerWords: ['Settlement', 'Ledger', 'Root cause analysis', 'SLA'],
-                    starTip: 'Trình bày quy trình khóa giao dịch trùng lặp, đối soát sổ cái (ledger) và hoàn tiền tự động đúng cam kết SLA.'
+                    q: 'Tell me about a time you handled a payment reconciliation discrepancy or chargeback spike.',
+                    vi: 'Hãy kể về một lần bạn xử lý sai lệch đối soát thanh toán hoặc đợt tăng đột biến khiếu nại hoàn tiền.',
+                    powerWords: ['Settlement', 'Chargeback mitigation', 'Ledger', 'Root Cause Analysis'],
+                    starTip: 'Trình bày quy trình khóa giao dịch trùng lặp bằng idempotency key và triển khai xác thực sinh trắc học.'
                 }
             ],
             B2B: [
                 {
-                    q: 'How do you uncover pain points and articulate our ROI value proposition to C-level B2B decision-makers?',
-                    vi: 'Bạn khai thác nỗi đau khách hàng và trình bày giá trị ROI cho các lãnh đạo cấp cao B2B như thế nào?',
-                    powerWords: ['Pain points', 'ROI (Return on Investment)', 'Procurement', 'Decision-makers'],
-                    starTip: 'Tập trung vào bài toán tiết kiệm chi phí vận hành và thời gian hoàn vốn thay vì chỉ liệt kê tính năng kỹ thuật.'
+                    q: 'How do you articulate ROI and Net Revenue Retention value to enterprise buyers evaluating AI SaaS tools in 2026?',
+                    vi: 'Bạn trình bày giá trị ROI cho khách hàng doanh nghiệp đang đánh giá công cụ AI SaaS năm 2026 như thế nào?',
+                    powerWords: ['Value Proposition', 'Procurement', 'Stakeholder alignment', 'NRR'],
+                    starTip: 'Tập trung vào thời gian hoàn vốn dưới 3 tháng và khả năng tự động hóa quy trình thay vì chỉ nói về tính năng AI.'
                 },
                 {
-                    q: 'Describe a complex B2B negotiation where the client asked for a heavy discount. How did you protect deal value?',
-                    vi: 'Mô tả một cuộc đàm phán B2B phức tạp khi khách hàng đòi giảm giá sâu. Bạn bảo vệ giá trị hợp đồng ra sao?',
-                    powerWords: ['Value-based pricing', 'Multi-year contract', 'Scope adjustment', 'Win-win'],
-                    starTip: 'Đổi chiết khấu lấy cam kết hợp đồng dài hạn (2-3 năm) hoặc điều chỉnh gói tính năng phù hợp ngân sách.'
+                    q: 'Describe a complex B2B contract negotiation involving security compliance and indemnification clauses.',
+                    vi: 'Mô tả một cuộc đàm phán hợp đồng B2B phức tạp liên quan đến tuân thủ bảo mật và điều khoản bồi thường.',
+                    powerWords: ['Indemnification clause', 'SLA', 'SOC2 compliance', 'Win-win'],
+                    starTip: 'Chủ động cung cấp gói chứng nhận bảo mật SOC2/ISO và đề xuất giới hạn trách nhiệm hợp lý để chốt deal nhanh.'
                 }
             ],
             CX: [
                 {
-                    q: 'Tell me about a time you turned an angry enterprise client into a loyal advocate after a service outage.',
-                    vi: 'Kể về một lần bạn biến một khách hàng doanh nghiệp giận dữ thành người ủng hộ trung thành sau sự cố gián đoạn dịch vụ.',
-                    powerWords: ['Empathy', 'De-escalation', 'Transparency', 'Post-mortem report'],
-                    starTip: 'Lắng nghe chân thành, nhận trách nhiệm trực diện, cập nhật tiến độ xử lý theo giờ và gửi báo cáo khắc phục chi tiết.'
+                    q: 'How do you handle a VIP client escalation when an AI support agent gives an inaccurate response (AI hallucination)?',
+                    vi: 'Bạn xử lý chuyển cấp sự cố cho khách VIP thế nào khi trợ lý AI đưa ra câu trả lời sai lệch?',
+                    powerWords: ['Empathy', 'De-escalation', 'AI Hallucination', 'Post-mortem'],
+                    starTip: 'Xin lỗi chân thành, chuyển ngay sang chuyên viên cấp cao, cập nhật lại dữ liệu RAG và gửi báo cáo khắc phục minh bạch.'
                 },
                 {
-                    q: 'What metrics do you track to predict and reduce customer churn in a B2B SaaS environment?',
-                    vi: 'Bạn theo dõi những chỉ số nào để dự đoán và giảm tỷ lệ khách hàng rời bỏ (churn) trong môi trường B2B SaaS?',
-                    powerWords: ['CSAT', 'NPS', 'Product adoption', 'Proactive outreach'],
-                    starTip: 'Kết hợp điểm NPS, tần suất đăng nhập tính năng cốt lõi và lịch họp đánh giá định kỳ (QBR) với khách hàng.'
+                    q: 'What proactive strategies do you use to reduce Churn Rate and drive hyper-personalization?',
+                    vi: 'Bạn dùng chiến lược chủ động nào để giảm tỷ lệ khách rời bỏ và thúc đẩy siêu cá nhân hóa?',
+                    powerWords: ['Churn rate', 'Hyper-personalization', 'Feedback loop', 'Onboarding'],
+                    starTip: 'Theo dõi tín hiệu giảm tương tác sớm (health score) và chủ động mở buổi tư vấn tối ưu quy trình cho khách.'
                 }
             ],
             QA: [
                 {
-                    q: 'How do you prioritize test cases when you have a tight deadline before a major production release?',
-                    vi: 'Bạn ưu tiên các kịch bản kiểm thử (test cases) thế nào khi thời gian quá gấp trước đợt phát hành lớn?',
-                    powerWords: ['Risk-based testing', 'Critical path', 'Smoke test', 'Regression suite'],
-                    starTip: 'Áp dụng Risk-based testing: ưu tiên luồng thanh toán/đăng nhập chính (Critical path) và chạy bộ Automation Smoke Test.'
+                    q: 'How do you test non-deterministic AI features and prevent regressions in fast-paced CI/CD pipelines?',
+                    vi: 'Bạn kiểm thử các tính năng AI không tất định và ngăn ngừa lỗi hồi quy trong quy trình CI/CD tốc độ cao ra sao?',
+                    powerWords: ['Deterministic guardrails', 'Regression testing', 'Synthetic data', 'Edge case'],
+                    starTip: 'Kết hợp bộ dataset đánh giá chuẩn (golden dataset), kiểm thử tự động self-healing và rào chắn kiểm tra định dạng đầu ra.'
                 },
                 {
-                    q: 'Describe a situation where a developer disagreed with your bug report. How did you resolve it professionally?',
-                    vi: 'Mô tả tình huống lập trình viên không đồng ý với báo cáo lỗi (bug) của bạn. Bạn giải quyết chuyên nghiệp ra sao?',
-                    powerWords: ['Steps to reproduce', 'Logs & network trace', 'Acceptance criteria', 'Collaboration'],
-                    starTip: 'Dùng bằng chứng khách quan (video, HAR file, console log) và đối chiếu trực tiếp với Acceptance Criteria của PO.'
+                    q: 'Tell me about a critical edge case you caught before production deployment that saved the company from major impact.',
+                    vi: 'Kể về một trường hợp biên nghiêm trọng bạn bắt được trước khi triển khai thật giúp công ty tránh thiệt hại lớn.',
+                    powerWords: ['Reproduce', 'Root Cause Analysis', 'Deployment', 'Acceptance Criteria'],
+                    starTip: 'Mô tả rõ kịch bản rớt mạng/trùng request, cách tái hiện lỗi và phối hợp với Dev vá lỗi kịp tiến độ.'
                 }
             ],
             PO: [
                 {
-                    q: 'How do you say "No" to urgent feature requests from senior stakeholders without damaging relationships?',
-                    vi: 'Bạn nói "Không" với các yêu cầu tính năng gấp từ các sếp/bên liên quan thế nào mà không làm sứt mẻ mối quan hệ?',
-                    powerWords: ['Data-driven', 'Opportunity cost', 'RICE framework', 'Product roadmap'],
-                    starTip: 'Dùng dữ liệu và khung ưu tiên (RICE) để chỉ ra chi phí cơ hội: nếu làm tính năng A ngay thì tính năng B sẽ trễ hạn.'
+                    q: 'How do you prioritize AI Copilot features versus core technical debt on your 2026 product roadmap?',
+                    vi: 'Bạn ưu tiên tính năng AI Copilot so với nợ kỹ thuật cốt lõi trên lộ trình sản phẩm 2026 như thế nào?',
+                    powerWords: ['Product-Led Growth', 'North Star Metric', 'Acceptance Criteria', 'Stakeholder'],
+                    starTip: 'Dùng dữ liệu tác động lên North Star Metric và dành 20% năng lực Sprint cho độ ổn định hệ thống.'
                 },
                 {
-                    q: 'How do you write effective User Stories and Acceptance Criteria so Dev and QA have zero ambiguity?',
-                    vi: 'Bạn viết User Stories và Tiêu chí nghiệm thu (AC) thế nào để đội Dev và QA không bao giờ hiểu nhầm?',
-                    powerWords: ['Given-When-Then', 'Edge cases', 'Backlog refinement', 'Definition of Done'],
-                    starTip: 'Sử dụng cấu trúc chuẩn Given-When-Then và tổ chức buổi Backlog Refinement để Dev/QA cùng phản biện sớm.'
+                    q: 'How do you prevent scope creep while keeping enterprise clients excited about upcoming releases?',
+                    vi: 'Bạn ngăn chặn phình phạm vi dự án thế nào trong khi vẫn giữ được sự hào hứng của khách hàng doanh nghiệp?',
+                    powerWords: ['MVP', 'Roadmap', 'Trade-off', 'Value Proposition'],
+                    starTip: 'Chốt chặt phạm vi MVP dựa trên Acceptance Criteria và đưa các yêu cầu mở rộng vào lộ trình Phase 2 minh bạch.'
                 }
             ]
         };
 
         const CEFR_EXAM_QUESTIONS = [
             {
-                q: '[IT / Architecture] To ensure the application handles 100,000 concurrent users without crashing, the engineering team focused on horizontal ______.',
-                options: ['scalability', 'ambiguity', 'procurement', 'churn'],
-                correct: 0,
-                level: 'B2',
-                explanation: '"Scalability" (khả năng mở rộng quy mô hệ thống) là thuật ngữ chuẩn chỉ khả năng chịu tải khi lượng người dùng tăng đột biến. "Ambiguity" là sự mơ hồ, "procurement" là thu mua, còn "churn" là tỷ lệ rời bỏ.'
-            },
-            {
-                q: '[Fintech] Before approving high-value international wire transfers, our compliance system performs automated ______ checks.',
-                options: ['regression', 'reconciliation and KYC', 'backlog', 'UI refactoring'],
-                correct: 1,
-                level: 'C1',
-                explanation: 'Trong ngành Fintech/Ngân hàng, các giao dịch chuyển tiền quốc tế giá trị lớn bắt buộc phải qua bước "reconciliation" (đối soát sổ sách/giao dịch) và "KYC" (xác minh danh tính khách hàng) để chống rửa tiền.'
-            },
-            {
-                q: '[Product Owner] Adding unapproved features in the middle of a sprint without adjusting the timeline is known as ______.',
-                options: ['edge case', 'scope creep', 'value proposition', 'onboarding'],
-                correct: 1,
-                level: 'B2',
-                explanation: '"Scope creep" là hiện tượng phình to phạm vi dự án khi có thêm yêu cầu phát sinh giữa Sprint mà không tăng thời gian hay nhân lực. "Edge case" là trường hợp biên khi test.'
-            },
-            {
-                q: '[QA / QC] Whenever a critical hotfix is merged, QA engineers execute ______ to verify that existing features still work properly.',
-                options: ['churn analysis', 'regression testing', 'B2B pitching', 'liquidity'],
-                correct: 1,
-                level: 'B2',
-                explanation: '"Regression testing" (kiểm thử hồi quy) là quy trình chạy lại các bài test để đảm bảo bản vá lỗi nóng (hotfix) không vô tình làm hỏng các tính năng đang chạy ổn định trước đó.'
-            },
-            {
-                q: '[CX] When a VIP enterprise client reports a critical system outage, the support agent must initiate an immediate ______ to senior engineers.',
-                options: ['escalation', 'deployment', 'procurement', 'repository'],
-                correct: 0,
-                level: 'B2',
-                explanation: '"Escalation" (chuyển cấp xử lý) là thuật ngữ cốt lõi trong bộ phận CX khi gặp sự cố nghiêm trọng vượt thẩm quyền của tuyến đầu và cần đẩy gấp lên kỹ sư cấp cao.'
-            },
-            {
-                q: '[B2B Sales] Our core ______ is helping fintech startups cut manual invoice processing time by 70%.',
-                options: ['latency', 'bug report', 'value proposition', 'edge case'],
-                correct: 2,
-                level: 'B1',
-                explanation: '"Value proposition" (tuyên ngôn giá trị cốt lõi) nêu bật lợi ích thiết thực nhất mà sản phẩm mang lại cho khách hàng doanh nghiệp B2B (giảm 70% thời gian xử lý hóa đơn).'
-            },
-            {
-                q: '[Business Grammar] Had the QA team ______ the edge case earlier, the payment gateway bug would not have reached production.',
-                options: ['detected', 'detect', 'detecting', 'to detect'],
+                q: '[IT / AI 2026] To prevent our LLM customer assistant from fabricating policies, the engineering team implemented strict ______ connected to verified company docs.',
+                options: ['RAG guardrails', 'churn rates', 'liquidity pools', 'procurement cycles'],
                 correct: 0,
                 level: 'C1',
-                explanation: 'Đây là cấu trúc đảo ngữ của câu điều kiện loại 3 (diễn tả giả định trái với quá khứ): "Had + S + V3/ed (detected), S + would not have + V3/ed".'
+                explanation: '"RAG guardrails" (hàng rào bảo vệ kết hợp truy xuất dữ liệu nội bộ Retrieval-Augmented Generation) giúp AI chỉ trả lời dựa trên tài liệu đã xác thực, ngăn chặn bịa thông tin (hallucination).'
             },
             {
-                q: '[Workplace Communication] Which phrase is most polite and professional when pushing back on an unrealistic deadline in a meeting?',
-                options: [
-                    '"That is impossible, we cannot do it."',
-                    '"Given our current sprint capacity, delivering this by Friday would require deprioritizing the security patch."',
-                    '"You always ask for things too late."',
-                    '"Ask someone else to code it."'
-                ],
+                q: '[Fintech 2026] In payment APIs, using an ______ key guarantees that retrying a timed-out request will never charge the customer twice.',
+                options: ['empathy', 'idempotency', 'ambiguity', 'onboarding'],
                 correct: 1,
-                level: 'C1',
-                explanation: 'Trong môi trường quốc tế, khi từ chối deadline bất khả thi (diplomatic pushback), ta không nói "impossible" mà nêu rõ giới hạn nguồn lực hiện tại ("sprint capacity") và sự đánh đổi ưu tiên ("deprioritizing...") để sếp tự cân nhắc.'
+                level: 'C2',
+                explanation: '"Idempotency" (tính lũy đẳng) là tiêu chuẩn bắt buộc trong Fintech: dù mạng chập chờn gửi lại cùng 1 giao dịch nhiều lần thì hệ thống vẫn chỉ xử lý đúng 1 lần duy nhất.'
             },
             {
-                q: '[IT / API] High network ______ causes noticeable delays between a user clicking "Pay" and receiving confirmation.',
-                options: ['empathy', 'latency', 'compliance', 'stakeholder'],
+                q: '[Product Owner] Rather than gating our AI workflow tool behind a sales call, we adopted ______ so users experience value immediately upon signup.',
+                options: ['Product-Led Growth (PLG)', 'regression testing', 'chargeback mitigation', 'indemnification'],
+                correct: 0,
+                level: 'C1',
+                explanation: '"Product-Led Growth (PLG)" là chiến lược tăng trưởng lấy chính trải nghiệm sản phẩm tự phục vụ (freemium/trial) làm động lực thu hút và chuyển đổi khách hàng.'
+            },
+            {
+                q: '[QA / QC] Whenever a critical hotfix is merged, QA engineers run automated ______ to verify that existing checkout flows remain intact.',
+                options: ['settlement', 'regression testing', 'B2B pitching', 'hyper-personalization'],
                 correct: 1,
                 level: 'B2',
-                explanation: '"Latency" (độ trễ mạng/API) là khoảng thời gian trễ từ lúc người dùng bấm nút đến khi hệ thống phản hồi kết quả.'
+                explanation: '"Regression testing" (kiểm thử hồi quy) là quy trình kiểm tra lại toàn bộ chức năng hiện có sau khi sửa lỗi/cập nhật code để đảm bảo không phát sinh lỗi dây chuyền.'
             },
             {
-                q: '[PO / Agile] Clear ______ ensure that developers and testers share the exact same understanding of when a feature is complete.',
-                options: ['acceptance criteria', 'churn rates', 'liquidity pools', 'procurement cycles'],
+                q: '[CX] Following a 15-minute API outage, the CX lead sent a transparent ______ explaining what happened and how it was permanently fixed.',
+                options: ['post-mortem / RCA', 'repository', 'user story', 'MVP'],
                 correct: 0,
-                level: 'B1',
-                explanation: '"Acceptance criteria" (tiêu chí nghiệm thu - AC) là danh sách các điều kiện bắt buộc phải thỏa mãn để PO, Dev và QA thống nhất rằng một tính năng đã hoàn thiện.'
+                level: 'B2',
+                explanation: '"Post-mortem / RCA (Root Cause Analysis)" là báo cáo phân tích nguyên nhân gốc rễ sự cố gửi cho khách hàng doanh nghiệp để củng cố niềm tin sau sự cố.'
+            },
+            {
+                q: '[B2B Enterprise] High ______ indicates that existing SaaS customers are not only renewing but also upgrading to higher AI tiers.',
+                options: ['latency', 'Net Revenue Retention (NRR)', 'bug report', 'edge case'],
+                correct: 1,
+                level: 'C1',
+                explanation: '"Net Revenue Retention (NRR)" là chỉ số vàng của B2B SaaS đo lường doanh thu giữ chân thuần từ khách hàng hiện hữu sau khi tính cả nâng cấp gói (expansion).'
+            },
+            {
+                q: '[Fintech] Automated daily ______ ensures our internal digital wallet ledger matches external bank settlement statements.',
+                options: ['reconciliation', 'hallucination', 'deployment', 'refactoring'],
+                correct: 0,
+                level: 'C1',
+                explanation: '"Reconciliation" (đối soát tài chính) là nghiệp vụ khớp số liệu giữa sổ cái nội bộ và sao kê ngân hàng/cổng thanh toán.'
+            },
+            {
+                q: '[Executive Grammar] Were the system ______ another sudden traffic spike, our serverless cluster would scale automatically.',
+                options: ['to experience', 'experienced', 'experiencing', 'experience'],
+                correct: 0,
+                level: 'C2',
+                explanation: 'Cấu trúc đảo ngữ câu điều kiện loại 2 diễn tả giả định ở hiện tại/tương lai: "Were + S + to V (to experience), S + would + V".'
+            },
+            {
+                q: '[PO / Agile] Adding unapproved features mid-sprint without adjusting resources is a classic example of ______.',
+                options: ['scope creep', 'smoke testing', 'observability', 'eKYC'],
+                correct: 0,
+                level: 'B2',
+                explanation: '"Scope creep" là tình trạng phình to phạm vi dự án ngoài kế hoạch ban đầu mà không bổ sung thời gian hay nhân lực.'
+            },
+            {
+                q: '[IT / Security] Modern enterprise platforms enforce ______ so every microservice request is authenticated and authorized continuously.',
+                options: ['Zero-Trust Architecture', 'churn rate', 'value proposition', 'feedback loop'],
+                correct: 0,
+                level: 'C2',
+                explanation: '"Zero-Trust Architecture" (kiến trúc bảo mật không tin cậy mặc định) yêu cầu xác thực nghiêm ngặt mọi truy cập nội bộ lẫn bên ngoài.'
             }
         ];
 
@@ -1107,13 +1262,14 @@
         // 2. QUẢN LÝ TRẠNG THÁI (STATE MANAGEMENT & LOCALSTORAGE)
         // =========================================================================
         let appState = {
-            selectedCefr: 'B1',
+            selectedCefr: 'A1',
             selectedDomain: 'ALL',
-            streak: 1,
+            unlockedCefrIndex: 1, // Mặc định mở sẵn A1 và A2 để trải nghiệm, làm Boss Test để mở tiếp B1->C2
+            streak: 3,
             lastActiveDate: new Date().toDateString(),
-            xp: 120,
-            todayLearnedCount: 3,
-            masteredIds: [1, 5, 9],
+            xp: 180,
+            todayLearnedCount: 4,
+            masteredIds: [101, 102, 103, 104],
             vocabList: [...INITIAL_VOCAB]
         };
 
@@ -1123,18 +1279,78 @@
         let gameRoundCorrect = 0;
         let gameCombo = 0;
         let chatHistory = [];
-        let examState = { currentIdx: 0, userAnswers: [], timerSec: 300, intervalId: null };
+        let examState = { currentIdx: 0, userAnswers: [], timerSec: 300, intervalId: null, isTierBoss: false, targetPromotionCefr: null };
+
+        // =========================================================================
+        // GIỌNG ĐỌC NỮ DỄ THƯƠNG (KAWAII FEMALE VOICE ENGINE)
+        // =========================================================================
+        let cachedFemaleVoice = null;
+        function getCuteFemaleVoice() {
+            if (!('speechSynthesis' in window)) return null;
+            const voices = window.speechSynthesis.getVoices();
+            if (!voices || voices.length === 0) return null;
+
+            if (cachedFemaleVoice && voices.includes(cachedFemaleVoice)) {
+                return cachedFemaleVoice;
+            }
+
+            // Ưu tiên các giọng nữ tiếng Anh Mỹ/Anh tự nhiên, ngọt ngào
+            const preferredNames = [
+                'Samantha', 'Google US English', 'Microsoft Aria', 'Microsoft Jenny',
+                'Victoria', 'Karen', 'Moira', 'Tessa', 'Ava', 'Allison', 'Susan', 'Zira'
+            ];
+
+            for (const name of preferredNames) {
+                const found = voices.find(v => v.lang.startsWith('en') && v.name.includes(name));
+                if (found) {
+                    cachedFemaleVoice = found;
+                    return found;
+                }
+            }
+
+            // Fallback chọn bất kỳ giọng nữ tiếng Anh nào
+            const anyFemale = voices.find(v =>
+                v.lang.startsWith('en') &&
+                (v.name.toLowerCase().includes('female') || v.name.toLowerCase().includes('woman'))
+            ) || voices.find(v => v.lang.startsWith('en-US')) || voices.find(v => v.lang.startsWith('en'));
+
+            cachedFemaleVoice = anyFemale || null;
+            return cachedFemaleVoice;
+        }
+
+        if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
+            window.speechSynthesis.onvoiceschanged = () => {
+                cachedFemaleVoice = null;
+                getCuteFemaleVoice();
+            };
+        }
+
+        function speakText(text) {
+            if (!('speechSynthesis' in window)) {
+                showToast('Trình duyệt của bạn chưa hỗ trợ đọc giọng nói.', 'pink');
+                return;
+            }
+            window.speechSynthesis.cancel();
+            const utterance = new SpeechSynthesisUtterance(text);
+            const femaleVoice = getCuteFemaleVoice();
+            if (femaleVoice) {
+                utterance.voice = femaleVoice;
+            }
+            utterance.lang = 'en-US';
+            utterance.rate = 0.96;
+            utterance.pitch = 1.18; // Cao độ trong trẻo, dễ thương kiểu nữ trợ lý Momo
+            window.speechSynthesis.speak(utterance);
+        }
 
         // =========================================================================
         // HỆ THỐNG TUNG HÔ VINH DANH, ÂM THANH WEB AUDIO & CANVAS CONFETTI
         // =========================================================================
         const SWEET_PRAISES = [
-            "Trời ơi xuất sắc quá đi mất! HR các tập đoàn lớn mà thấy trình này là chốt offer lương nghìn đô liền luôn á! 💖👑",
-            "Đỉnh của chóp! Não bạn hôm nay chạy mượt hơn cả server production không một con bug nào luôn! 🚀✨",
+            "Trời ơi xuất sắc quá đi mất! HR các tập đoàn lớn 2026 mà thấy trình này là chốt offer lương nghìn đô liền luôn á! 💖👑",
+            "Đỉnh của chóp! Não bạn hôm nay chạy mượt hơn cả hệ thống Agentic AI không một con bug nào luôn! 🚀✨",
             "Quá xịn xò! Cứ đà này mấy hôm nữa phỏng vấn tiếng Anh trôi chảy như người bản xứ, sếp Tây chỉ có nước trầm trồ! 🌟🎀",
-            "Chuẩn không cần chỉnh! KPI hôm nay vượt mức xuất sắc, xứng đáng nhận ngàn tim từ hội đồng thẩm định độ cute! 💕🏆",
-            "U là trời, thông minh thế này thì PO hay Tech Lead quốc tế cũng phải xin vía học tiếng Anh của bạn mất thôi! 🍀💎",
-            "10 điểm không có nhưng! Tốc độ tiếp thu này mà đi đàm phán B2B hay Pitching Fintech là auto chốt deal! 🥂🌸"
+            "Chuẩn không cần chỉnh! KPI hôm nay vượt mức xuất sắc, xứng đáng nhận ngàn tim từ Momo nha! 💕🏆",
+            "U là trời, thông minh thế này thì PO hay Tech Lead quốc tế cũng phải xin vía học tiếng Anh của bạn mất thôi! 🍀💎"
         ];
 
         function playCelebrationFanfare() {
@@ -1164,9 +1380,7 @@
                     osc.start(ctx.currentTime + n.time);
                     osc.stop(ctx.currentTime + n.time + n.dur + 0.05);
                 });
-            } catch (e) {
-                console.warn('AudioContext bị chặn tự động phát:', e);
-            }
+            } catch (e) {}
         }
 
         let confettiAnimId = null;
@@ -1287,10 +1501,16 @@
         // =========================================================================
         function initApp() {
             try {
-                const saved = localStorage.getItem('kawaiitech_english_v1');
+                const saved = localStorage.getItem('momo_colen_2026_v2');
                 if (saved) {
                     const parsed = JSON.parse(saved);
                     appState = { ...appState, ...parsed };
+                    const existingWords = new Set(appState.vocabList.map(v => v.word.toLowerCase()));
+                    INITIAL_VOCAB.forEach(item => {
+                        if (!existingWords.has(item.word.toLowerCase())) {
+                            appState.vocabList.push(item);
+                        }
+                    });
                 }
             } catch (e) {
                 console.warn('Không đọc được localStorage:', e);
@@ -1309,20 +1529,21 @@
                 saveState();
             }
 
+            getCuteFemaleVoice();
             updateHeaderStats();
             renderDashboard();
             renderFlashcard();
             nextGameQuestion();
+            initMatchingGame();
+            initListenGame();
             resetAiChat();
             renderInterviewHub();
         }
 
         function saveState() {
             try {
-                localStorage.setItem('kawaiitech_english_v1', JSON.stringify(appState));
-            } catch (e) {
-                console.warn('Lỗi lưu localStorage:', e);
-            }
+                localStorage.setItem('momo_colen_2026_v2', JSON.stringify(appState));
+            } catch (e) {}
         }
 
         function addXP(points, reason) {
@@ -1359,7 +1580,7 @@
         }
 
         // =========================================================================
-        // 4. ĐIỀU HƯỚNG TAB & RENDER DASHBOARD
+        // 4. ĐIỀU HƯỚNG TAB & BẢN ĐỒ LỘ TRÌNH CANDY CRUSH SAGA 6 BẬC
         // =========================================================================
         function switchTab(tabName) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
@@ -1388,126 +1609,195 @@
         }
 
         function getFilteredVocab() {
-            return appState.vocabList.filter(item => {
-                const domainMatch = appState.selectedDomain === 'ALL' || item.domain === appState.selectedDomain;
-                return domainMatch;
-            });
+            // Ưu tiên từ thuộc bậc CEFR đang chọn, nếu ít hơn 4 từ thì mở rộng thêm các bậc lân cận
+            const byCefr = appState.vocabList.filter(item => item.cefr === appState.selectedCefr);
+            return byCefr.length > 0 ? byCefr : appState.vocabList;
         }
 
         function renderDashboard() {
+            const currentTierIdx = CEFR_LEVELS.findIndex(l => l.code === appState.selectedCefr);
+            const currentTierObj = CEFR_LEVELS[currentTierIdx] || CEFR_LEVELS[0];
+            const nextTierObj = CEFR_LEVELS[currentTierIdx + 1];
+
+            // Render 6 bậc CEFR gộp toàn bộ chuyên ngành
             const cefrContainer = document.getElementById('cefr-selector');
-            cefrContainer.innerHTML = CEFR_LEVELS.map(lvl => {
+            cefrContainer.innerHTML = CEFR_LEVELS.map((lvl, idx) => {
                 const isSelected = appState.selectedCefr === lvl.code;
-                if (isSelected) {
-                    document.getElementById('cefr-desc-label').textContent = lvl.label;
-                }
+                const isUnlocked = idx <= appState.unlockedCefrIndex;
+                const wordsInLevel = appState.vocabList.filter(v => v.cefr === lvl.code);
+                const masteredInLevel = wordsInLevel.filter(v => appState.masteredIds.includes(v.id)).length;
+
                 return `
-                    <button onclick="selectCefrLevel('${lvl.code}')" class="py-2.5 px-2 rounded-2xl font-display font-extrabold text-sm border-2 transition-all ${
+                    <button onclick="selectCefrLevel('${lvl.code}', ${idx})" class="p-3 rounded-2xl border-2 text-left transition-all relative ${
                         isSelected
-                        ? 'bg-kitty-pinkDeep text-white border-kitty-pinkDeep shadow-sm scale-105'
-                        : 'bg-kitty-pinkLight/60 text-kitty-text border-kitty-pink hover:bg-kitty-pink'
+                        ? 'bg-gradient-to-br from-kitty-pinkDeep to-pink-500 text-white border-kitty-pinkDeep shadow-md scale-[1.03]'
+                        : isUnlocked
+                            ? 'bg-white text-kitty-text border-kitty-pink hover:bg-kitty-pinkLight'
+                            : 'bg-slate-100/80 text-slate-400 border-slate-200 hover:bg-slate-100'
                     }">
-                        ${lvl.code}
+                        <div class="flex items-center justify-between mb-1">
+                            <span class="font-display font-extrabold text-base">${lvl.code}</span>
+                            <span class="text-xs">${isUnlocked ? '⭐' : '🔒'}</span>
+                        </div>
+                        <p class="text-[11px] font-extrabold truncate">${lvl.targetWords} từ mục tiêu</p>
+                        <p class="text-[10px] font-bold opacity-85 mt-0.5">Đã thuộc: ${masteredInLevel}/${wordsInLevel.length} lõi</p>
                     </button>
                 `;
             }).join('');
 
-            const domainContainer = document.getElementById('domain-selector');
-            domainContainer.innerHTML = DOMAINS.map(dom => {
-                const isSelected = appState.selectedDomain === dom.id;
-                return `
-                    <button onclick="selectDomain('${dom.id}')" class="px-3.5 py-2 rounded-2xl font-extrabold text-xs border-2 transition-all ${
-                        isSelected
-                        ? 'bg-kitty-mintDeep text-white border-kitty-mintDeep shadow-sm'
-                        : 'bg-kitty-mintLight/70 text-kitty-text border-kitty-mint hover:bg-kitty-mint'
-                    }">
-                        ${dom.label}
-                    </button>
-                `;
-            }).join('');
+            // Cập nhật thông tin thanh tiến độ của bậc hiện tại
+            const tierWords = appState.vocabList.filter(v => v.cefr === currentTierObj.code);
+            const tierMastered = tierWords.filter(v => appState.masteredIds.includes(v.id)).length;
+            const tierPct = tierWords.length ? Math.round((tierMastered / tierWords.length) * 100) : 0;
+
+            document.getElementById('tier-title-label').textContent = `${currentTierObj.name} • Gộp 6 Chuyên Ngành (${currentTierObj.targetWords} từ mục tiêu)`;
+            document.getElementById('tier-progress-pct').textContent = `${tierPct}%`;
+            document.getElementById('tier-progress-bar').style.width = `${Math.max(8, tierPct)}%`;
+            document.getElementById('tier-sub-desc').textContent = `${currentTierObj.desc} • Hoàn thành chặng ngày để thi lên ${nextTierObj ? nextTierObj.code : 'Đỉnh Cao C2'}!`;
+            document.getElementById('tier-boss-test-btn').innerHTML = nextTierObj
+                ? `<span>👑 Thi Thăng Hạng Lên ${nextTierObj.code}</span>`
+                : `<span>👑 Thi Tốt Nghiệp Đỉnh Cao C2</span>`;
 
             document.getElementById('total-mastered-count').textContent = appState.masteredIds.length;
             document.getElementById('total-vocab-count').textContent = appState.vocabList.length;
+            document.getElementById('map-world-name').textContent = `${currentTierObj.world} • Chuỗi Streak ${appState.streak} Ngày 🔥`;
 
-            const roadmapGrid = document.getElementById('daily-roadmap-grid');
-            roadmapGrid.innerHTML = DAILY_ROADMAP.map(dayObj => {
-                const dayWords = appState.vocabList.filter(v => v.day === dayObj.day);
-                const masteredInDay = dayWords.filter(v => appState.masteredIds.includes(v.id)).length;
-                const pct = dayWords.length ? Math.round((masteredInDay / dayWords.length) * 100) : 0;
-
-                return `
-                    <div class="p-4 rounded-3xl bg-gradient-to-br from-white to-kitty-pinkLight/50 border-2 border-kitty-pink flex flex-col justify-between gap-3 hover:shadow-md transition-all">
-                        <div>
-                            <div class="flex items-center justify-between mb-1.5">
-                                <span class="px-2.5 py-0.5 rounded-xl bg-kitty-mintLight text-kitty-mintDeep font-extrabold text-[11px] border border-kitty-mint">${dayObj.domains}</span>
-                                <span class="text-xs font-extrabold text-kitty-pinkDeep">${pct}%</span>
-                            </div>
-                            <h4 class="font-display font-bold text-base text-kitty-text">${dayObj.title}</h4>
-                            <p class="text-xs text-kitty-subtext font-semibold mt-1">${dayObj.desc}</p>
-                        </div>
-                        <div class="space-y-2">
-                            <div class="w-full h-2 bg-white rounded-full overflow-hidden border border-kitty-pink">
-                                <div class="h-full bg-kitty-mintDark rounded-full" style="width: ${pct}%"></div>
-                            </div>
-                            <button onclick="startDayStudy(${dayObj.day})" class="w-full py-2 rounded-xl bg-white hover:bg-kitty-pink text-kitty-pinkDeep font-extrabold text-xs border border-kitty-pink transition-all">
-                                Học cụm từ Ngày ${dayObj.day} (${dayWords.length} từ) →
-                            </button>
-                        </div>
-                    </div>
-                `;
-            }).join('');
-
-            const deptGrid = document.getElementById('department-progress-grid');
-            const targetDepts = DOMAINS.filter(d => d.id !== 'ALL');
-            deptGrid.innerHTML = targetDepts.map(dept => {
-                const words = appState.vocabList.filter(v => v.domain === dept.id);
-                const done = words.filter(v => appState.masteredIds.includes(v.id)).length;
-                const percent = words.length ? Math.round((done / words.length) * 100) : 0;
-
-                return `
-                    <div class="p-4 rounded-2xl bg-kitty-mintLight/40 border-2 border-kitty-mint space-y-2">
-                        <div class="flex items-center justify-between">
-                            <span class="font-extrabold text-sm text-kitty-text">${dept.label}</span>
-                            <span class="text-xs font-extrabold text-kitty-mintDeep">${done}/${words.length} từ</span>
-                        </div>
-                        <div class="w-full h-2.5 bg-white rounded-full overflow-hidden border border-kitty-mint">
-                            <div class="h-full bg-gradient-to-r from-kitty-pinkDark to-kitty-mintDeep rounded-full transition-all" style="width: ${percent}%"></div>
-                        </div>
-                    </div>
-                `;
-            }).join('');
+            // Vẽ Bản Đồ Đường Uốn Lượn Candy Crush Saga
+            renderCandySagaMap(currentTierObj, nextTierObj, tierWords);
         }
 
-        function selectCefrLevel(code) {
+        function renderCandySagaMap(currentTierObj, nextTierObj, tierWords) {
+            const container = document.getElementById('candy-saga-map-container');
+            const stageOffsets = ['-translate-x-14 sm:-translate-x-24', 'translate-x-14 sm:translate-x-24', '-translate-x-10 sm:-translate-x-20', 'translate-x-12 sm:translate-x-20'];
+
+            // Tạo danh sách các chặng ngày + 1 Cổng Boss Test ở cuối bậc
+            const nodes = CANDY_STAGES_TEMPLATE.map((st, idx) => {
+                const stWords = tierWords.filter(w => w.stage === st.stage);
+                const masteredCount = stWords.filter(w => appState.masteredIds.includes(w.id)).length;
+                const isDone = stWords.length > 0 && masteredCount >= stWords.length;
+                const isCurrent = !isDone && (idx === 0 || appState.streak >= st.stage);
+
+                return {
+                    type: 'stage',
+                    stage: st.stage,
+                    numberLabel: `Ngày ${st.stage}`,
+                    title: st.title,
+                    sub: st.sub,
+                    wordCount: stWords.length,
+                    masteredCount,
+                    isDone,
+                    isCurrent,
+                    offsetClass: stageOffsets[idx % stageOffsets.length]
+                };
+            });
+
+            // Thêm nút Cổng Boss Test Thăng Hạng ở cuối lộ trình
+            nodes.push({
+                type: 'boss',
+                numberLabel: nextTierObj ? `TEST → ${nextTierObj.code}` : 'BOSS C2',
+                title: nextTierObj ? `Cổng Thăng Hạng Lên Bậc ${nextTierObj.code}` : 'Cổng Vinh Quang C2',
+                sub: 'Vượt qua bài kiểm tra tổng hợp để mở khóa bậc tiếp theo!',
+                offsetClass: 'translate-x-0'
+            });
+
+            // SVG đường ray kẹo ngọt uốn lượn nối các chặng
+            const svgPathHtml = `
+                <svg class="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 400 620" preserveAspectRatio="none">
+                    <path d="M 140 55 C 280 110, 280 175, 255 200 C 180 265, 130 295, 155 345 C 200 415, 275 435, 245 485 C 215 535, 200 560, 200 585"
+                          fill="none" stroke="#FFFFFF" stroke-width="18" stroke-linecap="round" opacity="0.85"/>
+                    <path d="M 140 55 C 280 110, 280 175, 255 200 C 180 265, 130 295, 155 345 C 200 415, 275 435, 245 485 C 215 535, 200 560, 200 585"
+                          fill="none" stroke="#FF85A2" stroke-width="10" stroke-dasharray="14 12" stroke-linecap="round"/>
+                </svg>
+            `;
+
+            const nodesHtml = nodes.map((n, index) => {
+                if (n.type === 'boss') {
+                    return `
+                        <div class="relative z-10 flex flex-col items-center my-3 ${n.offsetClass}">
+                            <button onclick="startTierBossExam()" class="candy-node candy-node-boss group">
+                                <span class="text-xl">👑</span>
+                                <span class="text-[11px] font-extrabold leading-tight">${n.numberLabel}</span>
+                            </button>
+                            <div class="mt-2 px-4 py-1.5 rounded-2xl bg-amber-100/95 border-2 border-amber-400 text-center shadow-sm max-w-[240px]">
+                                <p class="font-display font-extrabold text-xs text-amber-900">${n.title}</p>
+                                <p class="text-[10px] font-bold text-amber-700">${n.sub}</p>
+                            </div>
+                        </div>
+                    `;
+                }
+
+                const nodeColorClass = n.isDone
+                    ? 'candy-node-mint'
+                    : n.isCurrent
+                        ? 'candy-node-pink candy-node-active'
+                        : 'candy-node-pink';
+
+                const stars = n.isDone ? '⭐⭐⭐' : (n.masteredCount > 0 ? '⭐⭐☆' : '☆☆☆');
+
+                return `
+                    <div class="relative z-10 flex flex-col items-center my-3 ${n.offsetClass}">
+                        <!-- Linh vật Momo đứng cạnh chặng hiện tại -->
+                        ${n.isCurrent ? `
+                            <div class="mb-1 px-2.5 py-0.5 rounded-full bg-kitty-pinkDeep text-white text-[10px] font-extrabold shadow animate-bounce">
+                                🎀 Bạn đang ở đây!
+                            </div>
+                        ` : ''}
+                        <button onclick="startStageStudy(${n.stage})" class="candy-node ${nodeColorClass}">
+                            <span class="text-xs font-extrabold">${n.numberLabel}</span>
+                            <span class="text-[10px] opacity-90">${n.masteredCount}/${Math.max(1, n.wordCount)} từ</span>
+                        </button>
+                        <div class="text-xs mt-1 tracking-tighter drop-shadow-sm">${stars}</div>
+                        <div onclick="startStageStudy(${n.stage})" class="cursor-pointer mt-1 px-3.5 py-1.5 rounded-2xl bg-white/95 border-2 ${n.isDone ? 'border-kitty-mint' : 'border-kitty-pink'} text-center shadow-sm hover:scale-105 transition-transform max-w-[230px]">
+                            <p class="font-display font-extrabold text-xs text-kitty-text">${n.title}</p>
+                            <p class="text-[10px] font-bold text-kitty-subtext">${n.sub}</p>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            container.innerHTML = `
+                ${svgPathHtml}
+                <div class="relative z-10 flex flex-col items-center justify-between py-2">
+                    ${nodesHtml}
+                </div>
+            `;
+        }
+
+        function selectCefrLevel(code, idx) {
             appState.selectedCefr = code;
+            currentCardIndex = 0;
             saveState();
             updateHeaderStats();
             renderDashboard();
-            document.getElementById('ai-chat-subtitle').textContent = `Đang điều chỉnh theo trình độ ${code}`;
-            showToast(`Đã chuyển trình độ mục tiêu sang CEFR ${code}!`, 'pink');
-        }
-
-        function selectDomain(domainId) {
-            appState.selectedDomain = domainId;
-            currentCardIndex = 0;
-            saveState();
-            renderDashboard();
             renderFlashcard();
-            showToast(`Đã lọc từ vựng chuyên ngành: ${domainId}`, 'mint');
+            document.getElementById('ai-chat-subtitle').textContent = `Đang điều chỉnh theo trình độ ${code} • Giọng nữ Kawaii AI`;
+            if (idx > appState.unlockedCefrIndex) {
+                showToast(`Bạn đang xem trước bậc ${code}. Hãy làm Test Thăng Hạng để mở khóa chính thức nhé! 🔒`, 'pink');
+            } else {
+                showToast(`Đã chuyển bản đồ lộ trình sang bậc CEFR ${code}! 🍭`, 'mint');
+            }
         }
 
-        function startDayStudy(dayNum) {
-            appState.selectedDomain = 'ALL';
-            const idx = appState.vocabList.findIndex(v => v.day === dayNum);
+        function startStageStudy(stageNum) {
+            const tierWords = getFilteredVocab();
+            const idx = tierWords.findIndex(v => v.stage === stageNum);
             currentCardIndex = idx >= 0 ? idx : 0;
-            renderDashboard();
             renderFlashcard(true);
             switchTab('flashcards');
-            showToast(`Bắt đầu bài học Ngày ${dayNum}!`, 'pink');
+            showToast(`Bắt đầu Chặng Ngày ${stageNum} (${appState.selectedCefr})! 🎀`, 'pink');
+        }
+
+        function startTierBossExam() {
+            const currentIdx = CEFR_LEVELS.findIndex(l => l.code === appState.selectedCefr);
+            const nextTier = CEFR_LEVELS[currentIdx + 1];
+            examState.isTierBoss = true;
+            examState.targetPromotionCefr = nextTier ? nextTier.code : 'C2';
+            switchTab('exam');
+            startCefrExam(true);
         }
 
         // =========================================================================
-        // 5. FLASHCARD 3D & PHÁT ÂM
+        // 5. FLASHCARD 3D & PHÁT ÂM GIỌNG NỮ DỄ THƯƠNG
         // =========================================================================
         function renderFlashcard(animateSlide = false) {
             const list = getFilteredVocab();
@@ -1528,8 +1818,8 @@
             if (list.length === 0) {
                 document.getElementById('fc-counter').textContent = '0 / 0 thẻ';
                 document.getElementById('fc-word').textContent = 'Chưa có từ ở mục này';
-                document.getElementById('fc-ipa').textContent = 'Hãy nhấn "+ Tạo bộ từ AI" hoặc chọn "Tất cả"';
-                document.getElementById('fc-meaning').textContent = 'Không tìm thấy từ phù hợp bộ lọc';
+                document.getElementById('fc-ipa').textContent = 'Hãy nhấn "⚡ Nạp thêm từ mới"';
+                document.getElementById('fc-meaning').textContent = 'Không tìm thấy từ phù hợp';
                 return;
             }
 
@@ -1539,9 +1829,9 @@
             const item = list[currentCardIndex];
             const isMastered = appState.masteredIds.includes(item.id);
 
-            document.getElementById('fc-counter').textContent = `Thẻ ${currentCardIndex + 1} / ${list.length}`;
+            document.getElementById('fc-counter').textContent = `Thẻ ${currentCardIndex + 1} / ${list.length} (${appState.selectedCefr})`;
             document.getElementById('fc-cefr-badge').textContent = item.cefr;
-            document.getElementById('fc-domain-badge').textContent = item.domain;
+            document.getElementById('fc-domain-badge').textContent = `${item.domain} • Ngày ${item.stage || 1}`;
             document.getElementById('fc-status-badge').textContent = isMastered ? '🌟 Đã thuộc' : '🌱 Đang học';
             document.getElementById('fc-pos').textContent = `(${item.pos})`;
             document.getElementById('fc-word').textContent = item.word;
@@ -1599,26 +1889,13 @@
 
             if (isMastered && (appState.todayLearnedCount === 10 || sessionLearnedCounter % 5 === 0 || isLastCardInList)) {
                 triggerCelebration({
-                    badgeTitle: 'Chiến Thần Từ Vựng Chuyên Ngành',
-                    headline: 'HOÀN THÀNH PHIÊN HỌC XUẤT SẮC! 🎀',
+                    badgeTitle: `Chiến Thần Từ Vựng ${appState.selectedCefr}`,
+                    headline: 'HOÀN THÀNH CHẶNG HỌC XUẤT SẮC! 🎀',
                     xpBonus: 35
                 });
             }
 
             nextFlashcard();
-        }
-
-        function speakText(text) {
-            if (!('speechSynthesis' in window)) {
-                showToast('Trình duyệt của bạn chưa hỗ trợ đọc giọng nói.', 'pink');
-                return;
-            }
-            window.speechSynthesis.cancel();
-            const utterance = new SpeechSynthesisUtterance(text);
-            utterance.lang = 'en-US';
-            utterance.rate = 0.95;
-            utterance.pitch = 1.05;
-            window.speechSynthesis.speak(utterance);
         }
 
         function speakCurrentWord() {
@@ -1632,8 +1909,25 @@
         }
 
         // =========================================================================
-        // 6. MINI GAME HÓA (SPEED QUIZ + MÀN TUNG HÔ HOÀN THÀNH VÒNG)
+        // 6. KHU VUI CHƠI 3 MINI GAME (PHẢN XẠ + GHÉP CẶP + TAI THÍNH GÕ CHUẨN)
         // =========================================================================
+        function switchMiniGame(mode) {
+            document.querySelectorAll('.game-panel').forEach(p => p.classList.add('hidden'));
+            document.getElementById(`game-panel-${mode}`).classList.remove('hidden');
+
+            document.querySelectorAll('.gm-mode-btn').forEach(btn => {
+                btn.classList.remove('border-kitty-pinkDeep', 'bg-kitty-pinkLight', 'shadow-sm');
+                btn.classList.add('bg-white');
+            });
+            const activeBtn = document.getElementById(`gm-tab-${mode}`);
+            activeBtn.classList.remove('bg-white');
+            activeBtn.classList.add('border-kitty-pinkDeep', 'bg-kitty-pinkLight', 'shadow-sm');
+
+            if (mode === 'match') initMatchingGame();
+            if (mode === 'listen') initListenGame();
+        }
+
+        // --- GAME 1: PHẢN XẠ SIÊU TỐC ---
         function nextGameQuestion() {
             const pool = appState.vocabList;
             currentGameWord = pool[Math.floor(Math.random() * pool.length)];
@@ -1682,19 +1976,159 @@
                     gameRoundCorrect = 0;
                     document.getElementById('game-round-progress').textContent = '0/5';
                     triggerCelebration({
-                        badgeTitle: 'Bậc Thầy Săn Bug Ngôn Ngữ',
-                        headline: 'PHÁ ĐẢO MINI GAME RỒI! 🎮✨',
+                        badgeTitle: 'Bậc Thầy Phản Xạ Siêu Tốc',
+                        headline: 'PHÁ ĐẢO GAME PHẢN XẠ RỒI! ⚡✨',
                         xpBonus: 50
                     });
                 }
-                setTimeout(nextGameQuestion, 1000);
+                setTimeout(nextGameQuestion, 950);
             } else {
                 btnEl.classList.remove('bg-white', 'border-kitty-pink');
                 btnEl.classList.add('bg-rose-200', 'border-rose-500', 'text-rose-800');
                 gameCombo = 0;
                 document.getElementById('game-combo').textContent = gameCombo;
                 showToast(`Chưa đúng rồi! Đáp án là: "${currentGameWord.meaning}"`, 'pink');
-                setTimeout(nextGameQuestion, 1700);
+                setTimeout(nextGameQuestion, 1600);
+            }
+        }
+
+        // --- GAME 2: GHÉP ĐÔI THUẬT NGỮ ---
+        let matchState = { pairs: [], selectedEnId: null, selectedViId: null, matchedIds: [] };
+
+        function initMatchingGame() {
+            const shuffled = [...appState.vocabList].sort(() => 0.5 - Math.random()).slice(0, 5);
+            matchState = {
+                pairs: shuffled,
+                selectedEnId: null,
+                selectedViId: null,
+                matchedIds: []
+            };
+            renderMatchingBoard();
+        }
+
+        function renderMatchingBoard() {
+            const enCol = document.getElementById('match-en-col');
+            const viCol = document.getElementById('match-vi-col');
+            if (!enCol || !viCol) return;
+
+            const enList = [...matchState.pairs];
+            const viList = [...matchState.pairs].sort((a, b) => a.meaning.localeCompare(b.meaning));
+
+            enCol.innerHTML = enList.map(item => {
+                const isMatched = matchState.matchedIds.includes(item.id);
+                const isSelected = matchState.selectedEnId === item.id;
+                return `
+                    <button ${isMatched ? 'disabled' : ''} onclick="selectMatchTile('en', ${item.id})" class="w-full p-3.5 rounded-2xl border-2 font-display font-extrabold text-sm text-left transition-all ${
+                        isMatched
+                            ? 'bg-kitty-mint/60 border-kitty-mint text-kitty-mintDeep opacity-50 cursor-default'
+                            : isSelected
+                                ? 'bg-kitty-pinkDeep text-white border-kitty-pinkDeep shadow-md scale-[1.02]'
+                                : 'bg-white border-kitty-pink text-kitty-text hover:bg-kitty-pinkLight'
+                    }">
+                        ${isMatched ? '✅ ' : '🎀 '}${item.word}
+                    </button>
+                `;
+            }).join('');
+
+            viCol.innerHTML = viList.map(item => {
+                const isMatched = matchState.matchedIds.includes(item.id);
+                const isSelected = matchState.selectedViId === item.id;
+                return `
+                    <button ${isMatched ? 'disabled' : ''} onclick="selectMatchTile('vi', ${item.id})" class="w-full p-3.5 rounded-2xl border-2 font-bold text-xs sm:text-sm text-left transition-all ${
+                        isMatched
+                            ? 'bg-kitty-mint/60 border-kitty-mint text-kitty-mintDeep opacity-50 cursor-default'
+                            : isSelected
+                                ? 'bg-kitty-mintDeep text-white border-kitty-mintDeep shadow-md scale-[1.02]'
+                                : 'bg-white border-kitty-mint text-kitty-text hover:bg-kitty-mintLight'
+                    }">
+                        ${isMatched ? '✅ ' : '🍀 '}${item.meaning}
+                    </button>
+                `;
+            }).join('');
+        }
+
+        function selectMatchTile(side, id) {
+            if (side === 'en') {
+                matchState.selectedEnId = id;
+                const wordObj = matchState.pairs.find(p => p.id === id);
+                if (wordObj) speakText(wordObj.word);
+            } else {
+                matchState.selectedViId = id;
+            }
+
+            if (matchState.selectedEnId !== null && matchState.selectedViId !== null) {
+                if (matchState.selectedEnId === matchState.selectedViId) {
+                    matchState.matchedIds.push(id);
+                    gameCombo += 1;
+                    document.getElementById('game-combo').textContent = gameCombo;
+                    addXP(12, 'Ghép cặp chính xác!');
+
+                    if (matchState.matchedIds.length === matchState.pairs.length) {
+                        triggerCelebration({
+                            badgeTitle: 'Siêu Trí Nhớ Liên Phòng Ban',
+                            headline: 'GHÉP CHUẨN 100% CÁC CẶP TỪ! 🧩💖',
+                            xpBonus: 45
+                        });
+                        setTimeout(initMatchingGame, 1200);
+                    }
+                } else {
+                    gameCombo = 0;
+                    document.getElementById('game-combo').textContent = gameCombo;
+                    showToast('Chưa khớp cặp rồi, thử lại nhé Momo ơi! 🎀', 'pink');
+                }
+                matchState.selectedEnId = null;
+                matchState.selectedViId = null;
+            }
+            renderMatchingBoard();
+        }
+
+        // --- GAME 3: TAI THÍNH GÕ CHUẨN (LISTENING SPELLING) ---
+        let currentListenWord = null;
+
+        function initListenGame() {
+            // Chọn các từ đơn hoặc cụm 2 từ dễ gõ
+            const candidates = appState.vocabList.filter(v => v.word.length <= 18);
+            currentListenWord = candidates[Math.floor(Math.random() * candidates.length)] || appState.vocabList[0];
+
+            document.getElementById('listen-badge').textContent = `${currentListenWord.domain} • CEFR ${currentListenWord.cefr}`;
+            document.getElementById('listen-meaning-hint').textContent = currentListenWord.meaning;
+
+            const masked = currentListenWord.word
+                .split('')
+                .map((ch, idx) => (ch === ' ' || ch === '-' ? ch : (idx === 0 ? ch : '_')))
+                .join(' ');
+            document.getElementById('listen-letter-hint').textContent = masked;
+            document.getElementById('listen-input').value = '';
+        }
+
+        function speakListenGameWord() {
+            if (currentListenWord) speakText(currentListenWord.word);
+        }
+
+        function checkListenAnswer() {
+            if (!currentListenWord) return;
+            const userVal = document.getElementById('listen-input').value.trim().toLowerCase();
+            const targetVal = currentListenWord.word.trim().toLowerCase();
+
+            if (!userVal) {
+                showToast('Bạn hãy nghe loa và gõ từ tiếng Anh vào ô trống nhé!', 'pink');
+                return;
+            }
+
+            if (userVal === targetVal) {
+                gameCombo += 1;
+                document.getElementById('game-combo').textContent = gameCombo;
+                triggerCelebration({
+                    badgeTitle: 'Đôi Tai Vàng Nghe Chuẩn',
+                    headline: `CHÍNH XÁC: "${currentListenWord.word.toUpperCase()}"! 🎧🌟`,
+                    xpBonus: 30
+                });
+                initListenGame();
+            } else {
+                gameCombo = 0;
+                document.getElementById('game-combo').textContent = gameCombo;
+                showToast(`Gần đúng rồi! Đáp án chuẩn là: "${currentListenWord.word}"`, 'pink');
+                speakText(currentListenWord.word);
             }
         }
 
@@ -1729,7 +2163,7 @@
         }
 
         // =========================================================================
-        // 8. AI TẠO THÊM KHO TỪ VỰNG CHUYÊN NGÀNH
+        // 8. AI TẠO THÊM KHO TỪ VỰNG CHUYÊN NGÀNH 2026
         // =========================================================================
         function openAiVocabModal() {
             document.getElementById('ai-vocab-modal').classList.remove('hidden');
@@ -1739,18 +2173,47 @@
             document.getElementById('ai-vocab-modal').classList.add('hidden');
         }
 
+        function quickUnlockMoreWords() {
+            const existingWords = new Set(appState.vocabList.map(v => v.word.toLowerCase()));
+            const candidates = EXTRA_VOCAB_BANK.filter(item => !existingWords.has(item.word.toLowerCase()));
+
+            if (candidates.length > 0) {
+                const batch = candidates.slice(0, 6);
+                const nextId = Date.now();
+
+                batch.forEach((item, idx) => {
+                    appState.vocabList.push({
+                        ...item,
+                        id: nextId + idx,
+                        cefr: appState.selectedCefr,
+                        stage: 4
+                    });
+                });
+
+                saveState();
+                const filtered = getFilteredVocab();
+                currentCardIndex = Math.max(0, filtered.length - batch.length);
+                renderDashboard();
+                renderFlashcard(true);
+                addXP(20, `Đã nạp thêm ${batch.length} thuật ngữ 2026 vào bậc ${appState.selectedCefr}!`);
+            } else {
+                showToast('Bạn đã mở khóa hết kho dự phòng! Nhập chủ đề bất kỳ để AI tạo thêm từ vô tận nhé ✨', 'pink');
+                openAiVocabModal();
+            }
+        }
+
         async function generateMoreVocabWithAI() {
             const topic = document.getElementById('ai-topic-input').value.trim();
             if (!topic) {
-                showToast('Bạn hãy nhập chủ đề chuyên ngành trước nhé!', 'pink');
+                showToast('Bạn hãy nhập chủ đề chuyên ngành 2026 trước nhé!', 'pink');
                 return;
             }
 
             const btn = document.getElementById('generate-vocab-btn');
             btn.disabled = true;
-            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Đang tạo bộ từ...';
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Đang tạo bộ từ 2026...';
 
-            const prompt = `Generate 5 specialized English vocabulary items at CEFR level ${appState.selectedCefr} about the topic: "${topic}" for tech/business professionals (IT, Fintech, B2B, CX, QA/QC, PO).
+            const prompt = `Generate 5 modern 2026 specialized English vocabulary items at CEFR level ${appState.selectedCefr} about the topic: "${topic}" for tech/business professionals (IT, Fintech, B2B, CX, QA/QC, PO).
 Return ONLY a valid JSON array (no markdown backticks) with objects containing:
 "word", "pos", "ipa", "cefr", "domain" (one of: IT, Fintech, B2B, CX, QA, PO), "meaning" (Vietnamese), "exampleEn", "exampleVi".`;
 
@@ -1760,16 +2223,16 @@ Return ONLY a valid JSON array (no markdown backticks) with objects containing:
                 const newItems = JSON.parse(cleanJson);
 
                 if (Array.isArray(newItems)) {
-                    const nextIdStart = appState.vocabList.length + 100;
+                    const nextIdStart = Date.now();
                     newItems.forEach((item, idx) => {
                         appState.vocabList.unshift({
                             id: nextIdStart + idx,
                             word: item.word || 'Term',
                             pos: item.pos || 'noun',
                             ipa: item.ipa || '/.../',
-                            cefr: item.cefr || appState.selectedCefr,
+                            cefr: appState.selectedCefr,
                             domain: DOMAINS.some(d => d.id === item.domain) ? item.domain : 'IT',
-                            day: 1,
+                            stage: 1,
                             meaning: item.meaning || '',
                             exampleEn: item.exampleEn || '',
                             exampleVi: item.exampleVi || ''
@@ -1782,10 +2245,10 @@ Return ONLY a valid JSON array (no markdown backticks) with objects containing:
                     renderFlashcard(true);
                     closeAiVocabModal();
                     switchTab('flashcards');
-                    addXP(25, `Đã thêm ${newItems.length} từ chuyên ngành mới!`);
+                    addXP(25, `Đã thêm ${newItems.length} từ chuyên ngành 2026 mới!`);
                 }
             } catch (err) {
-                showToast('Không thể kết nối AI lúc này, bạn thử lại sau giây lát nhé!', 'pink');
+                showToast('Bạn có thể bấm nút "⚡ Nạp thêm từ mới" để học tiếp ngay lập tức nhé!', 'pink');
             } finally {
                 btn.disabled = false;
                 btn.innerHTML = '<span>🎀 Tạo 5 từ mới ngay</span>';
@@ -1793,7 +2256,7 @@ Return ONLY a valid JSON array (no markdown backticks) with objects containing:
         }
 
         // =========================================================================
-        // 9. VOICE RECOGNITION & HỘI THOẠI VỚI AI COACH
+        // 9. VOICE RECOGNITION & HỘI THOẠI VỚI AI COACH (GIỌNG NỮ DỄ THƯƠNG)
         // =========================================================================
         let activeRecognition = null;
 
@@ -1822,7 +2285,7 @@ Return ONLY a valid JSON array (no markdown backticks) with objects containing:
             recognition.onstart = () => {
                 activeRecognition = recognition;
                 micBtn.classList.add('animate-pulse', 'ring-4', 'ring-kitty-pinkDeep');
-                showToast('🎙️ Đang nghe... Hãy nói tiếng Anh của bạn!', 'mint');
+                showToast('🎙️ Momo đang lắng nghe... Hãy nói tiếng Anh của bạn nhé!', 'mint');
             };
 
             recognition.onresult = (event) => {
@@ -1850,18 +2313,18 @@ Return ONLY a valid JSON array (no markdown backticks) with objects containing:
 
         function resetAiChat() {
             const scenarioMap = {
-                daily_standup: "Hi there! Welcome to our Daily Standup. What did you accomplish yesterday, and are there any blockers on your current sprint tasks?",
-                po_sprint: "Hello! As we prepare for Sprint Planning, which user stories in the backlog do you think bring the highest business value right now?",
-                fintech_pitch: "Good morning! Tell me briefly about your fintech payment solution—how does it ensure fast settlement and KYC compliance?",
-                b2b_negotiation: "Thanks for meeting today. Before we sign the B2B SaaS agreement, how can your team support our enterprise onboarding?",
-                cx_escalation: "Hi, I'm a VIP client and our checkout API has been timing out for 20 minutes. How is your CX team handling this escalation?",
-                qa_bug_report: "Hey! I saw your critical bug ticket on the payment module, but I couldn't reproduce it locally. Could you walk me through the edge case?"
+                daily_standup: "Hi there! Welcome to our 2026 AI Engineering sync. How did you optimize our Agentic AI latency yesterday, and are there any blockers?",
+                po_sprint: "Hello! For our Q4 Product-Led Growth roadmap, which AI Copilot user stories bring the highest impact to our North Star Metric?",
+                fintech_pitch: "Good morning! How does your 2026 cross-border payment rail handle instant stablecoin settlement while passing real-time AML compliance?",
+                b2b_negotiation: "Thanks for meeting today. Before our procurement team approves the enterprise AI contract, how do you guarantee Zero-Trust security and SLA uptime?",
+                cx_escalation: "Hi, I'm a VIP client and your AI support bot just gave our team an inaccurate billing policy. How is your CX team handling this escalation?",
+                qa_bug_report: "Hey! I saw your critical bug ticket on the RAG pipeline edge case, but I couldn't reproduce it locally. Could you walk me through the synthetic test steps?"
             };
 
             const selected = document.getElementById('ai-scenario-select').value;
             const openingLine = scenarioMap[selected] || scenarioMap.daily_standup;
 
-            chatHistory = [{ sender: 'ai', text: openingLine, tip: 'Gợi ý: Trả lời ngắn gọn 2-3 câu, sử dụng thuật ngữ chuyên ngành phù hợp.' }];
+            chatHistory = [{ sender: 'ai', text: openingLine, tip: 'Gợi ý: Trả lời tự nhiên 2-3 câu, lồng ghép từ vựng chuyên ngành 2026 nhé!' }];
             renderAiChatMessages();
         }
 
@@ -1872,12 +2335,12 @@ Return ONLY a valid JSON array (no markdown backticks) with objects containing:
                     const escapedText = msg.text.replace(/\\/g, '\\\\').replace(/'/g, "\\'");
                     return `
                         <div class="flex items-start gap-2.5">
-                            <div class="w-8 h-8 rounded-full bg-kitty-pink flex items-center justify-center text-sm shrink-0 border border-white">🐱</div>
+                            <div class="w-9 h-9 rounded-full bg-kitty-pink flex items-center justify-center text-base shrink-0 border-2 border-white shadow-sm">🎀</div>
                             <div class="bg-white border-2 border-kitty-pink rounded-2xl rounded-tl-none p-3.5 max-w-[85%] shadow-sm space-y-1.5">
                                 <p class="text-sm font-bold text-kitty-text">${msg.text}</p>
                                 ${msg.tip ? `<p class="text-xs font-semibold text-kitty-mintDeep bg-kitty-mintLight px-2.5 py-1.5 rounded-xl">✨ ${msg.tip}</p>` : ''}
                                 <button onclick="speakText('${escapedText}')" class="text-[11px] font-extrabold text-kitty-pinkDeep hover:underline">
-                                    <i class="fa-solid fa-volume-high"></i> Nghe lại
+                                    <i class="fa-solid fa-volume-high"></i> Nghe giọng nữ Momo đọc
                                 </button>
                             </div>
                         </div>
@@ -1905,8 +2368,8 @@ Return ONLY a valid JSON array (no markdown backticks) with objects containing:
             renderAiChatMessages();
 
             const scenario = document.getElementById('ai-scenario-select').options[document.getElementById('ai-scenario-select').selectedIndex].text;
-            const sysPrompt = `You are Momo Coach (from the app "Momo Cố lên"), a friendly, encouraging workplace English tutor for tech & business professionals (CEFR level ${appState.selectedCefr}). Scenario: ${scenario}.
-Respond naturally in English (2-3 sentences) to keep the conversation going. Then add a short Vietnamese coaching note starting with "Góp ý nhẹ:" correcting any grammar issues or suggesting 1 better B2/C1 workplace term.`;
+            const sysPrompt = `You are Momo Coach (a sweet, encouraging female workplace English coach in 2026), helping tech & business professionals practice CEFR ${appState.selectedCefr} English. Scenario: ${scenario}.
+Respond naturally in warm, professional English (2-3 sentences) to keep the conversation going. Then add a short Vietnamese coaching note starting with "Góp ý nhẹ:" correcting any grammar issues or suggesting 1 modern 2026 B2/C1 workplace term.`;
 
             try {
                 const reply = await callGeminiAPI(`User said: "${userText}"`, sysPrompt);
@@ -1916,19 +2379,23 @@ Respond naturally in English (2-3 sentences) to keep the conversation going. The
 
                 chatHistory.push({ sender: 'ai', text: englishPart, tip: tipPart });
                 renderAiChatMessages();
-                addXP(10, 'Luyện hội thoại AI');
+                addXP(10, 'Luyện hội thoại giọng nữ AI');
 
                 if (document.getElementById('auto-tts-toggle').checked) {
                     speakText(englishPart);
                 }
             } catch (e) {
-                chatHistory.push({ sender: 'ai', text: "Great point! Let's align on that in our next sprint sync.", tip: 'Góp ý nhẹ: Câu trả lời rất tự nhiên và đúng trọng tâm công việc!' });
+                const fallbackLine = "That sounds super clear and actionable! Let's align on the acceptance criteria and ship the update in this sprint.";
+                chatHistory.push({ sender: 'ai', text: fallbackLine, tip: 'Góp ý nhẹ: Câu trả lời rất tự nhiên và đúng trọng tâm công việc 2026!' });
                 renderAiChatMessages();
+                if (document.getElementById('auto-tts-toggle').checked) {
+                    speakText(fallbackLine);
+                }
             }
         }
 
         // =========================================================================
-        // 10. MENU PHỎNG VẤN CÔNG TY NƯỚC NGOÀI
+        // 10. MENU PHỎNG VẤN CÔNG TY NƯỚC NGOÀI 2026
         // =========================================================================
         let currentMockQuestion = '';
 
@@ -1943,16 +2410,16 @@ Respond naturally in English (2-3 sentences) to keep the conversation going. The
                     <div class="bento-card p-6 flex flex-col justify-between gap-4">
                         <div class="space-y-3">
                             <div class="flex items-center justify-between">
-                                <span class="px-3 py-1 rounded-xl bg-kitty-pinkLight text-kitty-pinkDeep font-extrabold text-xs">Câu hỏi #${index + 1} • ${role}</span>
+                                <span class="px-3 py-1 rounded-xl bg-kitty-pinkLight text-kitty-pinkDeep font-extrabold text-xs">Câu hỏi 2026 #${index + 1} • ${role}</span>
                                 <button onclick="speakText('${escapedQ}')" class="px-3 py-1 rounded-xl bg-kitty-mintLight text-kitty-mintDeep font-extrabold text-xs border border-kitty-mint">
-                                    <i class="fa-solid fa-volume-high"></i> Nghe HR hỏi
+                                    <i class="fa-solid fa-volume-high"></i> Nghe HR nữ hỏi
                                 </button>
                             </div>
                             <h3 class="font-display font-bold text-base md:text-lg text-kitty-text leading-snug">"${item.q}"</h3>
                             <p class="text-xs font-semibold text-kitty-subtext italic">${item.vi}</p>
 
                             <div class="p-3.5 rounded-2xl bg-kitty-mintLight/60 border border-kitty-mint space-y-1.5">
-                                <p class="text-xs font-extrabold text-kitty-mintDeep">🔑 Từ vựng "ăn điểm" nên dùng:</p>
+                                <p class="text-xs font-extrabold text-kitty-mintDeep">🔑 Từ vựng 2026 "ăn điểm" nên dùng:</p>
                                 <div class="flex flex-wrap gap-1.5">
                                     ${item.powerWords.map(w => `<span class="px-2.5 py-0.5 rounded-lg bg-white border border-kitty-mint text-xs font-bold text-kitty-text">${w}</span>`).join('')}
                                 </div>
@@ -1970,11 +2437,12 @@ Respond naturally in English (2-3 sentences) to keep the conversation going. The
 
         function openMockInterviewModal(role, questionText) {
             currentMockQuestion = questionText;
-            document.getElementById('modal-int-role').textContent = `Phỏng vấn vị trí ${role} (Chuẩn CEFR ${appState.selectedCefr})`;
+            document.getElementById('modal-int-role').textContent = `Phỏng vấn 2026 vị trí ${role} (Chuẩn CEFR ${appState.selectedCefr})`;
             document.getElementById('modal-int-question').textContent = questionText;
             document.getElementById('modal-int-answer').value = '';
             document.getElementById('modal-int-feedback').classList.add('hidden');
             document.getElementById('mock-interview-modal').classList.remove('hidden');
+            speakText(questionText);
         }
 
         function closeMockInterviewModal() {
@@ -1992,13 +2460,13 @@ Respond naturally in English (2-3 sentences) to keep the conversation going. The
             btn.disabled = true;
             btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Hội đồng AI đang chấm điểm...';
 
-            const prompt = `You are a Senior Hiring Manager at a global tech/fintech company.
+            const prompt = `You are a Senior Hiring Manager at a global tech/fintech company in 2026.
 Interview Question: "${currentMockQuestion}"
 Candidate's English Answer: "${answer}"
 Evaluate the answer in Vietnamese with 3 clear bullet points:
 1. Điểm số (thang 10) & Trình độ CEFR ước tính.
 2. Điểm mạnh & Điểm cần cải thiện (ngữ pháp, cấu trúc STAR, sự tự tin).
-3. Mẫu câu trả lời nâng cấp (Sample C1 Answer in English) để ứng viên học thuộc.`;
+3. Mẫu câu trả lời nâng cấp 2026 (Sample C1/C2 Answer in English) để ứng viên học thuộc.`;
 
             try {
                 const feedback = await callGeminiAPI(prompt);
@@ -2007,7 +2475,7 @@ Evaluate the answer in Vietnamese with 3 clear bullet points:
                 fbBox.classList.remove('hidden');
 
                 triggerCelebration({
-                    badgeTitle: 'Ngôi Sao Phỏng Vấn Quốc Tế',
+                    badgeTitle: 'Ngôi Sao Phỏng Vấn Quốc Tế 2026',
                     headline: 'TRẢ LỜI PHỎNG VẤN QUÁ TỰ TIN! 💼👑',
                     xpBonus: 40
                 });
@@ -2020,10 +2488,16 @@ Evaluate the answer in Vietnamese with 3 clear bullet points:
         }
 
         // =========================================================================
-        // 11. BÀI THI ONLINE CHUẨN KHUNG CEFR
+        // 11. BÀI THI ONLINE CHUẨN KHUNG CEFR & THI THĂNG HẠNG BẬC
         // =========================================================================
-        function startCefrExam() {
+        function startCefrExam(isBossPromotion = false) {
+            if (!isBossPromotion) {
+                examState.isTierBoss = false;
+                examState.targetPromotionCefr = null;
+            }
+
             examState = {
+                ...examState,
                 currentIdx: 0,
                 userAnswers: new Array(CEFR_EXAM_QUESTIONS.length).fill(null),
                 timerSec: 300,
@@ -2051,7 +2525,8 @@ Evaluate the answer in Vietnamese with 3 clear bullet points:
         function renderExamQuestion() {
             const idx = examState.currentIdx;
             const item = CEFR_EXAM_QUESTIONS[idx];
-            document.getElementById('exam-progress-text').textContent = `Câu ${idx + 1} / ${CEFR_EXAM_QUESTIONS.length} (Mức ${item.level})`;
+            const bossTag = examState.isTierBoss ? `👑 Boss Test Lên ${examState.targetPromotionCefr} • ` : '';
+            document.getElementById('exam-progress-text').textContent = `${bossTag}Câu ${idx + 1} / ${CEFR_EXAM_QUESTIONS.length} (Mức ${item.level})`;
 
             const qBox = document.getElementById('exam-question-box');
             qBox.innerHTML = `
@@ -2112,13 +2587,27 @@ Evaluate the answer in Vietnamese with 3 clear bullet points:
             else if (score >= 7) awardedCefr = 'B2 (Upper-Intermediate)';
             else if (score >= 5) awardedCefr = 'B1 (Intermediate)';
 
+            // Mở khóa bậc tiếp theo nếu vượt qua Boss Test (>= 6/10 điểm)
+            let promotionMsg = '';
+            if (examState.isTierBoss && score >= 6 && examState.targetPromotionCefr) {
+                const targetIdx = CEFR_LEVELS.findIndex(l => l.code === examState.targetPromotionCefr);
+                if (targetIdx > appState.unlockedCefrIndex) {
+                    appState.unlockedCefrIndex = targetIdx;
+                }
+                appState.selectedCefr = examState.targetPromotionCefr;
+                saveState();
+                updateHeaderStats();
+                renderDashboard();
+                promotionMsg = `🎉 CHÚC MỪNG! Bạn đã chính thức thăng hạng mở khóa bản đồ CEFR ${examState.targetPromotionCefr}! `;
+            }
+
             document.getElementById('exam-active-card').classList.add('hidden');
             document.getElementById('exam-result-card').classList.remove('hidden');
             document.getElementById('exam-final-score').textContent = `${score} / ${CEFR_EXAM_QUESTIONS.length}`;
             document.getElementById('exam-awarded-cefr').textContent = `Đạt chuẩn CEFR ${awardedCefr}`;
-            document.getElementById('exam-feedback-text').textContent = score >= 7
-                ? 'Tuyệt vời! Bạn đã nắm vững thuật ngữ chuyên ngành IT, Fintech, B2B, CX, QA & PO để tự tin ứng tuyển công ty nước ngoài!'
-                : 'Cố gắng lên nhé! Hãy xem chi tiết giải thích từng câu bên dưới, sau đó ôn thêm Flashcard để bứt phá lên B2-C1.';
+            document.getElementById('exam-feedback-text').textContent = promotionMsg + (score >= 6
+                ? 'Tuyệt vời! Bạn đã nắm vững thuật ngữ chuyên ngành 2026 (IT, Fintech, B2B, CX, QA & PO) để tự tin ứng tuyển công ty nước ngoài!'
+                : 'Cần đạt tối thiểu 6/10 điểm để vượt Cổng Boss Thăng Hạng nhé! Xem chi tiết giải thích từng câu bên dưới và thử lại nha Momo!');
 
             // Render danh sách chi tiết từng câu đúng/sai và giải thích
             const reviewListEl = document.getElementById('exam-review-list');
@@ -2165,7 +2654,7 @@ Evaluate the answer in Vietnamese with 3 clear bullet points:
             }).join('');
 
             triggerCelebration({
-                badgeTitle: `Chứng Nhận Năng Lực CEFR ${awardedCefr.split(' ')[0]}`,
+                badgeTitle: promotionMsg ? `Thăng Hạng CEFR ${examState.targetPromotionCefr} Thành Công` : `Chứng Nhận Năng Lực CEFR ${awardedCefr.split(' ')[0]}`,
                 headline: `HOÀN THÀNH BÀI THI ${score}/10 ĐIỂM! 🏆`,
                 xpBonus: 100
             });
