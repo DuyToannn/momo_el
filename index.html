@@ -1,0 +1,2178 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Momo Cố lên - Học Tiếng Anh Chuyên Ngành & Phỏng Vấn Quốc Tế</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Quicksand & Nunito cho giao diện Kawaii thân thiện, dễ đọc -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;600;700;800&family=Quicksand:wght@600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Nunito', 'sans-serif'],
+                        display: ['Quicksand', 'sans-serif'],
+                    },
+                    colors: {
+                        kitty: {
+                            bg: '#FFF6F9',
+                            pinkLight: '#FFEBF0',
+                            pink: '#FFD1DC',
+                            pinkDark: '#FF9EB5',
+                            pinkDeep: '#FF6B8B',
+                            mintLight: '#E8F8F0',
+                            mint: '#C1E1C1',
+                            mintDark: '#8FD694',
+                            mintDeep: '#4EA868',
+                            text: '#3D3136',
+                            subtext: '#7A6870'
+                        }
+                    },
+                    boxShadow: {
+                        'kawaii': '0 10px 25px -5px rgba(255, 158, 181, 0.25), 0 4px 10px -2px rgba(193, 225, 193, 0.2)',
+                        'kawaii-btn': '0 4px 0 #FF85A2',
+                        'mint-btn': '0 4px 0 #7CC482'
+                    }
+                }
+            }
+        };
+    </script>
+
+    <style>
+        body {
+            background-color: #FFF6F9;
+            background-image: radial-gradient(#FFD1DC 1.2px, transparent 1.2px), radial-gradient(#C1E1C1 1.2px, #FFF6F9 1.2px);
+            background-size: 40px 40px;
+            background-position: 0 0, 20px 20px;
+            color: #3D3136;
+        }
+
+        /* Bento Card phong cách bo tròn mềm mại */
+        .bento-card {
+            background: rgba(255, 255, 255, 0.94);
+            backdrop-filter: blur(10px);
+            border: 2.5px solid #FFD1DC;
+            border-radius: 28px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .bento-mint {
+            background: rgba(255, 255, 255, 0.94);
+            border: 2.5px solid #C1E1C1;
+            border-radius: 28px;
+        }
+
+        /* 3D Flashcard Flip chuẩn xác & mượt mà */
+        .perspective-1000 {
+            perspective: 1200px;
+            -webkit-perspective: 1200px;
+        }
+        .flashcard-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transform-style: preserve-3d;
+            -webkit-transform-style: preserve-3d;
+        }
+        .flashcard-inner.no-transition {
+            transition: none !important;
+        }
+        .flashcard-inner.is-flipped {
+            transform: rotateY(180deg);
+            -webkit-transform: rotateY(180deg);
+        }
+        .flashcard-front, .flashcard-back {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            border-radius: 32px;
+            overflow: hidden;
+        }
+        .flashcard-front {
+            transform: rotateY(0deg);
+            z-index: 2;
+        }
+        .flashcard-back {
+            transform: rotateY(180deg);
+            z-index: 1;
+        }
+
+        /* Hiệu ứng trượt & nảy khi chuyển thẻ từ mới */
+        @keyframes cardSlideIn {
+            0% { opacity: 0; transform: translateX(35px) scale(0.95); }
+            70% { opacity: 1; transform: translateX(-4px) scale(1.01); }
+            100% { opacity: 1; transform: translateX(0) scale(1); }
+        }
+        .card-slide-in {
+            animation: cardSlideIn 0.42s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+
+        /* Hiệu ứng lấp lánh nhẹ khi chạm thẻ */
+        @keyframes cardSparkle {
+            0% { box-shadow: 0 0 0 0 rgba(255, 133, 162, 0.65); }
+            100% { box-shadow: 0 0 0 22px rgba(255, 133, 162, 0); }
+        }
+        .card-sparkle-pulse {
+            animation: cardSparkle 0.5s ease-out;
+        }
+
+        /* Hiệu ứng nhảy tưng tưng cho linh vật mèo vương miện */
+        @keyframes kittyBounce {
+            0%, 100% { transform: translateY(0) rotate(-3deg) scale(1); }
+            50% { transform: translateY(-14px) rotate(3deg) scale(1.06); }
+        }
+        .animate-kitty-bounce {
+            animation: kittyBounce 1.1s infinite ease-in-out;
+        }
+
+        /* Nút bấm nổi kawaii */
+        .btn-kawaii-pink {
+            background: linear-gradient(180deg, #FFB6C1 0%, #FF9EB5 100%);
+            color: #FFFFFF;
+            box-shadow: 0 4px 0 #FF7597;
+            transition: all 0.15s ease;
+        }
+        .btn-kawaii-pink:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 0 #FF7597;
+        }
+        .btn-kawaii-pink:active {
+            transform: translateY(3px);
+            box-shadow: 0 1px 0 #FF7597;
+        }
+
+        .btn-kawaii-mint {
+            background: linear-gradient(180deg, #A8E6CF 0%, #8FD694 100%);
+            color: #234E32;
+            box-shadow: 0 4px 0 #6BB872;
+            transition: all 0.15s ease;
+        }
+        .btn-kawaii-mint:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 0 #6BB872;
+        }
+        .btn-kawaii-mint:active {
+            transform: translateY(3px);
+            box-shadow: 0 1px 0 #6BB872;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #FFEBF0; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb { background: #FFB6C1; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #FF85A2; }
+
+        @keyframes floatSlow {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-6px); }
+        }
+        .animate-float { animation: floatSlow 3s ease-in-out infinite; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col pb-20 md:pb-6">
+
+    <!-- Toast Notification thay thế hoàn toàn alert() -->
+    <div id="toast-box" class="fixed top-20 right-4 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+    <!-- HEADER TOP BAR -->
+    <header class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b-2 border-kitty-pink px-4 py-3 shadow-sm">
+        <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3">
+            <!-- Logo Hello Kitty Concept -->
+            <div class="flex items-center gap-3 cursor-pointer" onclick="switchTab('dashboard')">
+                <div class="w-12 h-12 rounded-2xl bg-kitty-pinkLight border-2 border-kitty-pinkDark flex items-center justify-center relative shadow-sm animate-float">
+                    <!-- SVG Mèo Nơ Hồng Cute -->
+                    <svg viewBox="0 0 100 100" class="w-10 h-10">
+                        <path d="M20 42 L14 18 L38 30 Z" fill="#FFFFFF" stroke="#3D3136" stroke-width="3.5" stroke-linejoin="round"/>
+                        <path d="M80 42 L86 18 L62 30 Z" fill="#FFFFFF" stroke="#3D3136" stroke-width="3.5" stroke-linejoin="round"/>
+                        <ellipse cx="50" cy="58" rx="36" ry="28" fill="#FFFFFF" stroke="#3D3136" stroke-width="3.5"/>
+                        <circle cx="34" cy="56" r="4" fill="#3D3136"/>
+                        <circle cx="66" cy="56" r="4" fill="#3D3136"/>
+                        <ellipse cx="50" cy="64" rx="4.5" ry="3" fill="#FFD166" stroke="#3D3136" stroke-width="2"/>
+                        <line x1="10" y1="52" x2="22" y2="54" stroke="#3D3136" stroke-width="3" stroke-linecap="round"/>
+                        <line x1="8" y1="62" x2="20" y2="62" stroke="#3D3136" stroke-width="3" stroke-linecap="round"/>
+                        <line x1="90" y1="52" x2="78" y2="54" stroke="#3D3136" stroke-width="3" stroke-linecap="round"/>
+                        <line x1="92" y1="62" x2="80" y2="62" stroke="#3D3136" stroke-width="3" stroke-linecap="round"/>
+                        <!-- Nơ hồng đặc trưng -->
+                        <path d="M65 24 C58 16, 52 30, 64 32 C55 38, 64 44, 70 36 C76 44, 86 36, 76 31 C86 26, 78 14, 70 24 Z" fill="#FF85A2" stroke="#3D3136" stroke-width="2.5"/>
+                        <circle cx="70" cy="30" r="3.5" fill="#FFD1DC" stroke="#3D3136" stroke-width="2"/>
+                    </svg>
+                </div>
+                <div>
+                    <div class="flex items-center gap-1.5">
+                        <h1 class="font-display font-bold text-xl md:text-2xl text-kitty-pinkDeep tracking-tight">Momo Cố lên</h1>
+                        <span class="px-2 py-0.5 text-xs font-extrabold rounded-full bg-kitty-mintLight text-kitty-mintDeep border border-kitty-mint">CEFR Pro</span>
+                    </div>
+                    <p class="text-xs text-kitty-subtext font-semibold hidden sm:block">Tiếng Anh Chuyên Ngành & Phỏng Vấn Quốc Tế</p>
+                </div>
+            </div>
+
+            <!-- Thanh chỉ số Streak, XP & Trình độ hiện tại -->
+            <div class="flex items-center gap-2 sm:gap-3">
+                <!-- Streak Badge -->
+                <div class="flex items-center gap-1.5 px-3 py-1.5 rounded-2xl bg-orange-50 border-2 border-orange-200 shadow-sm" title="Chuỗi ngày học liên tiếp">
+                    <span class="text-lg">🔥</span>
+                    <div>
+                        <span id="header-streak" class="font-display font-extrabold text-sm text-orange-600">1</span>
+                        <span class="text-xs font-bold text-orange-500 hidden sm:inline">ngày</span>
+                    </div>
+                </div>
+
+                <!-- XP Badge -->
+                <div class="flex items-center gap-1.5 px-3 py-1.5 rounded-2xl bg-kitty-mintLight border-2 border-kitty-mint shadow-sm" title="Điểm kinh nghiệm tích lũy">
+                    <span class="text-lg">🍀</span>
+                    <div>
+                        <span id="header-xp" class="font-display font-extrabold text-sm text-kitty-mintDeep">120</span>
+                        <span class="text-xs font-bold text-kitty-mintDeep">XP</span>
+                    </div>
+                </div>
+
+                <!-- CEFR Level Badge -->
+                <div class="flex items-center gap-1.5 px-3 py-1.5 rounded-2xl bg-kitty-pinkLight border-2 border-kitty-pink shadow-sm">
+                    <span class="text-base">🎀</span>
+                    <span id="header-cefr" class="font-display font-extrabold text-sm text-kitty-pinkDeep">B1</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN WORKSPACE CONTAINER -->
+    <main class="flex-1 max-w-7xl w-full mx-auto px-4 pt-5 flex flex-col md:flex-row gap-6">
+
+        <!-- SIDEBAR NAVIGATION (Desktop) -->
+        <aside class="hidden md:flex flex-col w-64 shrink-0 gap-2.5">
+            <div class="bento-card p-3 flex flex-col gap-1.5 sticky top-24">
+                <button onclick="switchTab('dashboard')" data-tab="dashboard" class="nav-btn active flex items-center gap-3 px-4 py-3.5 rounded-2xl font-bold text-sm transition-all bg-kitty-pink text-kitty-pinkDeep shadow-sm">
+                    <span class="text-xl">🏠</span>
+                    <span>Lộ trình & Tiến độ</span>
+                </button>
+                <button onclick="switchTab('flashcards')" data-tab="flashcards" class="nav-btn flex items-center gap-3 px-4 py-3.5 rounded-2xl font-bold text-sm text-kitty-text hover:bg-kitty-pinkLight transition-all">
+                    <span class="text-xl">🃏</span>
+                    <span>Flashcard Từ vựng</span>
+                </button>
+                <button onclick="switchTab('game')" data-tab="game" class="nav-btn flex items-center gap-3 px-4 py-3.5 rounded-2xl font-bold text-sm text-kitty-text hover:bg-kitty-pinkLight transition-all">
+                    <span class="text-xl">🎮</span>
+                    <span>Mini Game Phản Xạ</span>
+                </button>
+                <button onclick="switchTab('voice-ai')" data-tab="voice-ai" class="nav-btn flex items-center gap-3 px-4 py-3.5 rounded-2xl font-bold text-sm text-kitty-text hover:bg-kitty-pinkLight transition-all">
+                    <span class="text-xl">🎙️</span>
+                    <span>Luyện Voice với AI</span>
+                </button>
+                <button onclick="switchTab('interview')" data-tab="interview" class="nav-btn flex items-center gap-3 px-4 py-3.5 rounded-2xl font-bold text-sm text-kitty-text hover:bg-kitty-pinkLight transition-all">
+                    <span class="text-xl">💼</span>
+                    <span>Phỏng vấn Quốc tế</span>
+                </button>
+                <button onclick="switchTab('exam')" data-tab="exam" class="nav-btn flex items-center gap-3 px-4 py-3.5 rounded-2xl font-bold text-sm text-kitty-text hover:bg-kitty-pinkLight transition-all">
+                    <span class="text-xl">📝</span>
+                    <span>Thi thử chuẩn CEFR</span>
+                </button>
+
+                <!-- Widget Mục tiêu ngày -->
+                <div class="mt-3 p-4 rounded-2xl bg-gradient-to-br from-kitty-pinkLight to-kitty-mintLight border-2 border-white">
+                    <div class="flex items-center justify-between text-xs font-extrabold mb-1.5">
+                        <span class="text-kitty-pinkDeep">🎯 Mục tiêu hôm nay</span>
+                        <span id="daily-goal-text" class="text-kitty-mintDeep">3 / 10 từ</span>
+                    </div>
+                    <div class="w-full h-3 bg-white rounded-full overflow-hidden border border-kitty-pink">
+                        <div id="daily-goal-bar" class="h-full bg-gradient-to-r from-kitty-pinkDark to-kitty-mintDark rounded-full transition-all duration-500" style="width: 30%;"></div>
+                    </div>
+                    <p class="text-[11px] text-kitty-subtext mt-2 font-semibold">Hoàn thành mục tiêu để giữ chuỗi Streak nhé! 🌸</p>
+                </div>
+            </div>
+        </aside>
+
+        <!-- CONTENT VIEWS AREA -->
+        <div class="flex-1 min-w-0">
+
+            <!-- ========================================== -->
+            <!-- TAB 1: DASHBOARD & LỘ TRÌNH CÁ NHÂN HÓA     -->
+            <!-- ========================================== -->
+            <section id="tab-dashboard" class="tab-content space-y-6">
+                <!-- Banner Chào mừng & Cá nhân hóa -->
+                <div class="bento-card p-6 md:p-7 bg-gradient-to-r from-white via-kitty-pinkLight to-kitty-mintLight relative overflow-hidden">
+                    <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-5">
+                        <div class="space-y-2 max-w-2xl">
+                            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white text-kitty-pinkDeep font-extrabold text-xs border border-kitty-pink shadow-sm">
+                                ✨ Cá nhân hóa lộ trình 2026
+                            </span>
+                            <h2 class="font-display font-bold text-2xl md:text-3xl text-kitty-text">
+                                Chào bạn! Hôm nay mình chinh phục bộ phận nào nhỉ? 🎀
+                            </h2>
+                            <p class="text-sm md:text-base text-kitty-subtext font-semibold">
+                                Chọn trình độ <b>CEFR (A1–C2)</b> và <b>Chuyên ngành</b> bên dưới để hệ thống tự động lọc từ vựng, lộ trình theo ngày và câu hỏi phỏng vấn chuẩn quốc tế.
+                            </p>
+                        </div>
+                        <div class="flex flex-wrap gap-2.5 shrink-0">
+                            <button onclick="switchTab('flashcards')" class="btn-kawaii-pink px-5 py-3 rounded-2xl font-extrabold text-sm flex items-center gap-2">
+                                <span>🚀 Học từ mới ngay</span>
+                            </button>
+                            <button onclick="openAiVocabModal()" class="btn-kawaii-mint px-4 py-3 rounded-2xl font-extrabold text-sm flex items-center gap-2">
+                                <span>✨ AI Tạo Thêm Từ Vựng</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bộ lọc Trình độ CEFR & Chuyên ngành -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+                    <!-- Chọn 6 bậc CEFR -->
+                    <div class="bento-card p-5 space-y-3">
+                        <div class="flex items-center justify-between">
+                            <h3 class="font-display font-bold text-base text-kitty-text flex items-center gap-2">
+                                <span>📊</span> Trình độ khung CEFR (6 Bậc)
+                            </h3>
+                            <span id="cefr-desc-label" class="text-xs font-extrabold text-kitty-pinkDeep bg-kitty-pinkLight px-2.5 py-1 rounded-xl">B1 - Trung cấp</span>
+                        </div>
+                        <div id="cefr-selector" class="grid grid-cols-3 sm:grid-cols-6 gap-2">
+                            <!-- Render by JS -->
+                        </div>
+                    </div>
+
+                    <!-- Chọn Chuyên ngành & Bộ phận -->
+                    <div class="bento-mint p-5 space-y-3">
+                        <div class="flex items-center justify-between">
+                            <h3 class="font-display font-bold text-base text-kitty-text flex items-center gap-2">
+                                <span>🏢</span> Chuyên ngành & Vị trí mục tiêu
+                            </h3>
+                            <span class="text-xs font-extrabold text-kitty-mintDeep bg-kitty-mintLight px-2.5 py-1 rounded-xl">Kho 1,500+ từ</span>
+                        </div>
+                        <div id="domain-selector" class="flex flex-wrap gap-2">
+                            <!-- Render by JS -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lộ trình học tổng hợp theo Ngày (Daily Roadmap) -->
+                <div class="bento-card p-6 space-y-4">
+                    <div class="flex flex-wrap items-center justify-between gap-2">
+                        <div>
+                            <h3 class="font-display font-bold text-lg text-kitty-text flex items-center gap-2">
+                                <span>📅</span> Lộ Trình Học Tổng Hợp Theo Ngày (Liên Phòng Ban)
+                            </h3>
+                            <p class="text-xs text-kitty-subtext font-semibold">Chia nhỏ 1000–2000 từ vựng cốt lõi theo từng ngày giúp bạn dễ nhớ và ứng dụng ngay vào công việc</p>
+                        </div>
+                        <span class="px-3 py-1.5 rounded-2xl bg-kitty-mintLight text-kitty-mintDeep font-extrabold text-xs border border-kitty-mint">
+                            Đã thuộc: <span id="total-mastered-count">0</span> / <span id="total-vocab-count">0</span> từ
+                        </span>
+                    </div>
+
+                    <div id="daily-roadmap-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <!-- Render by JS -->
+                    </div>
+                </div>
+
+                <!-- Thống kê tiến độ từng phòng ban -->
+                <div class="bento-mint p-6 space-y-4">
+                    <h3 class="font-display font-bold text-lg text-kitty-text flex items-center gap-2">
+                        <span>📈</span> Keep-Track Tiến Độ Theo Bộ Phận
+                    </h3>
+                    <div id="department-progress-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <!-- Render by JS -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- ========================================== -->
+            <!-- TAB 2: FLASHCARD HỌC TỪ VỰNG 3D            -->
+            <!-- ========================================== -->
+            <section id="tab-flashcards" class="tab-content hidden space-y-6">
+                <div class="flex flex-wrap items-center justify-between gap-3">
+                    <div>
+                        <h2 class="font-display font-bold text-2xl text-kitty-text">🃏 Flashcard Từ Vựng Chuyên Ngành</h2>
+                        <p class="text-xs sm:text-sm text-kitty-subtext font-semibold">Chạm vào thẻ để lật xem nghĩa, phiên âm IPA và ví dụ thực tế trong công ty nước ngoài</p>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span id="fc-counter" class="px-4 py-2 rounded-2xl bg-white border-2 border-kitty-pink font-extrabold text-sm text-kitty-pinkDeep">Thẻ 1 / 10</span>
+                        <button onclick="openAiVocabModal()" class="btn-kawaii-mint px-4 py-2 rounded-2xl text-sm font-extrabold">
+                            + Tạo bộ từ AI
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Khu vực Thẻ Flashcard 3D -->
+                <div class="max-w-xl mx-auto">
+                    <div id="flashcard-stage" class="perspective-1000 w-full h-96 cursor-pointer select-none" onclick="flipFlashcard()">
+                        <div id="flashcard-inner" class="flashcard-inner">
+                            <!-- MẶT TRƯỚC -->
+                            <div class="flashcard-front bg-white border-4 border-kitty-pink shadow-kawaii p-8 flex flex-col justify-between relative">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center gap-2">
+                                        <span id="fc-cefr-badge" class="px-3 py-1 rounded-xl bg-kitty-pink text-kitty-pinkDeep font-extrabold text-xs">B2</span>
+                                        <span id="fc-domain-badge" class="px-3 py-1 rounded-xl bg-kitty-mintLight text-kitty-mintDeep font-extrabold text-xs border border-kitty-mint">IT / Software</span>
+                                    </div>
+                                    <span id="fc-status-badge" class="text-xs font-bold text-kitty-subtext">🌱 Đang học</span>
+                                </div>
+
+                                <div class="text-center my-auto space-y-3">
+                                    <p id="fc-pos" class="text-xs font-extrabold uppercase tracking-widest text-kitty-mintDeep">(noun)</p>
+                                    <h3 id="fc-word" class="font-display font-extrabold text-3xl md:text-4xl text-kitty-text">Deployment</h3>
+                                    <p id="fc-ipa" class="text-base font-bold text-kitty-pinkDeep">/dɪˈplɔɪ.mənt/</p>
+                                    
+                                    <button onclick="event.stopPropagation(); speakCurrentWord()" class="mx-auto mt-2 inline-flex items-center gap-2 px-5 py-2.5 rounded-2xl bg-kitty-pinkLight hover:bg-kitty-pink text-kitty-pinkDeep font-extrabold text-sm border-2 border-kitty-pink transition-all">
+                                        <i class="fa-solid fa-volume-high"></i>
+                                        <span>Nghe phát âm</span>
+                                    </button>
+                                </div>
+
+                                <div class="text-center text-xs font-bold text-kitty-subtext flex items-center justify-center gap-1.5">
+                                    <span>🎀 Chạm vào thẻ để lật mặt sau</span>
+                                </div>
+                            </div>
+
+                            <!-- MẶT SAU -->
+                            <div class="flashcard-back bg-gradient-to-br from-white via-kitty-mintLight to-kitty-pinkLight border-4 border-kitty-mint shadow-kawaii p-8 flex flex-col justify-between">
+                                <div class="flex items-center justify-between">
+                                    <span class="font-extrabold text-xs text-kitty-mintDeep uppercase tracking-wider">Nghĩa & Ngữ cảnh thực tế</span>
+                                    <button onclick="event.stopPropagation(); speakCurrentExample()" class="px-3 py-1.5 rounded-xl bg-white border border-kitty-mint text-xs font-extrabold text-kitty-mintDeep hover:bg-kitty-mintLight">
+                                        <i class="fa-solid fa-volume-high mr-1"></i> Đọc ví dụ
+                                    </button>
+                                </div>
+
+                                <div class="my-auto space-y-4">
+                                    <div class="bg-white/90 p-4 rounded-2xl border-2 border-kitty-pink">
+                                        <p class="text-xs font-bold text-kitty-subtext mb-1">Tiếng Việt:</p>
+                                        <p id="fc-meaning" class="font-display font-extrabold text-xl text-kitty-pinkDeep">Sự triển khai phần mềm lên hệ thống</p>
+                                    </div>
+
+                                    <div class="bg-white/90 p-4 rounded-2xl border-2 border-kitty-mint">
+                                        <p class="text-xs font-bold text-kitty-subtext mb-1">Ví dụ công sở:</p>
+                                        <p id="fc-example-en" class="font-bold text-sm text-kitty-text mb-1">"The production deployment is scheduled for Friday night."</p>
+                                        <p id="fc-example-vi" class="text-xs font-semibold text-kitty-subtext italic">"Việc triển khai lên môi trường thật được lên lịch vào tối thứ Sáu."</p>
+                                    </div>
+                                </div>
+
+                                <div class="text-center text-xs font-bold text-kitty-mintDeep">
+                                    <span>🍀 Chạm để quay lại mặt trước</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Các nút điều khiển Flashcard -->
+                    <div class="flex items-center justify-between gap-2 sm:gap-3 mt-6">
+                        <button onclick="prevFlashcard()" class="px-4 py-3.5 rounded-2xl bg-white border-2 border-kitty-pink font-extrabold text-sm text-kitty-text hover:bg-kitty-pinkLight transition-all">
+                            <i class="fa-solid fa-arrow-left"></i> Trước
+                        </button>
+
+                        <button onclick="markWordStatus(false)" class="flex-1 py-3.5 rounded-2xl bg-amber-100 border-2 border-amber-300 font-extrabold text-sm text-amber-800 hover:bg-amber-200 transition-all">
+                            🔄 Cần ôn lại
+                        </button>
+
+                        <button onclick="markWordStatus(true)" class="flex-1 btn-kawaii-mint py-3.5 rounded-2xl font-extrabold text-sm">
+                            ✅ Đã thuộc (+15 XP)
+                        </button>
+
+                        <button onclick="nextFlashcard()" class="px-4 py-3.5 rounded-2xl bg-white border-2 border-kitty-pink font-extrabold text-sm text-kitty-text hover:bg-kitty-pinkLight transition-all">
+                            Sau <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ========================================== -->
+            <!-- TAB 3: MINI GAME HÓA (SPEED QUIZ)          -->
+            <!-- ========================================== -->
+            <section id="tab-game" class="tab-content hidden space-y-6">
+                <div class="bento-card p-6 md:p-8 max-w-3xl mx-auto">
+                    <div class="flex flex-wrap items-center justify-between gap-4 mb-6 pb-4 border-b-2 border-kitty-pinkLight">
+                        <div>
+                            <span class="px-3 py-1 rounded-full bg-kitty-pinkLight text-kitty-pinkDeep font-extrabold text-xs">🎮 Gamification Mode</span>
+                            <h2 class="font-display font-bold text-2xl text-kitty-text mt-1">Thử Thách Phản Xạ Từ Vựng</h2>
+                            <p class="text-xs font-semibold text-kitty-subtext">Trả lời đúng 5 câu trong vòng chơi để mở khóa Màn Tung Hô Vinh Danh! 🏆</p>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="px-4 py-2 rounded-2xl bg-kitty-mintLight border-2 border-kitty-mint font-extrabold text-sm text-kitty-mintDeep">
+                                Vòng này: <span id="game-round-progress">0/5</span>
+                            </div>
+                            <div class="px-4 py-2 rounded-2xl bg-kitty-pinkLight border-2 border-kitty-pink font-extrabold text-sm text-kitty-pinkDeep">
+                                Chuỗi đúng: <span id="game-combo">0</span> 🔥
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Câu hỏi Game -->
+                    <div id="game-area" class="space-y-6">
+                        <div class="p-6 rounded-3xl bg-gradient-to-r from-kitty-pinkLight to-kitty-mintLight border-2 border-kitty-pink text-center space-y-2">
+                            <span id="game-q-badge" class="inline-block px-3 py-1 rounded-xl bg-white text-xs font-extrabold text-kitty-mintDeep">IT • B2</span>
+                            <p class="text-xs font-bold text-kitty-subtext">Chọn nghĩa tiếng Việt chính xác của thuật ngữ sau:</p>
+                            <h3 id="game-question-word" class="font-display font-extrabold text-3xl text-kitty-text">Scalability</h3>
+                            <button onclick="speakGameWord()" class="inline-flex items-center gap-1.5 text-xs font-extrabold text-kitty-pinkDeep bg-white px-3 py-1.5 rounded-xl border border-kitty-pink mt-1">
+                                <i class="fa-solid fa-volume-high"></i> Nghe gợi ý
+                            </button>
+                        </div>
+
+                        <!-- 4 Đáp án -->
+                        <div id="game-options" class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                            <!-- Render by JS -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ========================================== -->
+            <!-- TAB 4: LUYỆN VOICE & GIAO TIẾP VỚI AI      -->
+            <!-- ========================================== -->
+            <section id="tab-voice-ai" class="tab-content hidden space-y-6">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <!-- Cột cấu hình tình huống Roleplay -->
+                    <div class="bento-card p-6 space-y-4 h-fit">
+                        <div class="flex items-center gap-2">
+                            <span class="text-2xl">🤖🎀</span>
+                            <h2 class="font-display font-bold text-xl text-kitty-text">Trợ lý Hội thoại AI</h2>
+                        </div>
+                        <p class="text-xs font-semibold text-kitty-subtext">
+                            Luyện nói tiếng Anh tự nhiên theo trình độ CEFR đang chọn. AI sẽ đóng vai đồng nghiệp/sếp/khách hàng, sửa lỗi nhẹ nhàng và gợi ý từ vựng chuyên ngành.
+                        </p>
+
+                        <div class="space-y-3">
+                            <div>
+                                <label class="block text-xs font-extrabold text-kitty-text mb-1">Chọn bối cảnh giao tiếp:</label>
+                                <select id="ai-scenario-select" onchange="resetAiChat()" class="w-full p-3 rounded-2xl bg-kitty-pinkLight border-2 border-kitty-pink font-bold text-sm text-kitty-text focus:outline-none">
+                                    <option value="daily_standup">💻 Daily Standup Meeting (IT / Agile)</option>
+                                    <option value="po_sprint">📋 Sprint Planning & Backlog (PO / QA)</option>
+                                    <option value="fintech_pitch">💳 Giới thiệu sản phẩm thanh toán (Fintech)</option>
+                                    <option value="b2b_negotiation">🤝 Đàm phán hợp đồng khách hàng (B2B)</option>
+                                    <option value="cx_escalation">🎧 Xử lý khiếu nại khách hàng VIP (CX)</option>
+                                    <option value="qa_bug_report">🐞 Thảo luận Bug nghiêm trọng với Dev (QA/QC)</option>
+                                </select>
+                            </div>
+
+                            <div class="p-3.5 rounded-2xl bg-kitty-mintLight border border-kitty-mint text-xs space-y-1">
+                                <p class="font-extrabold text-kitty-mintDeep">💡 Mẹo dùng Voice cực dễ:</p>
+                                <p class="text-kitty-text font-semibold">1. Nhấn nút <b>Micro màu hồng</b> và nói tiếng Anh.</p>
+                                <p class="text-kitty-text font-semibold">2. AI sẽ tự động nghe, trả lời bằng giọng nói và sửa lỗi cho bạn.</p>
+                            </div>
+
+                            <button onclick="resetAiChat()" class="w-full py-2.5 rounded-2xl bg-white border-2 border-kitty-pink font-extrabold text-xs text-kitty-pinkDeep hover:bg-kitty-pinkLight">
+                                🔄 Bắt đầu cuộc hội thoại mới
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Khung Chat & Voice Interaction -->
+                    <div class="lg:col-span-2 bento-mint p-5 md:p-6 flex flex-col h-[560px]">
+                        <!-- Header khung chat -->
+                        <div class="flex items-center justify-between pb-3 mb-3 border-b-2 border-kitty-mintLight">
+                            <div class="flex items-center gap-2.5">
+                                <div class="w-10 h-10 rounded-full bg-kitty-pink flex items-center justify-center text-lg border-2 border-white shadow-sm">🐱</div>
+                                <div>
+                                    <h3 class="font-display font-bold text-base text-kitty-text">Momo Coach AI</h3>
+                                    <p id="ai-chat-subtitle" class="text-xs font-bold text-kitty-mintDeep">Đang điều chỉnh theo trình độ B2</p>
+                                </div>
+                            </div>
+                            <label class="flex items-center gap-2 text-xs font-extrabold text-kitty-text cursor-pointer bg-white px-3 py-1.5 rounded-xl border border-kitty-mint">
+                                <input type="checkbox" id="auto-tts-toggle" checked class="accent-kitty-pinkDeep">
+                                <span>🔊 Tự động đọc giọng AI</span>
+                            </label>
+                        </div>
+
+                        <!-- Danh sách tin nhắn -->
+                        <div id="ai-chat-messages" class="flex-1 overflow-y-auto space-y-3.5 pr-2 mb-4">
+                            <!-- Messages rendered here -->
+                        </div>
+
+                        <!-- Thanh nhập liệu & Nút thu âm Voice -->
+                        <div class="flex items-center gap-2 pt-2 border-t-2 border-kitty-mintLight">
+                            <button id="voice-mic-btn" onclick="toggleVoiceRecognition('chat')" class="w-12 h-12 rounded-2xl btn-kawaii-pink flex items-center justify-center text-lg shrink-0" title="Nhấn để nói tiếng Anh">
+                                <i class="fa-solid fa-microphone"></i>
+                            </button>
+                            <input id="ai-chat-input" type="text" onkeypress="if(event.key==='Enter') sendAiChatMessage()" placeholder="Nói qua Micro hoặc gõ tiếng Anh tại đây..." class="flex-1 px-4 py-3 rounded-2xl bg-white border-2 border-kitty-mint font-semibold text-sm focus:outline-none focus:border-kitty-pinkDeep">
+                            <button onclick="sendAiChatMessage()" class="btn-kawaii-mint px-5 py-3 rounded-2xl font-extrabold text-sm shrink-0">
+                                Gửi <i class="fa-solid fa-paper-plane ml-1"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ========================================== -->
+            <!-- TAB 5: MENU PHỎNG VẤN CÔNG TY NƯỚC NGOÀI   -->
+            <!-- ========================================== -->
+            <section id="tab-interview" class="tab-content hidden space-y-6">
+                <div class="bento-card p-6 bg-gradient-to-r from-white to-kitty-pinkLight">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                        <div>
+                            <span class="px-3 py-1 rounded-full bg-kitty-mintLight text-kitty-mintDeep font-extrabold text-xs border border-kitty-mint">💼 Global Career Prep</span>
+                            <h2 class="font-display font-bold text-2xl text-kitty-text mt-1">Luyện Phỏng Vấn Công Ty Nước Ngoài</h2>
+                            <p class="text-sm font-semibold text-kitty-subtext">Chọn vị trí ứng tuyển để xem câu hỏi thực chiến, từ vựng "ăn điểm" & thi phỏng vấn thử với AI</p>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <select id="interview-role-select" onchange="renderInterviewHub()" class="px-4 py-3 rounded-2xl bg-white border-2 border-kitty-pink font-extrabold text-sm text-kitty-text shadow-sm focus:outline-none">
+                                <option value="IT">💻 Software Engineer / IT</option>
+                                <option value="Fintech">💳 Fintech Specialist</option>
+                                <option value="B2B">🤝 B2B Sales / Business Dev</option>
+                                <option value="CX">🎧 CX (Customer Experience)</option>
+                                <option value="QA">🐞 QA / QC / Automation Tester</option>
+                                <option value="PO">📋 Product Owner (PO)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Danh sách câu hỏi phỏng vấn + Khu vực trả lời thử -->
+                <div id="interview-questions-container" class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+                    <!-- Rendered dynamically -->
+                </div>
+            </section>
+
+            <!-- ========================================== -->
+            <!-- TAB 6: BÀI THI ONLINE CHUẨN KHUNG CEFR     -->
+            <!-- ========================================== -->
+            <section id="tab-exam" class="tab-content hidden space-y-6">
+                <div id="exam-intro-card" class="bento-card p-8 max-w-3xl mx-auto text-center space-y-5">
+                    <div class="w-20 h-20 mx-auto rounded-3xl bg-kitty-pinkLight border-2 border-kitty-pink flex items-center justify-center text-4xl shadow-sm">
+                        🎓
+                    </div>
+                    <h2 class="font-display font-extrabold text-2xl md:text-3xl text-kitty-text">
+                        Bài Kiểm Tra Năng Lực Tiếng Anh Chuyên Ngành CEFR
+                    </h2>
+                    <p class="text-sm md:text-base font-semibold text-kitty-subtext max-w-xl mx-auto">
+                        Bài thi gồm <b>10 câu hỏi tổng hợp</b> (Từ vựng chuyên ngành IT, Fintech, B2B, CX, QA, PO + Ngữ pháp công sở + Đọc hiểu tình huống). Hoàn thành để nhận chứng nhận cấp độ CEFR (A1-C2) & cộng <b>+100 XP</b>!
+                    </p>
+                    <div class="flex flex-wrap justify-center gap-3 text-xs font-extrabold">
+                        <span class="px-3.5 py-2 rounded-2xl bg-kitty-mintLight text-kitty-mintDeep border border-kitty-mint">⏱️ Thời gian: 5 phút</span>
+                        <span class="px-3.5 py-2 rounded-2xl bg-kitty-pinkLight text-kitty-pinkDeep border border-kitty-pink">📊 Chấm điểm tự động</span>
+                        <span class="px-3.5 py-2 rounded-2xl bg-yellow-50 text-yellow-700 border border-yellow-200">🏅 Cấp huy hiệu CEFR</span>
+                    </div>
+                    <button onclick="startCefrExam()" class="btn-kawaii-pink px-8 py-4 rounded-2xl font-extrabold text-base">
+                        🚀 Bắt Đầu Làm Bài Thi Ngay
+                    </button>
+                </div>
+
+                <!-- Khu vực làm bài thi -->
+                <div id="exam-active-card" class="hidden bento-mint p-6 md:p-8 max-w-3xl mx-auto space-y-6">
+                    <div class="flex items-center justify-between pb-4 border-b-2 border-kitty-mintLight">
+                        <span id="exam-progress-text" class="font-extrabold text-sm text-kitty-mintDeep">Câu 1 / 10</span>
+                        <div class="px-4 py-1.5 rounded-2xl bg-kitty-pinkLight border border-kitty-pink font-extrabold text-sm text-kitty-pinkDeep">
+                            ⏱️ <span id="exam-timer">05:00</span>
+                        </div>
+                    </div>
+
+                    <div id="exam-question-box" class="space-y-4">
+                        <!-- Rendered dynamically -->
+                    </div>
+
+                    <div class="flex justify-between pt-4">
+                        <button onclick="prevExamQuestion()" id="exam-prev-btn" class="px-5 py-2.5 rounded-2xl bg-white border-2 border-kitty-mint font-extrabold text-sm text-kitty-text">
+                            ← Câu trước
+                        </button>
+                        <button onclick="nextExamQuestion()" id="exam-next-btn" class="btn-kawaii-mint px-6 py-2.5 rounded-2xl font-extrabold text-sm">
+                            Câu tiếp theo →
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Khu vực kết quả bài thi -->
+                <div id="exam-result-card" class="hidden bento-card p-6 md:p-8 max-w-3xl mx-auto space-y-6">
+                    <div class="text-center space-y-4">
+                        <div class="text-5xl">🏆🎀</div>
+                        <h3 class="font-display font-extrabold text-2xl text-kitty-text">Chúc Mừng Bạn Hoàn Thành Bài Thi!</h3>
+                        <div class="p-6 rounded-3xl bg-gradient-to-r from-kitty-pinkLight to-kitty-mintLight border-2 border-kitty-pink space-y-2">
+                            <p class="text-xs font-extrabold uppercase text-kitty-subtext">Kết quả đánh giá năng lực</p>
+                            <p id="exam-final-score" class="font-display font-extrabold text-4xl text-kitty-pinkDeep">8 / 10</p>
+                            <p id="exam-awarded-cefr" class="inline-block px-4 py-1.5 rounded-2xl bg-white font-extrabold text-sm text-kitty-mintDeep border border-kitty-mint">
+                                Đạt chuẩn CEFR B2 (Upper-Intermediate)
+                            </p>
+                        </div>
+                        <p id="exam-feedback-text" class="text-sm font-semibold text-kitty-subtext"></p>
+                    </div>
+
+                    <!-- Bảng chi tiết từng câu đúng/sai & giải thích -->
+                    <div class="space-y-4 pt-4 border-t-2 border-kitty-pinkLight text-left">
+                        <div class="flex items-center justify-between">
+                            <h4 class="font-display font-extrabold text-lg text-kitty-text flex items-center gap-2">
+                                <span>📋</span> Chi Tiết Đáp Án & Giải Thích Từng Câu
+                            </h4>
+                            <span class="text-xs font-bold text-kitty-subtext">Xem lại để nhớ sâu hơn nhé!</span>
+                        </div>
+                        <div id="exam-review-list" class="space-y-3.5">
+                            <!-- Render chi tiết từng câu bằng JS -->
+                        </div>
+                    </div>
+
+                    <div class="text-center pt-2">
+                        <button onclick="startCefrExam()" class="btn-kawaii-pink px-7 py-3.5 rounded-2xl font-extrabold text-sm">
+                            🔄 Thi lại để nâng hạng
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- BOTTOM NAVIGATION (Mobile) -->
+    <nav class="md:hidden fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-md border-t-2 border-kitty-pink px-2 py-2 flex justify-around items-center z-30">
+        <button onclick="switchTab('dashboard')" data-tab="dashboard" class="mob-nav-btn flex flex-col items-center p-1.5 rounded-xl text-kitty-pinkDeep font-extrabold text-[11px]">
+            <span class="text-lg">🏠</span>
+            <span>Lộ trình</span>
+        </button>
+        <button onclick="switchTab('flashcards')" data-tab="flashcards" class="mob-nav-btn flex flex-col items-center p-1.5 rounded-xl text-kitty-subtext font-bold text-[11px]">
+            <span class="text-lg">🃏</span>
+            <span>Từ vựng</span>
+        </button>
+        <button onclick="switchTab('game')" data-tab="game" class="mob-nav-btn flex flex-col items-center p-1.5 rounded-xl text-kitty-subtext font-bold text-[11px]">
+            <span class="text-lg">🎮</span>
+            <span>Game</span>
+        </button>
+        <button onclick="switchTab('voice-ai')" data-tab="voice-ai" class="mob-nav-btn flex flex-col items-center p-1.5 rounded-xl text-kitty-subtext font-bold text-[11px]">
+            <span class="text-lg">🎙️</span>
+            <span>Voice AI</span>
+        </button>
+        <button onclick="switchTab('interview')" data-tab="interview" class="mob-nav-btn flex flex-col items-center p-1.5 rounded-xl text-kitty-subtext font-bold text-[11px]">
+            <span class="text-lg">💼</span>
+            <span>Phỏng vấn</span>
+        </button>
+        <button onclick="switchTab('exam')" data-tab="exam" class="mob-nav-btn flex flex-col items-center p-1.5 rounded-xl text-kitty-subtext font-bold text-[11px]">
+            <span class="text-lg">📝</span>
+            <span>Thi CEFR</span>
+        </button>
+    </nav>
+
+    <!-- MODAL: AI TẠO THÊM BỘ TỪ VỰNG CHUYÊN NGÀNH -->
+    <div id="ai-vocab-modal" class="hidden fixed inset-0 bg-black/40 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <div class="bento-card bg-white p-6 max-w-md w-full space-y-4">
+            <div class="flex items-center justify-between">
+                <h3 class="font-display font-bold text-xl text-kitty-text">✨ AI Mở Rộng Kho Từ Vựng</h3>
+                <button onclick="closeAiVocabModal()" class="w-8 h-8 rounded-full bg-kitty-pinkLight text-kitty-pinkDeep font-bold">✕</button>
+            </div>
+            <p class="text-xs font-semibold text-kitty-subtext">
+                Nhập chủ đề chuyên sâu bạn muốn học (VD: <i>Payment Gateway, CI/CD Pipeline, SaaS Churn Rate, API Testing, Agile Grooming...</i>). AI sẽ tạo thêm từ vựng chuẩn CEFR!
+            </p>
+            <div>
+                <label class="block text-xs font-extrabold text-kitty-text mb-1">Chủ đề chuyên ngành:</label>
+                <input id="ai-topic-input" type="text" placeholder="Ví dụ: Microservices & Cloud Security" class="w-full px-4 py-3 rounded-2xl bg-kitty-pinkLight border-2 border-kitty-pink font-bold text-sm focus:outline-none">
+            </div>
+            <div class="flex justify-end gap-2 pt-2">
+                <button onclick="closeAiVocabModal()" class="px-4 py-2.5 rounded-2xl bg-gray-100 font-bold text-xs text-gray-600">Hủy</button>
+                <button id="generate-vocab-btn" onclick="generateMoreVocabWithAI()" class="btn-kawaii-pink px-5 py-2.5 rounded-2xl font-extrabold text-xs flex items-center gap-1.5">
+                    <span>🎀 Tạo 5 từ mới ngay</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL: PHỎNG VẤN THỬ TRỰC TIẾP VỚI AI -->
+    <div id="mock-interview-modal" class="hidden fixed inset-0 bg-black/40 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <div class="bento-mint bg-white p-6 max-w-xl w-full space-y-4 max-h-[90vh] overflow-y-auto">
+            <div class="flex items-center justify-between border-b-2 border-kitty-mintLight pb-3">
+                <div>
+                    <span class="text-xs font-extrabold text-kitty-mintDeep uppercase">AI Mock Interviewer</span>
+                    <h3 id="modal-int-role" class="font-display font-bold text-lg text-kitty-text">Phỏng vấn vị trí IT</h3>
+                </div>
+                <button onclick="closeMockInterviewModal()" class="w-8 h-8 rounded-full bg-kitty-pinkLight text-kitty-pinkDeep font-bold">✕</button>
+            </div>
+
+            <div class="p-4 rounded-2xl bg-kitty-pinkLight border border-kitty-pink">
+                <p class="text-xs font-extrabold text-kitty-pinkDeep mb-1">Câu hỏi phỏng vấn:</p>
+                <p id="modal-int-question" class="font-bold text-sm text-kitty-text"></p>
+            </div>
+
+            <div class="space-y-2">
+                <div class="flex items-center justify-between">
+                    <label class="text-xs font-extrabold text-kitty-text">Câu trả lời của bạn (Nói bằng Voice hoặc gõ tiếng Anh):</label>
+                    <button id="modal-voice-btn" onclick="toggleVoiceRecognition('interview')" class="px-3 py-1 rounded-xl btn-kawaii-pink text-xs font-extrabold flex items-center gap-1">
+                        <i class="fa-solid fa-microphone"></i> Nói trả lời
+                    </button>
+                </div>
+                <textarea id="modal-int-answer" rows="4" placeholder="Nhấn nút Micro để nói câu trả lời tiếng Anh của bạn, hoặc nhập trực tiếp vào đây..." class="w-full p-3.5 rounded-2xl bg-white border-2 border-kitty-mint font-semibold text-sm focus:outline-none"></textarea>
+            </div>
+
+            <button id="submit-int-btn" onclick="evaluateInterviewAnswerWithAI()" class="w-full btn-kawaii-mint py-3 rounded-2xl font-extrabold text-sm">
+                ✨ Chấm điểm & Nhận xét từ Nhà tuyển dụng AI
+            </button>
+
+            <!-- Kết quả AI chấm điểm -->
+            <div id="modal-int-feedback" class="hidden p-4 rounded-2xl bg-kitty-mintLight border-2 border-kitty-mint space-y-2 text-sm">
+                <!-- Rendered by AI -->
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================================================================= -->
+    <!-- MÀN TUNG HÔ VINH DANH & KHEN THƯỞNG NỊNH NỌT (CELEBRATION OVERLAY)          -->
+    <!-- ========================================================================= -->
+    <div id="celebration-overlay" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-pink-950/45 backdrop-blur-md">
+        <!-- HTML5 Canvas Pháo giấy Trái tim & Ngôi sao -->
+        <canvas id="confetti-canvas" class="fixed inset-0 w-full h-full pointer-events-none z-10"></canvas>
+
+        <!-- Thẻ Vinh Danh Kawaii -->
+        <div class="relative z-20 max-w-md w-full bg-gradient-to-b from-white via-kitty-pinkLight to-kitty-mintLight border-4 border-kitty-pink rounded-[36px] p-7 text-center shadow-2xl space-y-4 transform transition-all">
+            <!-- Ruy băng danh hiệu -->
+            <div class="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-gradient-to-r from-kitty-pinkDark to-kitty-pinkDeep text-white font-extrabold text-xs shadow-sm uppercase tracking-wider">
+                <span>👑</span>
+                <span id="cel-badge-title">Chiến Thần Từ Vựng</span>
+                <span>👑</span>
+            </div>
+
+            <!-- Linh vật Mèo Nơ Hồng đội Vương Miện nhảy tưng tưng -->
+            <div class="w-28 h-28 mx-auto bg-white rounded-full border-4 border-kitty-mint shadow-kawaii flex items-center justify-center animate-kitty-bounce">
+                <svg viewBox="0 0 100 100" class="w-24 h-24">
+                    <!-- Vương miện vàng lấp lánh -->
+                    <path d="M32 22 L36 8 L50 17 L64 8 L68 22 Z" fill="#FFD166" stroke="#3D3136" stroke-width="3" stroke-linejoin="round"/>
+                    <circle cx="36" cy="7" r="2.5" fill="#FF85A2"/>
+                    <circle cx="50" cy="14" r="2.5" fill="#6BCB77"/>
+                    <circle cx="64" cy="7" r="2.5" fill="#FF85A2"/>
+                    <!-- Tai mèo -->
+                    <path d="M20 42 L14 18 L38 30 Z" fill="#FFFFFF" stroke="#3D3136" stroke-width="3.5" stroke-linejoin="round"/>
+                    <path d="M80 42 L86 18 L62 30 Z" fill="#FFFFFF" stroke="#3D3136" stroke-width="3.5" stroke-linejoin="round"/>
+                    <!-- Khuôn mặt -->
+                    <ellipse cx="50" cy="58" rx="36" ry="28" fill="#FFFFFF" stroke="#3D3136" stroke-width="3.5"/>
+                    <!-- Má hồng cute -->
+                    <ellipse cx="27" cy="64" rx="5.5" ry="3.5" fill="#FFB6C1" opacity="0.85"/>
+                    <ellipse cx="73" cy="64" rx="5.5" ry="3.5" fill="#FFB6C1" opacity="0.85"/>
+                    <!-- Mắt cười tít mắt -->
+                    <path d="M29 56 Q34 50 39 56" fill="none" stroke="#3D3136" stroke-width="3.5" stroke-linecap="round"/>
+                    <path d="M61 56 Q66 50 71 56" fill="none" stroke="#3D3136" stroke-width="3.5" stroke-linecap="round"/>
+                    <!-- Mũi vàng -->
+                    <ellipse cx="50" cy="64" rx="4" ry="2.8" fill="#FFD166" stroke="#3D3136" stroke-width="2"/>
+                    <!-- Râu mèo -->
+                    <line x1="10" y1="54" x2="21" y2="56" stroke="#3D3136" stroke-width="2.5" stroke-linecap="round"/>
+                    <line x1="8" y1="63" x2="20" y2="63" stroke="#3D3136" stroke-width="2.5" stroke-linecap="round"/>
+                    <line x1="90" y1="54" x2="79" y2="56" stroke="#3D3136" stroke-width="2.5" stroke-linecap="round"/>
+                    <line x1="92" y1="63" x2="80" y2="63" stroke="#3D3136" stroke-width="2.5" stroke-linecap="round"/>
+                    <!-- Nơ hồng đặc trưng -->
+                    <path d="M65 26 C58 18, 52 32, 64 34 C55 40, 64 46, 70 38 C76 46, 86 38, 76 33 C86 28, 78 16, 70 26 Z" fill="#FF85A2" stroke="#3D3136" stroke-width="2.5"/>
+                    <circle cx="70" cy="32" r="3.5" fill="#FFD1DC" stroke="#3D3136" stroke-width="2"/>
+                </svg>
+            </div>
+
+            <div>
+                <h2 id="cel-headline" class="font-display font-extrabold text-2xl text-kitty-pinkDeep">
+                    QUÁ ĐỈNH LUÔN BẠN ƠI! 🎉
+                </h2>
+                <div class="inline-flex items-center gap-2 mt-2 px-4 py-1.5 rounded-2xl bg-white border-2 border-kitty-mint shadow-sm">
+                    <span class="text-lg">⭐</span>
+                    <span id="cel-xp-reward" class="font-display font-extrabold text-base text-kitty-mintDeep">+50 XP Thưởng Nóng</span>
+                </div>
+            </div>
+
+            <!-- Lời khen nịnh nọt chuyên ngành -->
+            <div class="p-4 rounded-2xl bg-white/95 border-2 border-kitty-pink shadow-inner">
+                <p id="cel-praise-text" class="font-bold text-sm md:text-base text-kitty-text leading-relaxed">
+                    "Trời ơi xuất sắc quá đi mất! HR các tập đoàn lớn mà thấy trình này là chốt offer lương nghìn đô liền luôn á! 💖👑"
+                </p>
+            </div>
+
+            <button onclick="closeCelebrationModal()" class="w-full btn-kawaii-pink py-3.5 rounded-2xl font-extrabold text-base tracking-wide">
+                Nhận thưởng & Tiếp tục tỏa sáng ✨
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // =========================================================================
+        // 1. CƠ SỞ DỮ LIỆU TỪ VỰNG, LỘ TRÌNH & PHỎNG VẤN CHUYÊN NGÀNH (CEFR A1-C2)
+        // =========================================================================
+        const apiKey = ""; // Runtime tự động cung cấp khóa Gemini API
+
+        const CEFR_LEVELS = [
+            { code: 'A1', label: 'A1 - Sơ cấp' },
+            { code: 'A2', label: 'A2 - Nền tảng' },
+            { code: 'B1', label: 'B1 - Trung cấp' },
+            { code: 'B2', label: 'B2 - Trung cao' },
+            { code: 'C1', label: 'C1 - Cao cấp' },
+            { code: 'C2', label: 'C2 - Thành thạo' }
+        ];
+
+        const DOMAINS = [
+            { id: 'ALL', label: '🌟 Tất cả bộ phận' },
+            { id: 'IT', label: '💻 IT / Software' },
+            { id: 'Fintech', label: '💳 Fintech & Banking' },
+            { id: 'B2B', label: '🤝 Kinh doanh / B2B' },
+            { id: 'CX', label: '🎧 Bộ phận CX' },
+            { id: 'QA', label: '🐞 Tester / QA / QC' },
+            { id: 'PO', label: '📋 Product Owner (PO)' }
+        ];
+
+        const INITIAL_VOCAB = [
+            // IT / Software
+            { id: 1, word: 'Deployment', pos: 'noun', ipa: '/dɪˈplɔɪ.mənt/', cefr: 'B1', domain: 'IT', day: 1, meaning: 'Sự triển khai phần mềm lên hệ thống', exampleEn: 'The production deployment is scheduled for Friday night.', exampleVi: 'Việc triển khai lên môi trường thật được lên lịch vào tối thứ Sáu.' },
+            { id: 2, word: 'Scalability', pos: 'noun', ipa: '/ˌskeɪ.ləˈbɪl.ə.ti/', cefr: 'B2', domain: 'IT', day: 1, meaning: 'Khả năng mở rộng quy mô hệ thống', exampleEn: 'Cloud architecture ensures high scalability during peak traffic.', exampleVi: 'Kiến trúc đám mây đảm bảo khả năng mở rộng cao trong giờ cao điểm.' },
+            { id: 3, word: 'Latency', pos: 'noun', ipa: '/ˈleɪ.tən.si/', cefr: 'C1', domain: 'IT', day: 2, meaning: 'Độ trễ phản hồi của hệ thống/mạng', exampleEn: 'We optimized database queries to reduce API latency below 50ms.', exampleVi: 'Chúng tôi tối ưu truy vấn cơ sở dữ liệu để giảm độ trễ API xuống dưới 50ms.' },
+            { id: 4, word: 'Refactor', pos: 'verb', ipa: '/ˌriːˈfæk.tər/', cefr: 'B2', domain: 'IT', day: 2, meaning: 'Tái cấu trúc mã nguồn cho sạch và tối ưu hơn', exampleEn: 'Developers need two days to refactor the legacy payment module.', exampleVi: 'Lập trình viên cần 2 ngày để tái cấu trúc mô-đun thanh toán cũ.' },
+            { id: 5, word: 'Repository', pos: 'noun', ipa: '/rɪˈpɒz.ɪ.tər.i/', cefr: 'A2', domain: 'IT', day: 1, meaning: 'Kho lưu trữ mã nguồn (Git repo)', exampleEn: 'Please push your latest commit to the main repository.', exampleVi: 'Vui lòng đẩy bản cập nhật mới nhất của bạn lên kho mã nguồn chính.' },
+
+            // Fintech
+            { id: 6, word: 'Reconciliation', pos: 'noun', ipa: '/ˌrek.ənˌsɪl.iˈeɪ.ʃən/', cefr: 'C1', domain: 'Fintech', day: 3, meaning: 'Đối soát giao dịch tài chính / sổ sách', exampleEn: 'Automated daily reconciliation prevents settlement discrepancies.', exampleVi: 'Đối soát tự động hàng ngày giúp ngăn ngừa sai lệch thanh toán.' },
+            { id: 7, word: 'Liquidity', pos: 'noun', ipa: '/lɪˈkwɪd.ə.ti/', cefr: 'C1', domain: 'Fintech', day: 3, meaning: 'Tính thanh khoản', exampleEn: 'Instant cross-border transfers require strong liquidity management.', exampleVi: 'Chuyển tiền xuyên biên giới tức thì đòi hỏi quản trị thanh khoản mạnh.' },
+            { id: 8, word: 'Compliance', pos: 'noun', ipa: '/kəmˈplaɪ.əns/', cefr: 'B2', domain: 'Fintech', day: 3, meaning: 'Sự tuân thủ quy định pháp lý (KYC/AML)', exampleEn: 'All fintech wallets must pass strict KYC compliance checks.', exampleVi: 'Tất cả ví điện tử fintech phải vượt qua kiểm tra tuân thủ KYC nghiêm ngặt.' },
+            { id: 9, word: 'Transaction', pos: 'noun', ipa: '/trænˈzæk.ʃən/', cefr: 'A1', domain: 'Fintech', day: 1, meaning: 'Giao dịch thanh toán', exampleEn: 'Your QR payment transaction was completed successfully.', exampleVi: 'Giao dịch thanh toán QR của bạn đã hoàn tất thành công.' },
+
+            // B2B & Kinh doanh
+            { id: 10, word: 'Stakeholder', pos: 'noun', ipa: '/ˈsteɪkˌhəʊl.dər/', cefr: 'B1', domain: 'B2B', day: 2, meaning: 'Các bên liên quan / đối tác dự án', exampleEn: 'We aligned all key stakeholders before signing the B2B contract.', exampleVi: 'Chúng tôi đã thống nhất với các bên liên quan trước khi ký hợp đồng B2B.' },
+            { id: 11, word: 'Value Proposition', pos: 'noun phrase', ipa: '/ˈvæl.juː ˌprɒp.əˈzɪʃ.ən/', cefr: 'B2', domain: 'B2B', day: 4, meaning: 'Tuyên ngôn giá trị cốt lõi của sản phẩm', exampleEn: 'Our SaaS value proposition is reducing operational costs by 40%.', exampleVi: 'Giá trị cốt lõi của SaaS bên mình là giảm 40% chi phí vận hành.' },
+            { id: 12, word: 'Procurement', pos: 'noun', ipa: '/prəˈkjʊə.mənt/', cefr: 'C1', domain: 'B2B', day: 4, meaning: 'Quy trình thu mua / đấu thầu doanh nghiệp', exampleEn: 'Enterprise deals often take longer due to strict procurement reviews.', exampleVi: 'Các thương vụ doanh nghiệp lớn thường mất nhiều thời gian do khâu thẩm định thu mua.' },
+            { id: 13, word: 'Onboarding', pos: 'noun', ipa: '/ˈɒnˌbɔː.dɪŋ/', cefr: 'B1', domain: 'B2B', day: 2, meaning: 'Quy trình hướng dẫn làm quen / tích hợp ban đầu', exampleEn: 'Smooth client onboarding increases long-term B2B retention.', exampleVi: 'Quy trình hướng dẫn khách hàng mượt mà giúp tăng tỷ lệ giữ chân B2B dài hạn.' },
+
+            // CX (Customer Experience)
+            { id: 14, word: 'Churn Rate', pos: 'noun', ipa: '/tʃɜːn reɪt/', cefr: 'B2', domain: 'CX', day: 4, meaning: 'Tỷ lệ khách hàng rời bỏ dịch vụ', exampleEn: 'Proactive CX support helped reduce our monthly churn rate to 1.5%.', exampleVi: 'Hỗ trợ CX chủ động đã giúp giảm tỷ lệ khách rời bỏ hàng tháng xuống 1.5%.' },
+            { id: 15, word: 'Escalation', pos: 'noun', ipa: '/ˌes.kəˈleɪ.ʃən/', cefr: 'B2', domain: 'CX', day: 5, meaning: 'Chuyển cấp xử lý sự cố nghiêm trọng', exampleEn: 'Urgent VIP tickets require immediate escalation to Tier-2 engineers.', exampleVi: 'Các yêu cầu khẩn từ khách VIP cần chuyển cấp ngay cho kỹ sư cấp 2.' },
+            { id: 16, word: 'Empathy', pos: 'noun', ipa: '/ˈem.pə.θi/', cefr: 'B1', domain: 'CX', day: 5, meaning: 'Sự thấu cảm với khách hàng', exampleEn: 'Showing genuine empathy calms frustrated users during outages.', exampleVi: 'Thể hiện sự thấu cảm chân thành giúp trấn an người dùng bức xúc khi hệ thống lỗi.' },
+
+            // QA / QC / Tester
+            { id: 17, word: 'Regression Testing', pos: 'noun phrase', ipa: '/rɪˈɡreʃ.ən ˈtes.tɪŋ/', cefr: 'B2', domain: 'QA', day: 5, meaning: 'Kiểm thử hồi quy sau khi sửa lỗi/cập nhật', exampleEn: 'QA ran full regression testing before approving the hotfix release.', exampleVi: 'Đội QA đã chạy kiểm thử hồi quy toàn diện trước khi duyệt bản vá lỗi nóng.' },
+            { id: 18, word: 'Edge Case', pos: 'noun', ipa: '/edʒ keɪs/', cefr: 'B2', domain: 'QA', day: 5, meaning: 'Trường hợp biên / tình huống hiếm gặp', exampleEn: 'Good testers always think of edge cases like network drops mid-payment.', exampleVi: 'Tester giỏi luôn nghĩ tới các trường hợp biên như rớt mạng giữa lúc thanh toán.' },
+            { id: 19, word: 'Reproduce', pos: 'verb', ipa: '/ˌriː.prəˈdjuːs/', cefr: 'B1', domain: 'QA', day: 1, meaning: 'Tái hiện lại lỗi (bug)', exampleEn: 'Please attach clear steps to reproduce this UI bug on iOS.', exampleVi: 'Vui lòng đính kèm các bước rõ ràng để tái hiện lỗi giao diện này trên iOS.' },
+
+            // Product Owner (PO)
+            { id: 20, word: 'Prioritization', pos: 'noun', ipa: '/praɪˌɒr.ɪ.taɪˈzeɪ.ʃən/', cefr: 'B2', domain: 'PO', day: 6, meaning: 'Sắp xếp thứ tự ưu tiên tính năng', exampleEn: 'Backlog prioritization is based on business impact and dev effort.', exampleVi: 'Việc ưu tiên backlog dựa trên tác động kinh doanh và nguồn lực lập trình.' },
+            { id: 21, word: 'Acceptance Criteria', pos: 'noun phrase', ipa: '/əkˈsep.təns kraɪˈtɪə.ri.ə/', cefr: 'B2', domain: 'PO', day: 6, meaning: 'Tiêu chí nghiệm thu tính năng (AC)', exampleEn: 'Every user story must have clear acceptance criteria before Sprint Planning.', exampleVi: 'Mỗi user story phải có tiêu chí nghiệm thu rõ ràng trước buổi lập kế hoạch Sprint.' },
+            { id: 22, word: 'Scope Creep', pos: 'noun', ipa: '/skəʊp kriːp/', cefr: 'C1', domain: 'PO', day: 6, meaning: 'Sự phình to phạm vi dự án ngoài kế hoạch', exampleEn: 'The PO prevented scope creep by moving extra requests to Phase 2.', exampleVi: 'PO đã ngăn chặn việc phình phạm vi dự án bằng cách dời các yêu cầu phụ sang Giai đoạn 2.' }
+        ];
+
+        const DAILY_ROADMAP = [
+            { day: 1, title: 'Ngày 1: Nền tảng Tech & Quy trình Agile', domains: 'IT • QA • Fintech', desc: 'Làm quen thuật ngữ triển khai, kho mã nguồn, giao dịch & báo lỗi cơ bản.' },
+            { day: 2, title: 'Ngày 2: Tối ưu Hệ thống & Làm việc Đối tác', domains: 'IT • B2B', desc: 'Giao tiếp về độ trễ API, tái cấu trúc code và quy trình onboarding khách hàng.' },
+            { day: 3, title: 'Ngày 3: Nghiệp vụ Tài chính & Tuân thủ', domains: 'Fintech • Legal', desc: 'Chuyên sâu đối soát giao dịch, thanh khoản và tiêu chuẩn bảo mật KYC/AML.' },
+            { day: 4, title: 'Ngày 4: Tăng trưởng B2B & Giữ chân Khách hàng', domains: 'B2B • CX', desc: 'Trình bày giá trị giải pháp SaaS, đàm phán thu mua và giảm tỷ lệ rời bỏ.' },
+            { day: 5, title: 'Ngày 5: Đảm bảo Chất lượng & Xử lý Khủng hoảng', domains: 'QA/QC • CX', desc: 'Kiểm thử hồi quy, bắt các tình huống biên và quy trình chuyển cấp sự cố.' },
+            { day: 6, title: 'Ngày 6: Quản trị Sản phẩm & Chiến lược PO', domains: 'PO • All Teams', desc: 'Viết tiêu chí nghiệm thu, ưu tiên backlog và kiểm soát phạm vi dự án.' }
+        ];
+
+        const INTERVIEW_BANK = {
+            IT: [
+                {
+                    q: 'Can you walk me through a challenging technical bottleneck you solved and how you improved system scalability?',
+                    vi: 'Bạn hãy chia sẻ về một nút thắt kỹ thuật khó bạn từng giải quyết và cách bạn cải thiện khả năng mở rộng hệ thống?',
+                    powerWords: ['Latency', 'Caching layer', 'Database indexing', 'Throughput'],
+                    starTip: 'Situation (Hệ thống chậm giờ cao điểm) → Task (Giảm response time) → Action (Áp dụng Redis cache & tối ưu query) → Result (Giảm 65% latency).'
+                },
+                {
+                    q: 'How do you handle technical debt when business stakeholders push for rapid feature releases?',
+                    vi: 'Bạn xử lý nợ kỹ thuật (technical debt) như thế nào khi các bên kinh doanh thúc ép ra mắt tính năng nhanh?',
+                    powerWords: ['Trade-offs', 'Maintainability', 'Refactoring', 'Sprint allocation'],
+                    starTip: 'Nhấn mạnh việc giao tiếp minh bạch rủi ro dài hạn và đề xuất dành 15-20% capacity mỗi Sprint để refactor.'
+                }
+            ],
+            Fintech: [
+                {
+                    q: 'How do you balance seamless user experience with strict security and KYC/AML compliance in financial products?',
+                    vi: 'Bạn cân bằng giữa trải nghiệm người dùng mượt mà với tính bảo mật nghiêm ngặt và tuân thủ KYC/AML trong sản phẩm tài chính như thế nào?',
+                    powerWords: ['Frictionless KYC', 'Fraud detection', 'Idempotency', 'Audit trail'],
+                    starTip: 'Nêu ví dụ về eKYC tự động hóa giúp duyệt tài khoản trong 30 giây nhưng vẫn đảm bảo đối soát chống gian lận.'
+                },
+                {
+                    q: 'Tell me about a time you handled a payment reconciliation discrepancy or failed transaction incident.',
+                    vi: 'Hãy kể về một lần bạn xử lý sai lệch đối soát thanh toán hoặc sự cố giao dịch lỗi.',
+                    powerWords: ['Settlement', 'Ledger', 'Root cause analysis', 'SLA'],
+                    starTip: 'Trình bày quy trình khóa giao dịch trùng lặp, đối soát sổ cái (ledger) và hoàn tiền tự động đúng cam kết SLA.'
+                }
+            ],
+            B2B: [
+                {
+                    q: 'How do you uncover pain points and articulate our ROI value proposition to C-level B2B decision-makers?',
+                    vi: 'Bạn khai thác nỗi đau khách hàng và trình bày giá trị ROI cho các lãnh đạo cấp cao B2B như thế nào?',
+                    powerWords: ['Pain points', 'ROI (Return on Investment)', 'Procurement', 'Decision-makers'],
+                    starTip: 'Tập trung vào bài toán tiết kiệm chi phí vận hành và thời gian hoàn vốn thay vì chỉ liệt kê tính năng kỹ thuật.'
+                },
+                {
+                    q: 'Describe a complex B2B negotiation where the client asked for a heavy discount. How did you protect deal value?',
+                    vi: 'Mô tả một cuộc đàm phán B2B phức tạp khi khách hàng đòi giảm giá sâu. Bạn bảo vệ giá trị hợp đồng ra sao?',
+                    powerWords: ['Value-based pricing', 'Multi-year contract', 'Scope adjustment', 'Win-win'],
+                    starTip: 'Đổi chiết khấu lấy cam kết hợp đồng dài hạn (2-3 năm) hoặc điều chỉnh gói tính năng phù hợp ngân sách.'
+                }
+            ],
+            CX: [
+                {
+                    q: 'Tell me about a time you turned an angry enterprise client into a loyal advocate after a service outage.',
+                    vi: 'Kể về một lần bạn biến một khách hàng doanh nghiệp giận dữ thành người ủng hộ trung thành sau sự cố gián đoạn dịch vụ.',
+                    powerWords: ['Empathy', 'De-escalation', 'Transparency', 'Post-mortem report'],
+                    starTip: 'Lắng nghe chân thành, nhận trách nhiệm trực diện, cập nhật tiến độ xử lý theo giờ và gửi báo cáo khắc phục chi tiết.'
+                },
+                {
+                    q: 'What metrics do you track to predict and reduce customer churn in a B2B SaaS environment?',
+                    vi: 'Bạn theo dõi những chỉ số nào để dự đoán và giảm tỷ lệ khách hàng rời bỏ (churn) trong môi trường B2B SaaS?',
+                    powerWords: ['CSAT', 'NPS', 'Product adoption', 'Proactive outreach'],
+                    starTip: 'Kết hợp điểm NPS, tần suất đăng nhập tính năng cốt lõi và lịch họp đánh giá định kỳ (QBR) với khách hàng.'
+                }
+            ],
+            QA: [
+                {
+                    q: 'How do you prioritize test cases when you have a tight deadline before a major production release?',
+                    vi: 'Bạn ưu tiên các kịch bản kiểm thử (test cases) thế nào khi thời gian quá gấp trước đợt phát hành lớn?',
+                    powerWords: ['Risk-based testing', 'Critical path', 'Smoke test', 'Regression suite'],
+                    starTip: 'Áp dụng Risk-based testing: ưu tiên luồng thanh toán/đăng nhập chính (Critical path) và chạy bộ Automation Smoke Test.'
+                },
+                {
+                    q: 'Describe a situation where a developer disagreed with your bug report. How did you resolve it professionally?',
+                    vi: 'Mô tả tình huống lập trình viên không đồng ý với báo cáo lỗi (bug) của bạn. Bạn giải quyết chuyên nghiệp ra sao?',
+                    powerWords: ['Steps to reproduce', 'Logs & network trace', 'Acceptance criteria', 'Collaboration'],
+                    starTip: 'Dùng bằng chứng khách quan (video, HAR file, console log) và đối chiếu trực tiếp với Acceptance Criteria của PO.'
+                }
+            ],
+            PO: [
+                {
+                    q: 'How do you say "No" to urgent feature requests from senior stakeholders without damaging relationships?',
+                    vi: 'Bạn nói "Không" với các yêu cầu tính năng gấp từ các sếp/bên liên quan thế nào mà không làm sứt mẻ mối quan hệ?',
+                    powerWords: ['Data-driven', 'Opportunity cost', 'RICE framework', 'Product roadmap'],
+                    starTip: 'Dùng dữ liệu và khung ưu tiên (RICE) để chỉ ra chi phí cơ hội: nếu làm tính năng A ngay thì tính năng B sẽ trễ hạn.'
+                },
+                {
+                    q: 'How do you write effective User Stories and Acceptance Criteria so Dev and QA have zero ambiguity?',
+                    vi: 'Bạn viết User Stories và Tiêu chí nghiệm thu (AC) thế nào để đội Dev và QA không bao giờ hiểu nhầm?',
+                    powerWords: ['Given-When-Then', 'Edge cases', 'Backlog refinement', 'Definition of Done'],
+                    starTip: 'Sử dụng cấu trúc chuẩn Given-When-Then và tổ chức buổi Backlog Refinement để Dev/QA cùng phản biện sớm.'
+                }
+            ]
+        };
+
+        const CEFR_EXAM_QUESTIONS = [
+            {
+                q: '[IT / Architecture] To ensure the application handles 100,000 concurrent users without crashing, the engineering team focused on horizontal ______.',
+                options: ['scalability', 'ambiguity', 'procurement', 'churn'],
+                correct: 0,
+                level: 'B2',
+                explanation: '"Scalability" (khả năng mở rộng quy mô hệ thống) là thuật ngữ chuẩn chỉ khả năng chịu tải khi lượng người dùng tăng đột biến. "Ambiguity" là sự mơ hồ, "procurement" là thu mua, còn "churn" là tỷ lệ rời bỏ.'
+            },
+            {
+                q: '[Fintech] Before approving high-value international wire transfers, our compliance system performs automated ______ checks.',
+                options: ['regression', 'reconciliation and KYC', 'backlog', 'UI refactoring'],
+                correct: 1,
+                level: 'C1',
+                explanation: 'Trong ngành Fintech/Ngân hàng, các giao dịch chuyển tiền quốc tế giá trị lớn bắt buộc phải qua bước "reconciliation" (đối soát sổ sách/giao dịch) và "KYC" (xác minh danh tính khách hàng) để chống rửa tiền.'
+            },
+            {
+                q: '[Product Owner] Adding unapproved features in the middle of a sprint without adjusting the timeline is known as ______.',
+                options: ['edge case', 'scope creep', 'value proposition', 'onboarding'],
+                correct: 1,
+                level: 'B2',
+                explanation: '"Scope creep" là hiện tượng phình to phạm vi dự án khi có thêm yêu cầu phát sinh giữa Sprint mà không tăng thời gian hay nhân lực. "Edge case" là trường hợp biên khi test.'
+            },
+            {
+                q: '[QA / QC] Whenever a critical hotfix is merged, QA engineers execute ______ to verify that existing features still work properly.',
+                options: ['churn analysis', 'regression testing', 'B2B pitching', 'liquidity'],
+                correct: 1,
+                level: 'B2',
+                explanation: '"Regression testing" (kiểm thử hồi quy) là quy trình chạy lại các bài test để đảm bảo bản vá lỗi nóng (hotfix) không vô tình làm hỏng các tính năng đang chạy ổn định trước đó.'
+            },
+            {
+                q: '[CX] When a VIP enterprise client reports a critical system outage, the support agent must initiate an immediate ______ to senior engineers.',
+                options: ['escalation', 'deployment', 'procurement', 'repository'],
+                correct: 0,
+                level: 'B2',
+                explanation: '"Escalation" (chuyển cấp xử lý) là thuật ngữ cốt lõi trong bộ phận CX khi gặp sự cố nghiêm trọng vượt thẩm quyền của tuyến đầu và cần đẩy gấp lên kỹ sư cấp cao.'
+            },
+            {
+                q: '[B2B Sales] Our core ______ is helping fintech startups cut manual invoice processing time by 70%.',
+                options: ['latency', 'bug report', 'value proposition', 'edge case'],
+                correct: 2,
+                level: 'B1',
+                explanation: '"Value proposition" (tuyên ngôn giá trị cốt lõi) nêu bật lợi ích thiết thực nhất mà sản phẩm mang lại cho khách hàng doanh nghiệp B2B (giảm 70% thời gian xử lý hóa đơn).'
+            },
+            {
+                q: '[Business Grammar] Had the QA team ______ the edge case earlier, the payment gateway bug would not have reached production.',
+                options: ['detected', 'detect', 'detecting', 'to detect'],
+                correct: 0,
+                level: 'C1',
+                explanation: 'Đây là cấu trúc đảo ngữ của câu điều kiện loại 3 (diễn tả giả định trái với quá khứ): "Had + S + V3/ed (detected), S + would not have + V3/ed".'
+            },
+            {
+                q: '[Workplace Communication] Which phrase is most polite and professional when pushing back on an unrealistic deadline in a meeting?',
+                options: [
+                    '"That is impossible, we cannot do it."',
+                    '"Given our current sprint capacity, delivering this by Friday would require deprioritizing the security patch."',
+                    '"You always ask for things too late."',
+                    '"Ask someone else to code it."'
+                ],
+                correct: 1,
+                level: 'C1',
+                explanation: 'Trong môi trường quốc tế, khi từ chối deadline bất khả thi (diplomatic pushback), ta không nói "impossible" mà nêu rõ giới hạn nguồn lực hiện tại ("sprint capacity") và sự đánh đổi ưu tiên ("deprioritizing...") để sếp tự cân nhắc.'
+            },
+            {
+                q: '[IT / API] High network ______ causes noticeable delays between a user clicking "Pay" and receiving confirmation.',
+                options: ['empathy', 'latency', 'compliance', 'stakeholder'],
+                correct: 1,
+                level: 'B2',
+                explanation: '"Latency" (độ trễ mạng/API) là khoảng thời gian trễ từ lúc người dùng bấm nút đến khi hệ thống phản hồi kết quả.'
+            },
+            {
+                q: '[PO / Agile] Clear ______ ensure that developers and testers share the exact same understanding of when a feature is complete.',
+                options: ['acceptance criteria', 'churn rates', 'liquidity pools', 'procurement cycles'],
+                correct: 0,
+                level: 'B1',
+                explanation: '"Acceptance criteria" (tiêu chí nghiệm thu - AC) là danh sách các điều kiện bắt buộc phải thỏa mãn để PO, Dev và QA thống nhất rằng một tính năng đã hoàn thiện.'
+            }
+        ];
+
+        // =========================================================================
+        // 2. QUẢN LÝ TRẠNG THÁI (STATE MANAGEMENT & LOCALSTORAGE)
+        // =========================================================================
+        let appState = {
+            selectedCefr: 'B1',
+            selectedDomain: 'ALL',
+            streak: 1,
+            lastActiveDate: new Date().toDateString(),
+            xp: 120,
+            todayLearnedCount: 3,
+            masteredIds: [1, 5, 9],
+            vocabList: [...INITIAL_VOCAB]
+        };
+
+        let currentCardIndex = 0;
+        let sessionLearnedCounter = 0;
+        let currentGameWord = null;
+        let gameRoundCorrect = 0;
+        let gameCombo = 0;
+        let chatHistory = [];
+        let examState = { currentIdx: 0, userAnswers: [], timerSec: 300, intervalId: null };
+
+        // =========================================================================
+        // HỆ THỐNG TUNG HÔ VINH DANH, ÂM THANH WEB AUDIO & CANVAS CONFETTI
+        // =========================================================================
+        const SWEET_PRAISES = [
+            "Trời ơi xuất sắc quá đi mất! HR các tập đoàn lớn mà thấy trình này là chốt offer lương nghìn đô liền luôn á! 💖👑",
+            "Đỉnh của chóp! Não bạn hôm nay chạy mượt hơn cả server production không một con bug nào luôn! 🚀✨",
+            "Quá xịn xò! Cứ đà này mấy hôm nữa phỏng vấn tiếng Anh trôi chảy như người bản xứ, sếp Tây chỉ có nước trầm trồ! 🌟🎀",
+            "Chuẩn không cần chỉnh! KPI hôm nay vượt mức xuất sắc, xứng đáng nhận ngàn tim từ hội đồng thẩm định độ cute! 💕🏆",
+            "U là trời, thông minh thế này thì PO hay Tech Lead quốc tế cũng phải xin vía học tiếng Anh của bạn mất thôi! 🍀💎",
+            "10 điểm không có nhưng! Tốc độ tiếp thu này mà đi đàm phán B2B hay Pitching Fintech là auto chốt deal! 🥂🌸"
+        ];
+
+        function playCelebrationFanfare() {
+            try {
+                const AudioCtx = window.AudioContext || window.webkitAudioContext;
+                if (!AudioCtx) return;
+                const ctx = new AudioCtx();
+                const notes = [
+                    { freq: 523.25, time: 0.0, dur: 0.14 },
+                    { freq: 659.25, time: 0.12, dur: 0.14 },
+                    { freq: 783.99, time: 0.24, dur: 0.16 },
+                    { freq: 1046.50, time: 0.38, dur: 0.45 }
+                ];
+
+                notes.forEach(n => {
+                    const osc = ctx.createOscillator();
+                    const gain = ctx.createGain();
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(n.freq, ctx.currentTime + n.time);
+
+                    gain.gain.setValueAtTime(0.001, ctx.currentTime + n.time);
+                    gain.gain.exponentialRampToValueAtTime(0.22, ctx.currentTime + n.time + 0.03);
+                    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + n.time + n.dur);
+
+                    osc.connect(gain);
+                    gain.connect(ctx.destination);
+                    osc.start(ctx.currentTime + n.time);
+                    osc.stop(ctx.currentTime + n.time + n.dur + 0.05);
+                });
+            } catch (e) {
+                console.warn('AudioContext bị chặn tự động phát:', e);
+            }
+        }
+
+        let confettiAnimId = null;
+        function launchKawaiiConfetti() {
+            const canvas = document.getElementById('confetti-canvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            const colors = ['#FF85A1', '#FFB6C1', '#6BCB77', '#A8E6CF', '#FFD166', '#FF6B8B'];
+            const shapes = ['circle', 'heart', 'star', 'ribbon'];
+            const particles = [];
+
+            for (let i = 0; i < 110; i++) {
+                particles.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height - canvas.height,
+                    size: Math.random() * 9 + 6,
+                    color: colors[Math.floor(Math.random() * colors.length)],
+                    shape: shapes[Math.floor(Math.random() * shapes.length)],
+                    speedY: Math.random() * 3.5 + 2.2,
+                    speedX: Math.random() * 2.4 - 1.2,
+                    rotation: Math.random() * 360,
+                    rotSpeed: Math.random() * 6 - 3
+                });
+            }
+
+            function drawHeart(ctx, x, y, size) {
+                ctx.beginPath();
+                const topCurveHeight = size * 0.3;
+                ctx.moveTo(x, y + topCurveHeight);
+                ctx.bezierCurveTo(x, y, x - size / 2, y, x - size / 2, y + topCurveHeight);
+                ctx.bezierCurveTo(x - size / 2, y + (size + topCurveHeight) / 2, x, y + (size + topCurveHeight) / 1.2, x, y + size);
+                ctx.bezierCurveTo(x, y + (size + topCurveHeight) / 1.2, x + size / 2, y + (size + topCurveHeight) / 2, x + size / 2, y + topCurveHeight);
+                ctx.bezierCurveTo(x + size / 2, y, x, y, x, y + topCurveHeight);
+                ctx.closePath();
+                ctx.fill();
+            }
+
+            function drawStar(ctx, x, y, r) {
+                ctx.beginPath();
+                for (let i = 0; i < 5; i++) {
+                    ctx.lineTo(Math.cos((18 + i * 72) * Math.PI / 180) * r + x,
+                               -Math.sin((18 + i * 72) * Math.PI / 180) * r + y);
+                    ctx.lineTo(Math.cos((54 + i * 72) * Math.PI / 180) * (r * 0.45) + x,
+                               -Math.sin((54 + i * 72) * Math.PI / 180) * (r * 0.45) + y);
+                }
+                ctx.closePath();
+                ctx.fill();
+            }
+
+            if (confettiAnimId) cancelAnimationFrame(confettiAnimId);
+
+            function renderLoop() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                particles.forEach(p => {
+                    p.y += p.speedY;
+                    p.x += p.speedX;
+                    p.rotation += p.rotSpeed;
+
+                    if (p.y > canvas.height + 20) {
+                        p.y = -20;
+                        p.x = Math.random() * canvas.width;
+                    }
+
+                    ctx.save();
+                    ctx.translate(p.x, p.y);
+                    ctx.rotate((p.rotation * Math.PI) / 180);
+                    ctx.fillStyle = p.color;
+
+                    if (p.shape === 'heart') {
+                        drawHeart(ctx, -p.size / 2, -p.size / 2, p.size);
+                    } else if (p.shape === 'star') {
+                        drawStar(ctx, 0, 0, p.size * 0.75);
+                    } else if (p.shape === 'ribbon') {
+                        ctx.fillRect(-p.size / 2, -p.size / 4, p.size, p.size / 2);
+                    } else {
+                        ctx.beginPath();
+                        ctx.arc(0, 0, p.size / 2, 0, Math.PI * 2);
+                        ctx.fill();
+                    }
+                    ctx.restore();
+                });
+                confettiAnimId = requestAnimationFrame(renderLoop);
+            }
+            renderLoop();
+        }
+
+        function triggerCelebration({ badgeTitle, headline, xpBonus, customPraise }) {
+            const praise = customPraise || SWEET_PRAISES[Math.floor(Math.random() * SWEET_PRAISES.length)];
+            document.getElementById('cel-badge-title').textContent = badgeTitle || 'Ngôi Sao Chuyên Ngành';
+            document.getElementById('cel-headline').textContent = headline || 'XUẤT SẮC QUÁ BẠN ƠI! 🎉';
+            document.getElementById('cel-xp-reward').textContent = `+${xpBonus || 30} XP Thưởng Nóng`;
+            document.getElementById('cel-praise-text').textContent = `"${praise}"`;
+
+            if (xpBonus) {
+                appState.xp += xpBonus;
+                saveState();
+                updateHeaderStats();
+            }
+
+            document.getElementById('celebration-overlay').classList.remove('hidden');
+            playCelebrationFanfare();
+            launchKawaiiConfetti();
+        }
+
+        function closeCelebrationModal() {
+            document.getElementById('celebration-overlay').classList.add('hidden');
+            if (confettiAnimId) {
+                cancelAnimationFrame(confettiAnimId);
+                confettiAnimId = null;
+            }
+        }
+
+        // =========================================================================
+        // 3. KHỞI TẠO & LƯU TRỮ DỮ LIỆU (LOCALSTORAGE + STREAK)
+        // =========================================================================
+        function initApp() {
+            try {
+                const saved = localStorage.getItem('kawaiitech_english_v1');
+                if (saved) {
+                    const parsed = JSON.parse(saved);
+                    appState = { ...appState, ...parsed };
+                }
+            } catch (e) {
+                console.warn('Không đọc được localStorage:', e);
+            }
+
+            const todayStr = new Date().toDateString();
+            if (appState.lastActiveDate !== todayStr) {
+                const yesterday = new Date(Date.now() - 86400000).toDateString();
+                if (appState.lastActiveDate === yesterday) {
+                    appState.streak += 1;
+                } else {
+                    appState.streak = 1;
+                }
+                appState.todayLearnedCount = 0;
+                appState.lastActiveDate = todayStr;
+                saveState();
+            }
+
+            updateHeaderStats();
+            renderDashboard();
+            renderFlashcard();
+            nextGameQuestion();
+            resetAiChat();
+            renderInterviewHub();
+        }
+
+        function saveState() {
+            try {
+                localStorage.setItem('kawaiitech_english_v1', JSON.stringify(appState));
+            } catch (e) {
+                console.warn('Lỗi lưu localStorage:', e);
+            }
+        }
+
+        function addXP(points, reason) {
+            appState.xp += points;
+            saveState();
+            updateHeaderStats();
+            showToast(`+${points} XP • ${reason}`, 'mint');
+        }
+
+        function showToast(message, type = 'pink') {
+            const box = document.getElementById('toast-box');
+            const toast = document.createElement('div');
+            const bgClass = type === 'mint'
+                ? 'bg-kitty-mintLight border-kitty-mintDark text-kitty-mintDeep'
+                : 'bg-kitty-pinkLight border-kitty-pinkDark text-kitty-pinkDeep';
+            toast.className = `px-4 py-3 rounded-2xl border-2 shadow-lg font-extrabold text-xs sm:text-sm flex items-center gap-2 transition-all transform translate-x-0 ${bgClass}`;
+            toast.innerHTML = `<span>${type === 'mint' ? '🍀' : '🎀'}</span><span>${message}</span>`;
+            box.appendChild(toast);
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                setTimeout(() => toast.remove(), 300);
+            }, 2800);
+        }
+
+        function updateHeaderStats() {
+            document.getElementById('header-streak').textContent = appState.streak;
+            document.getElementById('header-xp').textContent = appState.xp;
+            document.getElementById('header-cefr').textContent = appState.selectedCefr;
+
+            const goalMax = 10;
+            const current = Math.min(appState.todayLearnedCount, goalMax);
+            document.getElementById('daily-goal-text').textContent = `${appState.todayLearnedCount} / ${goalMax} từ`;
+            document.getElementById('daily-goal-bar').style.width = `${(current / goalMax) * 100}%`;
+        }
+
+        // =========================================================================
+        // 4. ĐIỀU HƯỚNG TAB & RENDER DASHBOARD
+        // =========================================================================
+        function switchTab(tabName) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            const target = document.getElementById(`tab-${tabName}`);
+            if (target) target.classList.remove('hidden');
+
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                if (btn.dataset.tab === tabName) {
+                    btn.classList.add('bg-kitty-pink', 'text-kitty-pinkDeep', 'shadow-sm');
+                    btn.classList.remove('text-kitty-text');
+                } else {
+                    btn.classList.remove('bg-kitty-pink', 'text-kitty-pinkDeep', 'shadow-sm');
+                    btn.classList.add('text-kitty-text');
+                }
+            });
+
+            document.querySelectorAll('.mob-nav-btn').forEach(btn => {
+                if (btn.dataset.tab === tabName) {
+                    btn.classList.add('text-kitty-pinkDeep', 'font-extrabold');
+                    btn.classList.remove('text-kitty-subtext', 'font-bold');
+                } else {
+                    btn.classList.remove('text-kitty-pinkDeep', 'font-extrabold');
+                    btn.classList.add('text-kitty-subtext', 'font-bold');
+                }
+            });
+        }
+
+        function getFilteredVocab() {
+            return appState.vocabList.filter(item => {
+                const domainMatch = appState.selectedDomain === 'ALL' || item.domain === appState.selectedDomain;
+                return domainMatch;
+            });
+        }
+
+        function renderDashboard() {
+            const cefrContainer = document.getElementById('cefr-selector');
+            cefrContainer.innerHTML = CEFR_LEVELS.map(lvl => {
+                const isSelected = appState.selectedCefr === lvl.code;
+                if (isSelected) {
+                    document.getElementById('cefr-desc-label').textContent = lvl.label;
+                }
+                return `
+                    <button onclick="selectCefrLevel('${lvl.code}')" class="py-2.5 px-2 rounded-2xl font-display font-extrabold text-sm border-2 transition-all ${
+                        isSelected
+                        ? 'bg-kitty-pinkDeep text-white border-kitty-pinkDeep shadow-sm scale-105'
+                        : 'bg-kitty-pinkLight/60 text-kitty-text border-kitty-pink hover:bg-kitty-pink'
+                    }">
+                        ${lvl.code}
+                    </button>
+                `;
+            }).join('');
+
+            const domainContainer = document.getElementById('domain-selector');
+            domainContainer.innerHTML = DOMAINS.map(dom => {
+                const isSelected = appState.selectedDomain === dom.id;
+                return `
+                    <button onclick="selectDomain('${dom.id}')" class="px-3.5 py-2 rounded-2xl font-extrabold text-xs border-2 transition-all ${
+                        isSelected
+                        ? 'bg-kitty-mintDeep text-white border-kitty-mintDeep shadow-sm'
+                        : 'bg-kitty-mintLight/70 text-kitty-text border-kitty-mint hover:bg-kitty-mint'
+                    }">
+                        ${dom.label}
+                    </button>
+                `;
+            }).join('');
+
+            document.getElementById('total-mastered-count').textContent = appState.masteredIds.length;
+            document.getElementById('total-vocab-count').textContent = appState.vocabList.length;
+
+            const roadmapGrid = document.getElementById('daily-roadmap-grid');
+            roadmapGrid.innerHTML = DAILY_ROADMAP.map(dayObj => {
+                const dayWords = appState.vocabList.filter(v => v.day === dayObj.day);
+                const masteredInDay = dayWords.filter(v => appState.masteredIds.includes(v.id)).length;
+                const pct = dayWords.length ? Math.round((masteredInDay / dayWords.length) * 100) : 0;
+
+                return `
+                    <div class="p-4 rounded-3xl bg-gradient-to-br from-white to-kitty-pinkLight/50 border-2 border-kitty-pink flex flex-col justify-between gap-3 hover:shadow-md transition-all">
+                        <div>
+                            <div class="flex items-center justify-between mb-1.5">
+                                <span class="px-2.5 py-0.5 rounded-xl bg-kitty-mintLight text-kitty-mintDeep font-extrabold text-[11px] border border-kitty-mint">${dayObj.domains}</span>
+                                <span class="text-xs font-extrabold text-kitty-pinkDeep">${pct}%</span>
+                            </div>
+                            <h4 class="font-display font-bold text-base text-kitty-text">${dayObj.title}</h4>
+                            <p class="text-xs text-kitty-subtext font-semibold mt-1">${dayObj.desc}</p>
+                        </div>
+                        <div class="space-y-2">
+                            <div class="w-full h-2 bg-white rounded-full overflow-hidden border border-kitty-pink">
+                                <div class="h-full bg-kitty-mintDark rounded-full" style="width: ${pct}%"></div>
+                            </div>
+                            <button onclick="startDayStudy(${dayObj.day})" class="w-full py-2 rounded-xl bg-white hover:bg-kitty-pink text-kitty-pinkDeep font-extrabold text-xs border border-kitty-pink transition-all">
+                                Học cụm từ Ngày ${dayObj.day} (${dayWords.length} từ) →
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            const deptGrid = document.getElementById('department-progress-grid');
+            const targetDepts = DOMAINS.filter(d => d.id !== 'ALL');
+            deptGrid.innerHTML = targetDepts.map(dept => {
+                const words = appState.vocabList.filter(v => v.domain === dept.id);
+                const done = words.filter(v => appState.masteredIds.includes(v.id)).length;
+                const percent = words.length ? Math.round((done / words.length) * 100) : 0;
+
+                return `
+                    <div class="p-4 rounded-2xl bg-kitty-mintLight/40 border-2 border-kitty-mint space-y-2">
+                        <div class="flex items-center justify-between">
+                            <span class="font-extrabold text-sm text-kitty-text">${dept.label}</span>
+                            <span class="text-xs font-extrabold text-kitty-mintDeep">${done}/${words.length} từ</span>
+                        </div>
+                        <div class="w-full h-2.5 bg-white rounded-full overflow-hidden border border-kitty-mint">
+                            <div class="h-full bg-gradient-to-r from-kitty-pinkDark to-kitty-mintDeep rounded-full transition-all" style="width: ${percent}%"></div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function selectCefrLevel(code) {
+            appState.selectedCefr = code;
+            saveState();
+            updateHeaderStats();
+            renderDashboard();
+            document.getElementById('ai-chat-subtitle').textContent = `Đang điều chỉnh theo trình độ ${code}`;
+            showToast(`Đã chuyển trình độ mục tiêu sang CEFR ${code}!`, 'pink');
+        }
+
+        function selectDomain(domainId) {
+            appState.selectedDomain = domainId;
+            currentCardIndex = 0;
+            saveState();
+            renderDashboard();
+            renderFlashcard();
+            showToast(`Đã lọc từ vựng chuyên ngành: ${domainId}`, 'mint');
+        }
+
+        function startDayStudy(dayNum) {
+            appState.selectedDomain = 'ALL';
+            const idx = appState.vocabList.findIndex(v => v.day === dayNum);
+            currentCardIndex = idx >= 0 ? idx : 0;
+            renderDashboard();
+            renderFlashcard(true);
+            switchTab('flashcards');
+            showToast(`Bắt đầu bài học Ngày ${dayNum}!`, 'pink');
+        }
+
+        // =========================================================================
+        // 5. FLASHCARD 3D & PHÁT ÂM
+        // =========================================================================
+        function renderFlashcard(animateSlide = false) {
+            const list = getFilteredVocab();
+            const cardInner = document.getElementById('flashcard-inner');
+            const cardStage = document.getElementById('flashcard-stage');
+
+            cardInner.classList.add('no-transition');
+            cardInner.classList.remove('is-flipped');
+            void cardInner.offsetWidth;
+            cardInner.classList.remove('no-transition');
+
+            if (animateSlide && cardStage) {
+                cardStage.classList.remove('card-slide-in');
+                void cardStage.offsetWidth;
+                cardStage.classList.add('card-slide-in');
+            }
+
+            if (list.length === 0) {
+                document.getElementById('fc-counter').textContent = '0 / 0 thẻ';
+                document.getElementById('fc-word').textContent = 'Chưa có từ ở mục này';
+                document.getElementById('fc-ipa').textContent = 'Hãy nhấn "+ Tạo bộ từ AI" hoặc chọn "Tất cả"';
+                document.getElementById('fc-meaning').textContent = 'Không tìm thấy từ phù hợp bộ lọc';
+                return;
+            }
+
+            if (currentCardIndex >= list.length) currentCardIndex = 0;
+            if (currentCardIndex < 0) currentCardIndex = list.length - 1;
+
+            const item = list[currentCardIndex];
+            const isMastered = appState.masteredIds.includes(item.id);
+
+            document.getElementById('fc-counter').textContent = `Thẻ ${currentCardIndex + 1} / ${list.length}`;
+            document.getElementById('fc-cefr-badge').textContent = item.cefr;
+            document.getElementById('fc-domain-badge').textContent = item.domain;
+            document.getElementById('fc-status-badge').textContent = isMastered ? '🌟 Đã thuộc' : '🌱 Đang học';
+            document.getElementById('fc-pos').textContent = `(${item.pos})`;
+            document.getElementById('fc-word').textContent = item.word;
+            document.getElementById('fc-ipa').textContent = item.ipa;
+            document.getElementById('fc-meaning').textContent = item.meaning;
+            document.getElementById('fc-example-en').textContent = `"${item.exampleEn}"`;
+            document.getElementById('fc-example-vi').textContent = `"${item.exampleVi}"`;
+        }
+
+        function flipFlashcard() {
+            const cardInner = document.getElementById('flashcard-inner');
+            const cardStage = document.getElementById('flashcard-stage');
+            cardInner.classList.toggle('is-flipped');
+
+            if (cardStage) {
+                cardStage.classList.remove('card-sparkle-pulse');
+                void cardStage.offsetWidth;
+                cardStage.classList.add('card-sparkle-pulse');
+            }
+        }
+
+        function nextFlashcard() {
+            currentCardIndex++;
+            renderFlashcard(true);
+        }
+
+        function prevFlashcard() {
+            currentCardIndex--;
+            renderFlashcard(true);
+        }
+
+        function markWordStatus(isMastered) {
+            const list = getFilteredVocab();
+            if (!list.length) return;
+            const item = list[currentCardIndex];
+            const isLastCardInList = (currentCardIndex === list.length - 1);
+
+            if (isMastered) {
+                sessionLearnedCounter += 1;
+                if (!appState.masteredIds.includes(item.id)) {
+                    appState.masteredIds.push(item.id);
+                    appState.todayLearnedCount += 1;
+                    addXP(15, `Thuộc từ "${item.word}"!`);
+                } else {
+                    showToast(`Bạn đã thuộc từ "${item.word}" rồi!`, 'mint');
+                }
+            } else {
+                appState.masteredIds = appState.masteredIds.filter(id => id !== item.id);
+                showToast(`Đã đưa "${item.word}" vào danh sách cần ôn lại 🔄`, 'pink');
+            }
+
+            saveState();
+            updateHeaderStats();
+            renderDashboard();
+
+            if (isMastered && (appState.todayLearnedCount === 10 || sessionLearnedCounter % 5 === 0 || isLastCardInList)) {
+                triggerCelebration({
+                    badgeTitle: 'Chiến Thần Từ Vựng Chuyên Ngành',
+                    headline: 'HOÀN THÀNH PHIÊN HỌC XUẤT SẮC! 🎀',
+                    xpBonus: 35
+                });
+            }
+
+            nextFlashcard();
+        }
+
+        function speakText(text) {
+            if (!('speechSynthesis' in window)) {
+                showToast('Trình duyệt của bạn chưa hỗ trợ đọc giọng nói.', 'pink');
+                return;
+            }
+            window.speechSynthesis.cancel();
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'en-US';
+            utterance.rate = 0.95;
+            utterance.pitch = 1.05;
+            window.speechSynthesis.speak(utterance);
+        }
+
+        function speakCurrentWord() {
+            const list = getFilteredVocab();
+            if (list[currentCardIndex]) speakText(list[currentCardIndex].word);
+        }
+
+        function speakCurrentExample() {
+            const list = getFilteredVocab();
+            if (list[currentCardIndex]) speakText(list[currentCardIndex].exampleEn);
+        }
+
+        // =========================================================================
+        // 6. MINI GAME HÓA (SPEED QUIZ + MÀN TUNG HÔ HOÀN THÀNH VÒNG)
+        // =========================================================================
+        function nextGameQuestion() {
+            const pool = appState.vocabList;
+            currentGameWord = pool[Math.floor(Math.random() * pool.length)];
+
+            document.getElementById('game-q-badge').textContent = `${currentGameWord.domain} • CEFR ${currentGameWord.cefr}`;
+            document.getElementById('game-question-word').textContent = currentGameWord.word;
+
+            const distractors = pool
+                .filter(v => v.id !== currentGameWord.id)
+                .sort(() => 0.5 - Math.random())
+                .slice(0, 3)
+                .map(v => v.meaning);
+
+            const options = [...distractors, currentGameWord.meaning].sort(() => 0.5 - Math.random());
+
+            const optionsEl = document.getElementById('game-options');
+            optionsEl.innerHTML = options.map(opt => {
+                const escapedOpt = opt.replace(/\\/g, '\\\\').replace(/'/g, "\\'");
+                return `
+                    <button onclick="checkGameAnswer(this, '${escapedOpt}')" class="p-4 rounded-2xl bg-white border-2 border-kitty-pink hover:border-kitty-mintDeep hover:bg-kitty-mintLight font-bold text-sm text-kitty-text text-left transition-all shadow-sm">
+                        ${opt}
+                    </button>
+                `;
+            }).join('');
+        }
+
+        function speakGameWord() {
+            if (currentGameWord) speakText(currentGameWord.word);
+        }
+
+        function checkGameAnswer(btnEl, selectedMeaning) {
+            const isCorrect = selectedMeaning === currentGameWord.meaning;
+            const allBtns = document.querySelectorAll('#game-options button');
+            allBtns.forEach(b => b.disabled = true);
+
+            if (isCorrect) {
+                btnEl.classList.remove('bg-white', 'border-kitty-pink');
+                btnEl.classList.add('bg-kitty-mint', 'border-kitty-mintDeep', 'text-kitty-mintDeep');
+                gameRoundCorrect += 1;
+                gameCombo += 1;
+                document.getElementById('game-round-progress').textContent = `${gameRoundCorrect}/5`;
+                document.getElementById('game-combo').textContent = gameCombo;
+                addXP(10, 'Phản xạ siêu tốc!');
+
+                if (gameRoundCorrect >= 5) {
+                    gameRoundCorrect = 0;
+                    document.getElementById('game-round-progress').textContent = '0/5';
+                    triggerCelebration({
+                        badgeTitle: 'Bậc Thầy Săn Bug Ngôn Ngữ',
+                        headline: 'PHÁ ĐẢO MINI GAME RỒI! 🎮✨',
+                        xpBonus: 50
+                    });
+                }
+                setTimeout(nextGameQuestion, 1000);
+            } else {
+                btnEl.classList.remove('bg-white', 'border-kitty-pink');
+                btnEl.classList.add('bg-rose-200', 'border-rose-500', 'text-rose-800');
+                gameCombo = 0;
+                document.getElementById('game-combo').textContent = gameCombo;
+                showToast(`Chưa đúng rồi! Đáp án là: "${currentGameWord.meaning}"`, 'pink');
+                setTimeout(nextGameQuestion, 1700);
+            }
+        }
+
+        // =========================================================================
+        // 7. GEMINI API HELPER (EXPONENTIAL BACKOFF)
+        // =========================================================================
+        async function callGeminiAPI(promptText, systemInstructionText = '') {
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+            const payload = {
+                contents: [{ parts: [{ text: promptText }] }]
+            };
+            if (systemInstructionText) {
+                payload.systemInstruction = { parts: [{ text: systemInstructionText }] };
+            }
+
+            const delays = [1000, 2000, 4000, 8000, 16000];
+            for (let attempt = 0; attempt < 5; attempt++) {
+                try {
+                    const response = await fetch(url, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+                    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                    const data = await response.json();
+                    return data.candidates?.[0]?.content?.parts?.[0]?.text || '';
+                } catch (err) {
+                    if (attempt === 4) throw err;
+                    await new Promise(res => setTimeout(res, delays[attempt]));
+                }
+            }
+        }
+
+        // =========================================================================
+        // 8. AI TẠO THÊM KHO TỪ VỰNG CHUYÊN NGÀNH
+        // =========================================================================
+        function openAiVocabModal() {
+            document.getElementById('ai-vocab-modal').classList.remove('hidden');
+        }
+
+        function closeAiVocabModal() {
+            document.getElementById('ai-vocab-modal').classList.add('hidden');
+        }
+
+        async function generateMoreVocabWithAI() {
+            const topic = document.getElementById('ai-topic-input').value.trim();
+            if (!topic) {
+                showToast('Bạn hãy nhập chủ đề chuyên ngành trước nhé!', 'pink');
+                return;
+            }
+
+            const btn = document.getElementById('generate-vocab-btn');
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Đang tạo bộ từ...';
+
+            const prompt = `Generate 5 specialized English vocabulary items at CEFR level ${appState.selectedCefr} about the topic: "${topic}" for tech/business professionals (IT, Fintech, B2B, CX, QA/QC, PO).
+Return ONLY a valid JSON array (no markdown backticks) with objects containing:
+"word", "pos", "ipa", "cefr", "domain" (one of: IT, Fintech, B2B, CX, QA, PO), "meaning" (Vietnamese), "exampleEn", "exampleVi".`;
+
+            try {
+                const rawText = await callGeminiAPI(prompt);
+                const cleanJson = rawText.replace(/```json|```/g, '').trim();
+                const newItems = JSON.parse(cleanJson);
+
+                if (Array.isArray(newItems)) {
+                    const nextIdStart = appState.vocabList.length + 100;
+                    newItems.forEach((item, idx) => {
+                        appState.vocabList.unshift({
+                            id: nextIdStart + idx,
+                            word: item.word || 'Term',
+                            pos: item.pos || 'noun',
+                            ipa: item.ipa || '/.../',
+                            cefr: item.cefr || appState.selectedCefr,
+                            domain: DOMAINS.some(d => d.id === item.domain) ? item.domain : 'IT',
+                            day: 1,
+                            meaning: item.meaning || '',
+                            exampleEn: item.exampleEn || '',
+                            exampleVi: item.exampleVi || ''
+                        });
+                    });
+
+                    saveState();
+                    currentCardIndex = 0;
+                    renderDashboard();
+                    renderFlashcard(true);
+                    closeAiVocabModal();
+                    switchTab('flashcards');
+                    addXP(25, `Đã thêm ${newItems.length} từ chuyên ngành mới!`);
+                }
+            } catch (err) {
+                showToast('Không thể kết nối AI lúc này, bạn thử lại sau giây lát nhé!', 'pink');
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = '<span>🎀 Tạo 5 từ mới ngay</span>';
+            }
+        }
+
+        // =========================================================================
+        // 9. VOICE RECOGNITION & HỘI THOẠI VỚI AI COACH
+        // =========================================================================
+        let activeRecognition = null;
+
+        function toggleVoiceRecognition(targetMode) {
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            if (!SpeechRecognition) {
+                showToast('Trình duyệt chưa hỗ trợ nhận diện giọng nói. Bạn hãy nhập văn bản nhé!', 'pink');
+                return;
+            }
+
+            if (activeRecognition) {
+                activeRecognition.stop();
+                activeRecognition = null;
+                return;
+            }
+
+            const recognition = new SpeechRecognition();
+            recognition.lang = 'en-US';
+            recognition.interimResults = false;
+            recognition.maxAlternatives = 1;
+
+            const micBtn = targetMode === 'chat'
+                ? document.getElementById('voice-mic-btn')
+                : document.getElementById('modal-voice-btn');
+
+            recognition.onstart = () => {
+                activeRecognition = recognition;
+                micBtn.classList.add('animate-pulse', 'ring-4', 'ring-kitty-pinkDeep');
+                showToast('🎙️ Đang nghe... Hãy nói tiếng Anh của bạn!', 'mint');
+            };
+
+            recognition.onresult = (event) => {
+                const transcript = event.results[0][0].transcript;
+                if (targetMode === 'chat') {
+                    document.getElementById('ai-chat-input').value = transcript;
+                    sendAiChatMessage();
+                } else {
+                    const area = document.getElementById('modal-int-answer');
+                    area.value = (area.value + ' ' + transcript).trim();
+                }
+            };
+
+            recognition.onerror = () => {
+                showToast('Không nghe rõ giọng nói, bạn thử nói lại gần mic hơn nhé!', 'pink');
+            };
+
+            recognition.onend = () => {
+                activeRecognition = null;
+                micBtn.classList.remove('animate-pulse', 'ring-4', 'ring-kitty-pinkDeep');
+            };
+
+            recognition.start();
+        }
+
+        function resetAiChat() {
+            const scenarioMap = {
+                daily_standup: "Hi there! Welcome to our Daily Standup. What did you accomplish yesterday, and are there any blockers on your current sprint tasks?",
+                po_sprint: "Hello! As we prepare for Sprint Planning, which user stories in the backlog do you think bring the highest business value right now?",
+                fintech_pitch: "Good morning! Tell me briefly about your fintech payment solution—how does it ensure fast settlement and KYC compliance?",
+                b2b_negotiation: "Thanks for meeting today. Before we sign the B2B SaaS agreement, how can your team support our enterprise onboarding?",
+                cx_escalation: "Hi, I'm a VIP client and our checkout API has been timing out for 20 minutes. How is your CX team handling this escalation?",
+                qa_bug_report: "Hey! I saw your critical bug ticket on the payment module, but I couldn't reproduce it locally. Could you walk me through the edge case?"
+            };
+
+            const selected = document.getElementById('ai-scenario-select').value;
+            const openingLine = scenarioMap[selected] || scenarioMap.daily_standup;
+
+            chatHistory = [{ sender: 'ai', text: openingLine, tip: 'Gợi ý: Trả lời ngắn gọn 2-3 câu, sử dụng thuật ngữ chuyên ngành phù hợp.' }];
+            renderAiChatMessages();
+        }
+
+        function renderAiChatMessages() {
+            const box = document.getElementById('ai-chat-messages');
+            box.innerHTML = chatHistory.map(msg => {
+                if (msg.sender === 'ai') {
+                    const escapedText = msg.text.replace(/\\/g, '\\\\').replace(/'/g, "\\'");
+                    return `
+                        <div class="flex items-start gap-2.5">
+                            <div class="w-8 h-8 rounded-full bg-kitty-pink flex items-center justify-center text-sm shrink-0 border border-white">🐱</div>
+                            <div class="bg-white border-2 border-kitty-pink rounded-2xl rounded-tl-none p-3.5 max-w-[85%] shadow-sm space-y-1.5">
+                                <p class="text-sm font-bold text-kitty-text">${msg.text}</p>
+                                ${msg.tip ? `<p class="text-xs font-semibold text-kitty-mintDeep bg-kitty-mintLight px-2.5 py-1.5 rounded-xl">✨ ${msg.tip}</p>` : ''}
+                                <button onclick="speakText('${escapedText}')" class="text-[11px] font-extrabold text-kitty-pinkDeep hover:underline">
+                                    <i class="fa-solid fa-volume-high"></i> Nghe lại
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    return `
+                        <div class="flex justify-end">
+                            <div class="bg-kitty-pinkDeep text-white rounded-2xl rounded-tr-none p-3.5 max-w-[80%] shadow-sm">
+                                <p class="text-sm font-bold">${msg.text}</p>
+                            </div>
+                        </div>
+                    `;
+                }
+            }).join('');
+            box.scrollTop = box.scrollHeight;
+        }
+
+        async function sendAiChatMessage() {
+            const inputEl = document.getElementById('ai-chat-input');
+            const userText = inputEl.value.trim();
+            if (!userText) return;
+
+            inputEl.value = '';
+            chatHistory.push({ sender: 'user', text: userText });
+            renderAiChatMessages();
+
+            const scenario = document.getElementById('ai-scenario-select').options[document.getElementById('ai-scenario-select').selectedIndex].text;
+            const sysPrompt = `You are Momo Coach (from the app "Momo Cố lên"), a friendly, encouraging workplace English tutor for tech & business professionals (CEFR level ${appState.selectedCefr}). Scenario: ${scenario}.
+Respond naturally in English (2-3 sentences) to keep the conversation going. Then add a short Vietnamese coaching note starting with "Góp ý nhẹ:" correcting any grammar issues or suggesting 1 better B2/C1 workplace term.`;
+
+            try {
+                const reply = await callGeminiAPI(`User said: "${userText}"`, sysPrompt);
+                const parts = reply.split('Góp ý nhẹ:');
+                const englishPart = parts[0].trim();
+                const tipPart = parts[1] ? 'Góp ý nhẹ: ' + parts[1].trim() : '';
+
+                chatHistory.push({ sender: 'ai', text: englishPart, tip: tipPart });
+                renderAiChatMessages();
+                addXP(10, 'Luyện hội thoại AI');
+
+                if (document.getElementById('auto-tts-toggle').checked) {
+                    speakText(englishPart);
+                }
+            } catch (e) {
+                chatHistory.push({ sender: 'ai', text: "Great point! Let's align on that in our next sprint sync.", tip: 'Góp ý nhẹ: Câu trả lời rất tự nhiên và đúng trọng tâm công việc!' });
+                renderAiChatMessages();
+            }
+        }
+
+        // =========================================================================
+        // 10. MENU PHỎNG VẤN CÔNG TY NƯỚC NGOÀI
+        // =========================================================================
+        let currentMockQuestion = '';
+
+        function renderInterviewHub() {
+            const role = document.getElementById('interview-role-select').value;
+            const questions = INTERVIEW_BANK[role] || INTERVIEW_BANK.IT;
+            const container = document.getElementById('interview-questions-container');
+
+            container.innerHTML = questions.map((item, index) => {
+                const escapedQ = item.q.replace(/\\/g, '\\\\').replace(/'/g, "\\'");
+                return `
+                    <div class="bento-card p-6 flex flex-col justify-between gap-4">
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between">
+                                <span class="px-3 py-1 rounded-xl bg-kitty-pinkLight text-kitty-pinkDeep font-extrabold text-xs">Câu hỏi #${index + 1} • ${role}</span>
+                                <button onclick="speakText('${escapedQ}')" class="px-3 py-1 rounded-xl bg-kitty-mintLight text-kitty-mintDeep font-extrabold text-xs border border-kitty-mint">
+                                    <i class="fa-solid fa-volume-high"></i> Nghe HR hỏi
+                                </button>
+                            </div>
+                            <h3 class="font-display font-bold text-base md:text-lg text-kitty-text leading-snug">"${item.q}"</h3>
+                            <p class="text-xs font-semibold text-kitty-subtext italic">${item.vi}</p>
+
+                            <div class="p-3.5 rounded-2xl bg-kitty-mintLight/60 border border-kitty-mint space-y-1.5">
+                                <p class="text-xs font-extrabold text-kitty-mintDeep">🔑 Từ vựng "ăn điểm" nên dùng:</p>
+                                <div class="flex flex-wrap gap-1.5">
+                                    ${item.powerWords.map(w => `<span class="px-2.5 py-0.5 rounded-lg bg-white border border-kitty-mint text-xs font-bold text-kitty-text">${w}</span>`).join('')}
+                                </div>
+                                <p class="text-xs font-semibold text-kitty-text pt-1">💡 <b>Cấu trúc STAR:</b> ${item.starTip}</p>
+                            </div>
+                        </div>
+
+                        <button onclick="openMockInterviewModal('${role}', '${escapedQ}')" class="w-full btn-kawaii-pink py-3 rounded-2xl font-extrabold text-sm">
+                            🎙️ Trả lời thử & AI Chấm điểm
+                        </button>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function openMockInterviewModal(role, questionText) {
+            currentMockQuestion = questionText;
+            document.getElementById('modal-int-role').textContent = `Phỏng vấn vị trí ${role} (Chuẩn CEFR ${appState.selectedCefr})`;
+            document.getElementById('modal-int-question').textContent = questionText;
+            document.getElementById('modal-int-answer').value = '';
+            document.getElementById('modal-int-feedback').classList.add('hidden');
+            document.getElementById('mock-interview-modal').classList.remove('hidden');
+        }
+
+        function closeMockInterviewModal() {
+            document.getElementById('mock-interview-modal').classList.add('hidden');
+        }
+
+        async function evaluateInterviewAnswerWithAI() {
+            const answer = document.getElementById('modal-int-answer').value.trim();
+            if (!answer) {
+                showToast('Bạn hãy nói hoặc nhập câu trả lời tiếng Anh trước nhé!', 'pink');
+                return;
+            }
+
+            const btn = document.getElementById('submit-int-btn');
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Hội đồng AI đang chấm điểm...';
+
+            const prompt = `You are a Senior Hiring Manager at a global tech/fintech company.
+Interview Question: "${currentMockQuestion}"
+Candidate's English Answer: "${answer}"
+Evaluate the answer in Vietnamese with 3 clear bullet points:
+1. Điểm số (thang 10) & Trình độ CEFR ước tính.
+2. Điểm mạnh & Điểm cần cải thiện (ngữ pháp, cấu trúc STAR, sự tự tin).
+3. Mẫu câu trả lời nâng cấp (Sample C1 Answer in English) để ứng viên học thuộc.`;
+
+            try {
+                const feedback = await callGeminiAPI(prompt);
+                const fbBox = document.getElementById('modal-int-feedback');
+                fbBox.innerHTML = `<p class="font-extrabold text-kitty-mintDeep mb-1">📋 Nhận xét từ Hội đồng Tuyển dụng AI:</p><div class="whitespace-pre-line font-semibold text-kitty-text leading-relaxed">${feedback}</div>`;
+                fbBox.classList.remove('hidden');
+
+                triggerCelebration({
+                    badgeTitle: 'Ngôi Sao Phỏng Vấn Quốc Tế',
+                    headline: 'TRẢ LỜI PHỎNG VẤN QUÁ TỰ TIN! 💼👑',
+                    xpBonus: 40
+                });
+            } catch (e) {
+                showToast('Lỗi kết nối AI, bạn thử bấm chấm điểm lại nhé!', 'pink');
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = '✨ Chấm điểm & Nhận xét từ Nhà tuyển dụng AI';
+            }
+        }
+
+        // =========================================================================
+        // 11. BÀI THI ONLINE CHUẨN KHUNG CEFR
+        // =========================================================================
+        function startCefrExam() {
+            examState = {
+                currentIdx: 0,
+                userAnswers: new Array(CEFR_EXAM_QUESTIONS.length).fill(null),
+                timerSec: 300,
+                intervalId: null
+            };
+
+            document.getElementById('exam-intro-card').classList.add('hidden');
+            document.getElementById('exam-result-card').classList.add('hidden');
+            document.getElementById('exam-active-card').classList.remove('hidden');
+
+            renderExamQuestion();
+
+            if (examState.intervalId) clearInterval(examState.intervalId);
+            examState.intervalId = setInterval(() => {
+                examState.timerSec--;
+                const mins = String(Math.floor(examState.timerSec / 60)).padStart(2, '0');
+                const secs = String(examState.timerSec % 60).padStart(2, '0');
+                document.getElementById('exam-timer').textContent = `${mins}:${secs}`;
+                if (examState.timerSec <= 0) {
+                    finishCefrExam();
+                }
+            }, 1000);
+        }
+
+        function renderExamQuestion() {
+            const idx = examState.currentIdx;
+            const item = CEFR_EXAM_QUESTIONS[idx];
+            document.getElementById('exam-progress-text').textContent = `Câu ${idx + 1} / ${CEFR_EXAM_QUESTIONS.length} (Mức ${item.level})`;
+
+            const qBox = document.getElementById('exam-question-box');
+            qBox.innerHTML = `
+                <div class="p-5 rounded-3xl bg-kitty-pinkLight/60 border-2 border-kitty-pink">
+                    <p class="font-display font-bold text-base md:text-lg text-kitty-text">${item.q}</p>
+                </div>
+                <div class="space-y-2.5">
+                    ${item.options.map((opt, optIdx) => {
+                        const isChosen = examState.userAnswers[idx] === optIdx;
+                        return `
+                            <button onclick="selectExamOption(${optIdx})" class="w-full p-4 rounded-2xl border-2 text-left font-bold text-sm transition-all ${
+                                isChosen
+                                ? 'bg-kitty-mint border-kitty-mintDeep text-kitty-mintDeep shadow-sm'
+                                : 'bg-white border-kitty-pink/70 text-kitty-text hover:bg-kitty-pinkLight'
+                            }">
+                                <span class="inline-block w-6 font-extrabold">${String.fromCharCode(65 + optIdx)}.</span> ${opt}
+                            </button>
+                        `;
+                    }).join('')}
+                </div>
+            `;
+
+            document.getElementById('exam-prev-btn').disabled = idx === 0;
+            document.getElementById('exam-next-btn').textContent = idx === CEFR_EXAM_QUESTIONS.length - 1 ? 'Nộp bài & Chấm điểm 🏁' : 'Câu tiếp theo →';
+        }
+
+        function selectExamOption(optIdx) {
+            examState.userAnswers[examState.currentIdx] = optIdx;
+            renderExamQuestion();
+        }
+
+        function prevExamQuestion() {
+            if (examState.currentIdx > 0) {
+                examState.currentIdx--;
+                renderExamQuestion();
+            }
+        }
+
+        function nextExamQuestion() {
+            if (examState.currentIdx < CEFR_EXAM_QUESTIONS.length - 1) {
+                examState.currentIdx++;
+                renderExamQuestion();
+            } else {
+                finishCefrExam();
+            }
+        }
+
+        function finishCefrExam() {
+            if (examState.intervalId) clearInterval(examState.intervalId);
+
+            let score = 0;
+            CEFR_EXAM_QUESTIONS.forEach((item, idx) => {
+                if (examState.userAnswers[idx] === item.correct) score++;
+            });
+
+            let awardedCefr = 'A2 (Elementary)';
+            if (score >= 9) awardedCefr = 'C1 - C2 (Advanced / Mastery)';
+            else if (score >= 7) awardedCefr = 'B2 (Upper-Intermediate)';
+            else if (score >= 5) awardedCefr = 'B1 (Intermediate)';
+
+            document.getElementById('exam-active-card').classList.add('hidden');
+            document.getElementById('exam-result-card').classList.remove('hidden');
+            document.getElementById('exam-final-score').textContent = `${score} / ${CEFR_EXAM_QUESTIONS.length}`;
+            document.getElementById('exam-awarded-cefr').textContent = `Đạt chuẩn CEFR ${awardedCefr}`;
+            document.getElementById('exam-feedback-text').textContent = score >= 7
+                ? 'Tuyệt vời! Bạn đã nắm vững thuật ngữ chuyên ngành IT, Fintech, B2B, CX, QA & PO để tự tin ứng tuyển công ty nước ngoài!'
+                : 'Cố gắng lên nhé! Hãy xem chi tiết giải thích từng câu bên dưới, sau đó ôn thêm Flashcard để bứt phá lên B2-C1.';
+
+            // Render danh sách chi tiết từng câu đúng/sai và giải thích
+            const reviewListEl = document.getElementById('exam-review-list');
+            reviewListEl.innerHTML = CEFR_EXAM_QUESTIONS.map((item, idx) => {
+                const userChoiceIdx = examState.userAnswers[idx];
+                const isCorrect = userChoiceIdx === item.correct;
+                const isUnanswered = userChoiceIdx === null || userChoiceIdx === undefined;
+                const userAnswerText = isUnanswered
+                    ? 'Chưa chọn đáp án'
+                    : `${String.fromCharCode(65 + userChoiceIdx)}. ${item.options[userChoiceIdx]}`;
+                const correctAnswerText = `${String.fromCharCode(65 + item.correct)}. ${item.options[item.correct]}`;
+
+                return `
+                    <div class="p-4 md:p-5 rounded-3xl border-2 ${isCorrect ? 'bg-kitty-mintLight/55 border-kitty-mint' : 'bg-rose-50/80 border-rose-200'} space-y-2.5">
+                        <div class="flex items-center justify-between gap-2">
+                            <span class="px-2.5 py-0.5 rounded-xl bg-white text-xs font-extrabold text-kitty-text border border-kitty-pink">
+                                Câu ${idx + 1} • Mức ${item.level}
+                            </span>
+                            ${isCorrect
+                                ? '<span class="px-3 py-1 rounded-xl bg-kitty-mint text-kitty-mintDeep font-extrabold text-xs">✅ Chính xác</span>'
+                                : '<span class="px-3 py-1 rounded-xl bg-rose-200 text-rose-800 font-extrabold text-xs">❌ Chưa đúng</span>'
+                            }
+                        </div>
+
+                        <p class="font-display font-bold text-sm md:text-base text-kitty-text">${item.q}</p>
+
+                        <div class="space-y-1 text-xs md:text-sm">
+                            <p class="${isCorrect ? 'text-kitty-mintDeep font-extrabold' : 'text-rose-700 font-bold'}">
+                                • Bạn chọn: <span>${userAnswerText}</span>
+                            </p>
+                            ${!isCorrect ? `
+                                <p class="text-kitty-mintDeep font-extrabold">
+                                    • Đáp án đúng: <span>${correctAnswerText}</span>
+                                </p>
+                            ` : ''}
+                        </div>
+
+                        <div class="p-3.5 rounded-2xl bg-white/95 border border-kitty-pink text-xs md:text-sm text-kitty-text leading-relaxed">
+                            <span class="font-extrabold text-kitty-pinkDeep">💡 Giải thích: </span>
+                            <span class="font-semibold">${item.explanation}</span>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            triggerCelebration({
+                badgeTitle: `Chứng Nhận Năng Lực CEFR ${awardedCefr.split(' ')[0]}`,
+                headline: `HOÀN THÀNH BÀI THI ${score}/10 ĐIỂM! 🏆`,
+                xpBonus: 100
+            });
+        }
+
+        // Khởi chạy ứng dụng khi tải trang xong
+        window.onload = initApp;
+    </script>
+</body>
+</html>
